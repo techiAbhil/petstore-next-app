@@ -10,7 +10,7 @@ import PET_MARKETPLACE from '../assets/pet-marketplace.png'
 import Footer from '../components/home/footer'
 import Testimonial from '../components/home/testimonial'
 
-export default () => {
+const Index = () => {
     return (
         <>
             <section className="row bg-header-color">
@@ -20,7 +20,7 @@ export default () => {
                     <p className="text-center py-3 px-5">
                         Experience the best care for your furry babies with the
                         help of our trusted experts. An all-in-one platform for
-                        your pet's needs
+                        your pets needs
                     </p>
                     <Stack
                         className="justify-content-center"
@@ -138,3 +138,5 @@ export default () => {
         </>
     )
 }
+
+export default Index

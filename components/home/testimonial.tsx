@@ -68,7 +68,7 @@ const responsiveSettings = [
     },
 ]
 
-export default () => {
+const HomeTestimonials = () => {
     return (
         <Fragment>
             <section className="row">
@@ -85,15 +85,21 @@ export default () => {
                     duration={2500}
                 >
                     {testimonials.map(
-                        ({
-                            comment,
-                            petRelation,
-                            rating,
-                            userName,
-                            userProfilePic,
-                        }) => {
+                        (
+                            {
+                                comment,
+                                petRelation,
+                                rating,
+                                userName,
+                                userProfilePic,
+                            },
+                            index: number
+                        ) => {
                             return (
-                                <div className="d-flex flex-column testimonial-card p-5">
+                                <div
+                                    key={index}
+                                    className="d-flex flex-column testimonial-card p-5"
+                                >
                                     <div>
                                         <i className="fa-solid fa-star"></i>
                                         <i className="fa-solid fa-star"></i>
@@ -130,3 +136,5 @@ export default () => {
         </Fragment>
     )
 }
+
+export default HomeTestimonials
