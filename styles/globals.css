@@ -181,6 +181,11 @@
     align-items: center;
 }
 
+.home-list-items {
+    background: #f7882f;
+    width: 90%;
+}
+
 @media screen and (max-width: 500px) {
     .profile-icon {
         width: 40px;

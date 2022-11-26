@@ -74,7 +74,7 @@ export default () => {
             <section className="row">
                 <div className="col-12 d-flex flex-column align-items-center justify-content-center section-text-style">
                     <h1 className="fw-bolder text-center">
-                        What Other Says About Us
+                        About Pets and More
                     </h1>
                 </div>
             </section>
