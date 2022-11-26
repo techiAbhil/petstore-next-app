@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { Stack } from 'react-bootstrap'
 import MAIN_LOGO from '../../assets/main-logo.png'
+import MenuList from './menu-list'
 
 const Layout = ({ children }: { children: any }) => {
     const [isMobileMenuExpanded, setIsMobileMenuExpanded] =
@@ -38,31 +39,7 @@ const Layout = ({ children }: { children: any }) => {
                 {isMobileMenuExpanded && (
                     <div className="row d-flex justify-content-center bg-header-color">
                         <nav className="navbar navbar-expand-lg">
-                            <ul className="navbar-nav me-auto mb-2 mb-lg-0 header-custom-menu-link">
-                                <li className="nav-item">
-                                    <button className="btn btn-menu-item">
-                                        For Pet Parent
-                                    </button>
-                                </li>
-
-                                <li className="nav-item">
-                                    <button className="btn btn-menu-item">
-                                        For Pet Business
-                                    </button>
-                                </li>
-
-                                <li className="nav-item">
-                                    <button className="btn btn-menu-item">
-                                        Blog
-                                    </button>
-                                </li>
-
-                                <li className="nav-item">
-                                    <button className="btn btn-menu-item">
-                                        Deal & Promotion
-                                    </button>
-                                </li>
-                            </ul>
+                            <MenuList />
                         </nav>
                     </div>
                 )}
@@ -80,31 +57,7 @@ const Layout = ({ children }: { children: any }) => {
 
                 <div className="col-lg-6 d-flex justify-content-center">
                     <nav className="navbar navbar-expand-lg">
-                        <ul className="navbar-nav me-auto mb-2 mb-lg-0 header-custom-menu-link">
-                            <li className="nav-item">
-                                <button className="btn btn-menu-item">
-                                    For Pet Parent
-                                </button>
-                            </li>
-
-                            <li className="nav-item">
-                                <button className="btn btn-menu-item">
-                                    For Pet Business
-                                </button>
-                            </li>
-
-                            <li className="nav-item">
-                                <button className="btn btn-menu-item">
-                                    Blog
-                                </button>
-                            </li>
-
-                            <li className="nav-item">
-                                <button className="btn btn-menu-item">
-                                    Deal & Promotion
-                                </button>
-                            </li>
-                        </ul>
+                        <MenuList />
                     </nav>
                 </div>
 
