@@ -1,18 +1,21 @@
-import Image from 'next/image'
-import { Card, Stack } from 'react-bootstrap'
-import Button from 'react-bootstrap/Button'
-import LOGO from '../assets/logo.svg'
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { Card, Stack } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
+import LOGO from '../assets/logo.svg';
 
-import PET_ASSIST from '../assets/pet-assistent.png'
-import PET_FAMILY from '../assets/pet-family.png'
-import PET_HOME from '../assets/pet-home.png'
-import PET_MARKETPLACE from '../assets/pet-marketplace.png'
-import Footer from '../components/home/footer'
-import Testimonial from '../components/home/testimonial'
+import PET_ASSIST from '../assets/pet-assistent.png';
+import PET_FAMILY from '../assets/pet-family.png';
+import PET_HOME from '../assets/pet-home.png';
+import PET_MARKETPLACE from '../assets/pet-marketplace.png';
+import Footer from '../components/home/footer';
+import Testimonial from '../components/home/testimonial';
+import Layout from '../components/layout/layout';
 
 const Index = () => {
+    const router = useRouter();
     return (
-        <>
+        <Layout>
             <section className="row bg-header-color">
                 <div className="col-md-6 col-sm-12 d-flex flex-column align-items-center justify-content-center section-text-style">
                     <h1 className="fw-bolder">Everything</h1>
@@ -65,10 +68,13 @@ const Index = () => {
                             height="50"
                             width="50"
                         />
-                        <p className="mt-2">Home</p>
+                        <p className="mt-2">Services</p>
                     </div>
 
-                    <div className="d-flex flex-column justify-content-center align-items-center landing-section-card-btn">
+                    <div
+                        className="d-flex flex-column justify-content-center align-items-center landing-section-card-btn"
+                        onClick={() => router.push('my-pet')}
+                    >
                         <Image
                             src={PET_ASSIST}
                             alt="Dog"
@@ -135,8 +141,8 @@ const Index = () => {
             <Testimonial />
 
             <Footer />
-        </>
-    )
-}
+        </Layout>
+    );
+};
 
-export default Index
+export default Index;

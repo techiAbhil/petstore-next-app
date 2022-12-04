@@ -10,6 +10,8 @@
     --quaternary-color: #f7c331;
     --theme-secondary-color: #edfafb;
     --dark-grey-text-color: #36414e;
+    --facebook-blue: #3b5998;
+    --google-red: #e63537;
 }
 
 .bg-header-color {
@@ -200,6 +202,82 @@
     }
 }
 
+.font-small {
+    font-size: small;
+}
+
+.font-extra-small {
+    font-size: x-small;
+}
+
+.forgot-passowrd-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.facebook-btn {
+    background: var(--facebook-blue);
+    color: #fff;
+    border: none;
+}
+
+.google-btn {
+    background: var(--google-red);
+    color: #fff;
+    border: none;
+}
+
+.google-btn:hover {
+    background: #ea4335;
+}
+
+.ruler {
+    width: 90%;
+    height: 1px;
+    top: 55%;
+    background: var(--primary-color);
+    margin-top: 5%;
+}
+
+.font-grey {
+    color: var(--primary-color);
+}
+
+.font-dark-grey {
+    color: var(--dark-grey-text-color);
+}
+
+.circular-profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border-width: 1px solid var(--primary-color);
+    background-color: var(--tertiary-color);
+}
+
+.circular-profile-pic:hover {
+    cursor: pointer;
+}
+
+.avatar-icon {
+    color: var(--dark-grey-text-color);
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.my-pet-profile-pic {
+    min-width: 250px;
+    min-height: 250px;
+    border-radius: 50%;
+    border-width: 1px solid var(--primary-color);
+    background-color: var(--quaternary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 @media screen and (width>768px) {
     .testimonial-section-container {
         margin: 0px 20px;

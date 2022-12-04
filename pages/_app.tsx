@@ -3,7 +3,6 @@ import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import Script from 'next/script'
 import { Fragment } from 'react'
-import Layout from '../components/layout/layout'
 
 import '../styles/globals.css'
 
@@ -26,9 +25,7 @@ export default function App({ Component, pageProps }: AppProps) {
             </Head>
             <Script src="https://kit.fontawesome.com/73ee72016e.js"></Script>
 
-            <Layout>
-                <Component {...pageProps} />
-            </Layout>
+            <Component {...pageProps} />
         </Fragment>
     )
 }

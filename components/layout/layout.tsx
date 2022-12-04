@@ -1,12 +1,14 @@
-import Image from 'next/image'
-import { useState } from 'react'
-import { Stack } from 'react-bootstrap'
-import MAIN_LOGO from '../../assets/main-logo.png'
-import MenuList from './menu-list'
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { Stack } from 'react-bootstrap';
+import MAIN_LOGO from '../../assets/main-logo.png';
+import MenuList from './menu-list';
 
 const Layout = ({ children }: { children: any }) => {
     const [isMobileMenuExpanded, setIsMobileMenuExpanded] =
-        useState<boolean>(false)
+        useState<boolean>(false);
+    const router = useRouter();
     return (
         <div className="container-fluid">
             {/* <!-- for mobile --> */}
@@ -16,10 +18,15 @@ const Layout = ({ children }: { children: any }) => {
                         src={MAIN_LOGO}
                         className="img-fluid rounded"
                         alt="Responsive image"
+                        onClick={() => router.push('/')}
                     />
                 </div>
                 <div className="col-6 d-flex justify-content-end align-items-center">
-                    <a href="#" className="sandwitch-icon mr-2">
+                    <a
+                        href="#"
+                        className="sandwitch-icon mr-2"
+                        onClick={() => router.push('/login')}
+                    >
                         <i className="fa-solid fa-user"></i>
                     </a>
                     <a
@@ -47,10 +54,13 @@ const Layout = ({ children }: { children: any }) => {
 
             {/* <!-- for desktop --> */}
             <header className="row sticky-top bg-header-color d-none d-md-none d-lg-flex">
-                <div className="col-lg-3 d-flex justify-content-center pt-2">
+                <div
+                    className="col-lg-3 d-flex justify-content-center pt-2 cursor-pointer"
+                    onClick={() => router.push('/')}
+                >
                     <Image
                         src={MAIN_LOGO}
-                        className="img-fluid rounded "
+                        className="img-fluid rounded"
                         alt="Responsive image"
                     />
                 </div>
@@ -67,7 +77,11 @@ const Layout = ({ children }: { children: any }) => {
                         direction="horizontal"
                         gap={2}
                     >
-                        <button type="button" className="btn login-btn">
+                        <button
+                            type="button"
+                            className="btn login-btn"
+                            onClick={() => router.push('/login')}
+                        >
                             Login
                         </button>
                         <button type="button" className="btn login-btn">
@@ -79,7 +93,7 @@ const Layout = ({ children }: { children: any }) => {
 
             {children}
         </div>
-    )
-}
+    );
+};
 
-export default Layout
+export default Layout;
