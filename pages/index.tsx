@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { Card, Stack } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
-import LOGO from '../assets/logo.svg';
+import LOGO from '../assets/logo.png';
 
 import PET_ASSIST from '../assets/pet-assistent.png';
 import PET_FAMILY from '../assets/pet-family.png';
@@ -16,7 +16,7 @@ const Index = () => {
     const router = useRouter();
     return (
         <Layout>
-            <section className="row bg-header-color">
+            <section className="row">
                 <div className="col-md-6 col-sm-12 d-flex flex-column align-items-center justify-content-center section-text-style">
                     <h1 className="fw-bolder">Everything</h1>
                     <h3 className="fw-bolder">Your Pet Needs</h3>
@@ -31,11 +31,13 @@ const Index = () => {
                         gap={1}
                     >
                         <Button className="btn login-btn">Get Started</Button>
-                        <Button className="btn login-btn">Download App</Button>
+                        <Button className="btn login-btn-secondary">
+                            Download App
+                        </Button>
                     </Stack>
                 </div>
 
-                <div className="col-md-6 col-sm-12">
+                <div className="col-md-6 col-sm-12 p-5">
                     <Image
                         src={LOGO}
                         className="img-fluid"
@@ -110,7 +112,7 @@ const Index = () => {
             </section>
 
             <section className="row">
-                <div className="col-md-6 col-sm-12">
+                <div className="col-md-6 col-sm-12 p-5">
                     <Image
                         src={LOGO}
                         className="img-fluid"

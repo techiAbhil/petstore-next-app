@@ -33,6 +33,16 @@
     color: var(--primary-color);
 }
 
+.login-btn-secondary {
+    background-color: var(--secondary-color);
+    color: var(--dark-grey-text-color);
+    border: none;
+}
+
+.login-btn-secondary:hover {
+    background-color: var(--primary-color);
+}
+
 .btn-menu-item {
     background: transparent;
     font-weight: 400;
