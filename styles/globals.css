@@ -172,15 +172,16 @@
     width: 60px;
 }
 
-.sandwitch-icon {
+.profile-login-icon {
     width: 53px;
     height: 53px;
-    background: #fff;
+    background: var(--tertiary-color);
     border-radius: 100%;
     align-self: center;
     display: flex;
     justify-content: center;
     align-items: center;
+    color: var(--dark-grey-text-color);
 }
 
 .home-list-items {
@@ -188,12 +189,23 @@
     width: 90%;
 }
 
+.sandwich-icon {
+    background-color: var(--tertiary-color);
+}
+
+@media screen and (max-width: 768px) {
+    .profile-login-icon {
+        width: 34px;
+        height: 34px;
+    }
+}
+
 @media screen and (max-width: 500px) {
     .profile-icon {
         width: 40px;
     }
 
-    .sandwitch-icon {
+    .profile-login-icon {
         width: 35px;
         height: 35px;
     }
@@ -297,4 +309,8 @@
         background-color: darkgrey;
         outline: 1px solid slategrey;
     }
+}
+
+.navbar-toggler {
+    font-size: inherit;
 }

@@ -1,99 +1,110 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
 import { Stack } from 'react-bootstrap';
+import Navbar from 'react-bootstrap/Navbar';
 import MAIN_LOGO from '../../assets/main-logo.png';
 import MenuList from './menu-list';
+import SidebarMenuItems from './sidebar-menu';
 
-const Layout = ({ children }: { children: any }) => {
-    const [isMobileMenuExpanded, setIsMobileMenuExpanded] =
-        useState<boolean>(false);
+const expand = false;
+function Layout({ children }: { children: any }) {
     const router = useRouter();
     return (
         <div className="container-fluid">
-            {/* <!-- for mobile --> */}
-            <header className="row sticky-top bg-header-color d-lg-none d-xl-none d-flex">
-                <div className="col-6">
-                    <Image
-                        src={MAIN_LOGO}
-                        className="img-fluid rounded"
-                        alt="Responsive image"
+            <Navbar
+                sticky="top"
+                expand={expand}
+                className="row bg-header-color"
+            >
+                {/* for mobile */}
+                <div className="d-lg-none d-xl-none row">
+                    <div
+                        className="col-8 d-flex justify-content-center pt-2 cursor-pointer"
                         onClick={() => router.push('/')}
-                    />
-                </div>
-                <div className="col-6 d-flex justify-content-end align-items-center">
-                    <a
-                        href="#"
-                        className="sandwitch-icon mr-2"
-                        onClick={() => router.push('/login')}
                     >
-                        <i className="fa-solid fa-user"></i>
-                    </a>
-                    <a
-                        className="sandwitch-icon mr-2"
-                        data-toggle="collapse"
-                        data-target="#navbarToggleExternalContent"
-                        aria-controls="navbarToggleExternalContent"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation"
-                        onClick={() =>
-                            setIsMobileMenuExpanded(!isMobileMenuExpanded)
-                        }
-                    >
-                        <i className="fa-solid fa-bars"></i>
-                    </a>
+                        <Navbar.Brand href="#">
+                            <Image
+                                src={MAIN_LOGO}
+                                className="img-fluid rounded"
+                                alt="Responsive image"
+                            />
+                        </Navbar.Brand>
+                    </div>
+
+                    <div className="col-4 d-flex justify-content-center">
+                        <Stack
+                            className="d-flex align-items-center"
+                            direction="horizontal"
+                            gap={2}
+                        >
+                            <a
+                                href="#"
+                                className="profile-login-icon mr-2"
+                                onClick={() => router.push('/login')}
+                            >
+                                {/* <i className="fa-solid fa-user"></i> */}
+                                <i className="fa-solid fa-right-to-bracket"></i>
+                            </a>
+                            <Navbar.Toggle
+                                className="sandwich-icon"
+                                aria-controls={`offcanvasNavbar-expand-${expand}`}
+                            />
+                        </Stack>
+                    </div>
+                    <SidebarMenuItems />
                 </div>
-                {isMobileMenuExpanded && (
-                    <div className="row d-flex justify-content-center bg-header-color">
+                {/* end of mobile */}
+
+                {/* for desktop */}
+                <div className="d-none d-md-none  d-lg-flex row">
+                    <div
+                        className="col-lg-3 d-flex justify-content-center pt-2 cursor-pointer"
+                        onClick={() => router.push('/')}
+                    >
+                        <Navbar.Brand href="#">
+                            <Image
+                                src={MAIN_LOGO}
+                                className="img-fluid rounded"
+                                alt="Responsive image"
+                            />
+                        </Navbar.Brand>
+                    </div>
+
+                    <div className="col-lg-6 d-flex justify-content-center">
                         <nav className="navbar navbar-expand-lg">
                             <MenuList />
                         </nav>
                     </div>
-                )}
-            </header>
 
-            {/* <!-- for desktop --> */}
-            <header className="row sticky-top bg-header-color d-none d-md-none d-lg-flex">
-                <div
-                    className="col-lg-3 d-flex justify-content-center pt-2 cursor-pointer"
-                    onClick={() => router.push('/')}
-                >
-                    <Image
-                        src={MAIN_LOGO}
-                        className="img-fluid rounded"
-                        alt="Responsive image"
-                    />
-                </div>
-
-                <div className="col-lg-6 d-flex justify-content-center">
-                    <nav className="navbar navbar-expand-lg">
-                        <MenuList />
-                    </nav>
-                </div>
-
-                <div className="col-lg-3 d-flex justify-content-center">
-                    <Stack
-                        className="d-flex align-items-center"
-                        direction="horizontal"
-                        gap={2}
-                    >
-                        <button
-                            type="button"
-                            className="btn login-btn"
-                            onClick={() => router.push('/login')}
+                    <div className="col-lg-3 d-flex justify-content-center">
+                        <Stack
+                            className="d-flex align-items-center"
+                            direction="horizontal"
+                            gap={2}
                         >
-                            Login
-                        </button>
-                        <button type="button" className="btn login-btn">
-                            Get Started
-                        </button>
-                    </Stack>
+                            <button
+                                type="button"
+                                className="btn login-btn"
+                                onClick={() => router.push('/login')}
+                            >
+                                Login
+                            </button>
+                            <button type="button" className="btn login-btn">
+                                Get Started
+                            </button>
+                            <Navbar.Toggle
+                                className="sandwich-icon"
+                                aria-controls={`offcanvasNavbar-expand-${expand}`}
+                            />
+                        </Stack>
+                    </div>
+                    <SidebarMenuItems />
                 </div>
-            </header>
-
+                {/* end of desktop */}
+            </Navbar>
             {children}
         </div>
     );
-};
+}
 
 export default Layout;
