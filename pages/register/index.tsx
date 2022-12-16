@@ -1,61 +1,82 @@
+import axios from 'axios';
+import { Form as FormikForm, Formik } from 'formik';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Button } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
+import CustomFormikField from '../../components/common/CustomFormikField';
 import AuthLayout from '../../components/layout/auth-layout';
+import { registrationSchema } from '../../validations/auth.validation';
 
 const Register = () => {
     const router = useRouter();
+    const submitHandler = async (values: any) => {
+        console.log(values);
+        const response = await axios.post('/auth/register', values);
+    };
     return (
         <AuthLayout>
             <>
-                <form className="mt-1">
-                    <p className="text-center text-uppercase text-secondary fw-bold">
-                        Register
-                    </p>
+                <Formik
+                    initialValues={{
+                        email: '',
+                        password: '',
+                        confirmPassword: '',
+                    }}
+                    validationSchema={registrationSchema}
+                    onSubmit={submitHandler}
+                >
+                    {() => (
+                        <FormikForm className="mt-1">
+                            <p className="text-center text-uppercase text-secondary fw-bold">
+                                Register
+                            </p>
 
-                    <div className="form-group">
-                        <Form.Select aria-label="Default select example">
-                            <option>Owner</option>
-                            <option value="1">Owner 1</option>
-                            <option value="2">Owner 2</option>
-                        </Form.Select>
-                    </div>
+                            <div className="form-group">
+                                <Form.Select aria-label="Default select example">
+                                    <option>Owner</option>
+                                    <option value="1">Owner 1</option>
+                                    <option value="2">Owner 2</option>
+                                </Form.Select>
+                            </div>
 
-                    <div className="form-group">
-                        <input
-                            type="text"
-                            className="form-control my-3"
-                            placeholder="Email ID / Mobile Number"
-                        />
-                    </div>
+                            <div className="form-group">
+                                <CustomFormikField
+                                    className="form-control my-3"
+                                    placeholder="Email"
+                                    name="email"
+                                />
+                            </div>
 
-                    <div className="form-group mt-1">
-                        <input
-                            type="text"
-                            className="form-control my-3"
-                            placeholder="Password / OTP"
-                        />
-                    </div>
+                            <div className="form-group mt-1">
+                                <CustomFormikField
+                                    className="form-control my-3"
+                                    placeholder="Password"
+                                    name="password"
+                                    type="password"
+                                />
+                            </div>
 
-                    <div className="form-group mt-1">
-                        <input
-                            type="text"
-                            className="form-control my-3"
-                            placeholder="Re-enter Password / OTP"
-                        />
-                    </div>
+                            <div className="form-group mt-1">
+                                <CustomFormikField
+                                    className="form-control my-3"
+                                    placeholder="Re-enter Password"
+                                    name="confirmPassword"
+                                    type="password"
+                                />
+                            </div>
 
-                    <div className="form-group pt-3">
-                        <Button
-                            className="btn btn-block login-btn w-100"
-                            onClick={() => router.push('/register-profile')}
-                        >
-                            Sign Up
-                        </Button>
-                    </div>
-                </form>
-
+                            <div className="form-group pt-3">
+                                <Button
+                                    className="btn btn-block login-btn w-100"
+                                    type="submit"
+                                >
+                                    Sign Up
+                                </Button>
+                            </div>
+                        </FormikForm>
+                    )}
+                </Formik>
                 <div className="form-group py-4 row justify-content-between align-middle">
                     <div className="col-3">
                         <div className="ruler" />

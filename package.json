@@ -12,9 +12,11 @@
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.9",
+    "axios": "^1.2.1",
     "bootstrap": "^5.2.3",
     "eslint": "8.28.0",
     "eslint-config-next": "13.0.4",
+    "formik": "^2.2.9",
     "next": "13.0.4",
     "react": "18.2.0",
     "react-bootstrap": "^2.6.0",
@@ -22,5 +24,8 @@
     "react-dropzone": "^14.2.3",
     "react-slideshow-image": "^4.0.5",
     "typescript": "4.9.3"
+  },
+  "devDependencies": {
+    "yup": "^0.32.11"
   }
 }

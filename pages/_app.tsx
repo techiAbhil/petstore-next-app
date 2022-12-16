@@ -1,10 +1,10 @@
-import 'bootstrap/dist/css/bootstrap.min.css'
-import type { AppProps } from 'next/app'
-import Head from 'next/head'
-import Script from 'next/script'
-import { Fragment } from 'react'
-
-import '../styles/globals.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import type { AppProps } from 'next/app';
+import Head from 'next/head';
+import Script from 'next/script';
+import { Fragment } from 'react';
+import '../styles/globals.css';
+import '../utils/interceptor';
 
 export default function App({ Component, pageProps }: AppProps) {
     return (
@@ -27,5 +27,5 @@ export default function App({ Component, pageProps }: AppProps) {
 
             <Component {...pageProps} />
         </Fragment>
-    )
+    );
 }

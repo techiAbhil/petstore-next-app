@@ -1,56 +1,75 @@
+import axios from 'axios';
+import { Form, Formik } from 'formik';
 import Link from 'next/link';
 import { Button } from 'react-bootstrap';
+import CustomFormikField from '../../components/common/CustomFormikField';
 import AuthLayout from '../../components/layout/auth-layout';
+import { loginSchema } from '../../validations/auth.validation';
 
 const Login = () => {
+    const submitHandler = async (values: any) => {
+        console.log(values);
+        const response = await axios.post('/auth/login', values);
+    };
     return (
         <AuthLayout>
             <>
-                <form className="mt-1">
-                    <p className="text-center text-uppercase text-secondary fw-bold">
-                        Login
-                    </p>
-                    <div className="form-group">
-                        <input
-                            type="text"
-                            className="form-control my-3"
-                            placeholder="Username"
-                        />
-                    </div>
+                <Formik
+                    initialValues={{ email: '', password: '' }}
+                    validationSchema={loginSchema}
+                    onSubmit={submitHandler}
+                >
+                    {() => (
+                        <Form className="mt-1">
+                            <p className="text-center text-uppercase text-secondary fw-bold">
+                                Login
+                            </p>
+                            <div className="form-group">
+                                <CustomFormikField
+                                    className="form-control my-3"
+                                    placeholder="Email"
+                                    name="email"
+                                />
+                            </div>
 
-                    <div className="form-group mt-1">
-                        <input
-                            type="text"
-                            className="form-control my-3"
-                            placeholder="Password"
-                        />
-                    </div>
+                            <div className="form-group mt-1">
+                                <CustomFormikField
+                                    className="form-control my-3"
+                                    placeholder="Password"
+                                    name="password"
+                                    type="password"
+                                />
+                            </div>
 
-                    <div className="forgot-passowrd-container">
-                        <div>
-                            <input
-                                className="form-check-input"
-                                type="checkbox"
-                                id="gridCheck"
-                            />
-                            <label className="form-check-label font-small px-1">
-                                Check me out{'  '}
-                            </label>
-                        </div>
-                        <div>
-                            <a href="#" className="font-small">
-                                Forgot Password?
-                            </a>
-                        </div>
-                    </div>
+                            <div className="forgot-passowrd-container">
+                                <div>
+                                    <input
+                                        className="form-check-input"
+                                        type="checkbox"
+                                        id="gridCheck"
+                                    />
+                                    <label className="form-check-label font-small px-1">
+                                        Check me out{'  '}
+                                    </label>
+                                </div>
+                                <div>
+                                    <a href="#" className="font-small">
+                                        Forgot Password?
+                                    </a>
+                                </div>
+                            </div>
 
-                    <div className="form-group pt-3">
-                        <Button className="btn btn-block login-btn w-100">
-                            Login
-                        </Button>
-                    </div>
-                </form>
-
+                            <div className="form-group pt-3">
+                                <Button
+                                    type="submit"
+                                    className="btn btn-block login-btn w-100"
+                                >
+                                    Login
+                                </Button>
+                            </div>
+                        </Form>
+                    )}
+                </Formik>
                 <div className="form-group py-4 row justify-content-between align-middle">
                     <div className="col-3">
                         <div className="ruler" />
