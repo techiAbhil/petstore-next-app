@@ -12,7 +12,6 @@ function ProfileDropdown() {
     }, [router]);
 
     const userDetails = useUserDetails();
-    console.log('userD = ', userDetails);
 
     return (
         <Dropdown drop="down" align="end">
