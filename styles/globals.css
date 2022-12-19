@@ -203,6 +203,17 @@
     background-color: var(--tertiary-color);
 }
 
+.profile-dropdown {
+    background-color: var(--tertiary-color);
+    color: var(--dark-grey-text-color);
+    border: none;
+    margin: none;
+}
+
+.profile-dropdown:hover {
+    background-color: var(--tertiary-color);
+}
+
 @media screen and (max-width: 768px) {
     .profile-login-icon {
         width: 34px;
@@ -323,4 +334,15 @@
 
 .navbar-toggler {
     font-size: inherit;
+}
+
+.error-toaster {
+    background-color: var(--tertiary-color);
+}
+
+.loading-modal .modal-content {
+    background-color: transparent;
+    justify-content: center;
+    align-items: center;
+    border: none;
 }

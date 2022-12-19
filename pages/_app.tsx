@@ -2,11 +2,22 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import Script from 'next/script';
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
+import { Provider } from 'react-redux';
+import { store } from '../store/store';
 import '../styles/globals.css';
 import '../utils/interceptor';
-
 export default function App({ Component, pageProps }: AppProps) {
+    const [showing, setShowing] = useState(false);
+
+    useEffect(() => {
+        setShowing(true);
+    }, []);
+
+    if (!showing) {
+        return null;
+    }
+
     return (
         <Fragment>
             <Head>
@@ -24,8 +35,9 @@ export default function App({ Component, pageProps }: AppProps) {
                 <link rel="preconnect" href="https://fonts.gstatic.com" />
             </Head>
             <Script src="https://kit.fontawesome.com/73ee72016e.js"></Script>
-
-            <Component {...pageProps} />
+            <Provider store={store}>
+                <Component {...pageProps} />
+            </Provider>
         </Fragment>
     );
 }

@@ -1,28 +1,24 @@
 import { ErrorMessage, Field } from 'formik';
+import Form from 'react-bootstrap/Form';
 
-const CustomFormikField = ({
+const CustomFormikSelect = ({
+    children,
     name,
-    className,
-    type = 'text',
-    placeholder,
     hideErrorMsg = false,
     errorMessageComponent = 'div',
 }: {
+    children: any[];
     name: string;
-    className?: string;
-    type?: string;
-    placeholder?: string;
     hideErrorMsg?: boolean;
     errorMessageComponent?: string;
 }) => {
     return (
         <>
-            <Field
-                type={type}
-                className={className}
-                placeholder={placeholder}
-                name={name}
-            />
+            <Field name={name} defaultValue="">
+                {({ field }: any) => (
+                    <Form.Select {...field}>{children}</Form.Select>
+                )}
+            </Field>
             {!hideErrorMsg && (
                 <ErrorMessage
                     className="text-danger text-capitalize p-1"
@@ -34,4 +30,4 @@ const CustomFormikField = ({
     );
 };
 
-export default CustomFormikField;
+export default CustomFormikSelect;

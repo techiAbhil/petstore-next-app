@@ -1,19 +1,25 @@
-import axios from 'axios';
 import { Form as FormikForm, Formik } from 'formik';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useCallback } from 'react';
 import { Button } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
+import { useDispatch } from 'react-redux';
 import CustomFormikField from '../../components/common/CustomFormikField';
 import AuthLayout from '../../components/layout/auth-layout';
+import { setRegistrationState } from '../../store/registrationSlice';
 import { registrationSchema } from '../../validations/auth.validation';
 
 const Register = () => {
     const router = useRouter();
-    const submitHandler = async (values: any) => {
-        console.log(values);
-        const response = await axios.post('/auth/register', values);
-    };
+    const dispatch = useDispatch();
+    const submitHandler = useCallback(
+        async (values: any) => {
+            dispatch(setRegistrationState({ ...values }));
+            router.push('/register-profile');
+        },
+        [dispatch, router]
+    );
     return (
         <AuthLayout>
             <>
@@ -40,26 +46,26 @@ const Register = () => {
                                 </Form.Select>
                             </div>
 
-                            <div className="form-group">
+                            <div className="form-group my-3">
                                 <CustomFormikField
-                                    className="form-control my-3"
+                                    className="form-control"
                                     placeholder="Email"
                                     name="email"
                                 />
                             </div>
 
-                            <div className="form-group mt-1">
+                            <div className="form-group my-3">
                                 <CustomFormikField
-                                    className="form-control my-3"
+                                    className="form-control "
                                     placeholder="Password"
                                     name="password"
                                     type="password"
                                 />
                             </div>
 
-                            <div className="form-group mt-1">
+                            <div className="form-group my-3">
                                 <CustomFormikField
-                                    className="form-control my-3"
+                                    className="form-control "
                                     placeholder="Re-enter Password"
                                     name="confirmPassword"
                                     type="password"
@@ -113,17 +119,11 @@ const Register = () => {
                 </div>
 
                 <div className="pb-5 d-flex justify-content-center align-items-center">
-                    <a
-                        className="font-extra-small px-2"
-                        href="javascript:void(0);"
-                    >
+                    <a className="font-extra-small px-2" href="#">
                         Terms & Condition
                     </a>
                     <span className="font-grey">{'|'}</span>
-                    <a
-                        className="font-extra-small px-2"
-                        href="javascript:void(0);"
-                    >
+                    <a className="font-extra-small px-2" href="#">
                         Privacy Policy
                     </a>
                 </div>

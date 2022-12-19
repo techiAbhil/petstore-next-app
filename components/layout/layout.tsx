@@ -1,14 +1,21 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { useMemo } from 'react';
 import { Stack } from 'react-bootstrap';
 import Navbar from 'react-bootstrap/Navbar';
 import MAIN_LOGO from '../../assets/main-logo.png';
+import ProfileDropdown from '../common/ProfileDropdown';
 import MenuList from './menu-list';
 import SidebarMenuItems from './sidebar-menu';
 
 const expand = false;
 function Layout({ children }: { children: any }) {
     const router = useRouter();
+    const isAuthenticated = useMemo(() => {
+        if (typeof window !== 'undefined')
+            return window.localStorage.getItem('USER_DETAILS') ? true : false;
+        return false;
+    }, []);
     return (
         <div className="container-fluid">
             <Navbar
@@ -37,14 +44,18 @@ function Layout({ children }: { children: any }) {
                             direction="horizontal"
                             gap={2}
                         >
-                            <a
-                                href="#"
-                                className="profile-login-icon mr-2"
-                                onClick={() => router.push('/login')}
-                            >
-                                {/* <i className="fa-solid fa-user"></i> */}
-                                <i className="fa-solid fa-right-to-bracket"></i>
-                            </a>
+                            {!isAuthenticated ? (
+                                <a
+                                    href="#"
+                                    className="profile-login-icon mr-2"
+                                    onClick={() => router.push('/login')}
+                                >
+                                    {/* <i className="fa-solid fa-user"></i> */}
+                                    <i className="fa-solid fa-right-to-bracket"></i>
+                                </a>
+                            ) : (
+                                <ProfileDropdown />
+                            )}
                             <Navbar.Toggle
                                 className="sandwich-icon"
                                 aria-controls={`offcanvasNavbar-expand-${expand}`}
@@ -82,16 +93,25 @@ function Layout({ children }: { children: any }) {
                             direction="horizontal"
                             gap={2}
                         >
-                            <button
-                                type="button"
-                                className="btn login-btn"
-                                onClick={() => router.push('/login')}
-                            >
-                                Login
-                            </button>
-                            <button type="button" className="btn login-btn">
-                                Get Started
-                            </button>
+                            {!isAuthenticated ? (
+                                <>
+                                    <button
+                                        type="button"
+                                        className="btn login-btn"
+                                        onClick={() => router.push('/login')}
+                                    >
+                                        Login
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className="btn login-btn"
+                                    >
+                                        Get Started
+                                    </button>
+                                </>
+                            ) : (
+                                <ProfileDropdown />
+                            )}
                             <Navbar.Toggle
                                 className="sandwich-icon"
                                 aria-controls={`offcanvasNavbar-expand-${expand}`}

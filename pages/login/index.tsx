@@ -1,16 +1,44 @@
 import axios from 'axios';
 import { Form, Formik } from 'formik';
+import jwtDecode from 'jwt-decode';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useCallback, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import CustomFormikField from '../../components/common/CustomFormikField';
+import CustomLoader from '../../components/common/CustomLoader';
+import CustomToaster from '../../components/common/Toaster';
 import AuthLayout from '../../components/layout/auth-layout';
 import { loginSchema } from '../../validations/auth.validation';
 
 const Login = () => {
-    const submitHandler = async (values: any) => {
-        console.log(values);
-        const response = await axios.post('/auth/login', values);
-    };
+    const [serviceError, setServiceError] = useState<string | undefined>(
+        undefined
+    );
+    const [showLoader, setShowLoader] = useState<boolean>(false);
+    const router = useRouter();
+
+    const submitHandler = useCallback(async (values: any) => {
+        try {
+            console.log(values);
+            const {
+                data: { token },
+            }: any = await axios.post('/auth/login', values);
+            const userDetails: any = jwtDecode(token);
+            localStorage.setItem(
+                'USER_DETAILS',
+                JSON.stringify({ ...userDetails, token })
+            );
+            setShowLoader(false);
+            router.replace('/');
+        } catch (e: any) {
+            setServiceError(
+                e?.response?.data?.message ?? 'Something went wrong!'
+            );
+
+            setShowLoader(false);
+        }
+    }, []);
     return (
         <AuthLayout>
             <>
@@ -24,17 +52,17 @@ const Login = () => {
                             <p className="text-center text-uppercase text-secondary fw-bold">
                                 Login
                             </p>
-                            <div className="form-group">
+                            <div className="form-group my-3">
                                 <CustomFormikField
-                                    className="form-control my-3"
+                                    className="form-control"
                                     placeholder="Email"
                                     name="email"
                                 />
                             </div>
 
-                            <div className="form-group mt-1">
+                            <div className="form-group my-3">
                                 <CustomFormikField
-                                    className="form-control my-3"
+                                    className="form-control"
                                     placeholder="Password"
                                     name="password"
                                     type="password"
@@ -105,6 +133,14 @@ const Login = () => {
                     </Link>
                 </div>
             </>
+            <CustomLoader show={showLoader} />
+            {serviceError && (
+                <CustomToaster
+                    bodyContent={serviceError}
+                    headerContent={<strong className="me-auto">Error</strong>}
+                    onClose={() => setServiceError(undefined)}
+                />
+            )}
         </AuthLayout>
     );
 };
