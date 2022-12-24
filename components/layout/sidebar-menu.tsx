@@ -1,53 +1,119 @@
-import {
-    Button,
-    Form,
-    Nav,
-    Navbar,
-    NavDropdown,
-    Offcanvas,
-} from 'react-bootstrap';
+import Image from 'next/image';
+import { useState } from 'react';
+import { Nav, Navbar, NavDropdown, Offcanvas } from 'react-bootstrap';
+import MAIN_LOGO from '../../assets/main-logo.png';
+
 const expand = false;
 const SidebarMenuItems = () => {
+    const [selectedNestedDropdown, setSelectedNestedDropdown] =
+        useState<string>('');
     return (
         <Navbar.Offcanvas
+            className="bg-header-color"
             id={`offcanvasNavbar-expand-${expand}`}
             aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
             placement="end"
         >
             <Offcanvas.Header closeButton>
                 <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
-                    Offcanvas
+                    <Image
+                        src={MAIN_LOGO}
+                        className="img-fluid rounded"
+                        alt="Responsive image"
+                        width={200}
+                        height={200}
+                    />
                 </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
                 <Nav className="justify-content-end flex-grow-1 pe-3">
-                    <Nav.Link href="#action1">Home</Nav.Link>
-                    <Nav.Link href="#action2">Link</Nav.Link>
+                    <Nav.Link href="#">My Profile</Nav.Link>
                     <NavDropdown
-                        title="Dropdown"
-                        id={`offcanvasNavbarDropdown-expand-${expand}`}
+                        title="My Pet Assistent"
+                        className={`offcanvasNavbarDropdown`}
                     >
-                        <NavDropdown.Item href="#action3">
-                            Action
+                        <NavDropdown.Item href="#">Basic Info</NavDropdown.Item>
+
+                        <NavDropdown.Item href="#">
+                            <NavDropdown
+                                title="History"
+                                className={`offcanvasNavbarDropdown`}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    setSelectedNestedDropdown(
+                                        selectedNestedDropdown === 'History'
+                                            ? ''
+                                            : 'History'
+                                    );
+                                }}
+                                show={selectedNestedDropdown === 'History'}
+                            >
+                                <NavDropdown.Item href="#">
+                                    Vaccination
+                                </NavDropdown.Item>
+                                <NavDropdown.Item href="#">
+                                    Parasite Prevention
+                                </NavDropdown.Item>
+                                <NavDropdown.Item href="#">
+                                    Grooming
+                                </NavDropdown.Item>
+                                <NavDropdown.Item href="#">
+                                    Measurements
+                                </NavDropdown.Item>
+                                <NavDropdown.Item href="#">
+                                    Episodes & Symptomatic History
+                                </NavDropdown.Item>
+                            </NavDropdown>
+                            {/* History */}
                         </NavDropdown.Item>
-                        <NavDropdown.Item href="#action4">
-                            Another action
-                        </NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item href="#action5">
-                            Something else here
+
+                        <NavDropdown.Item href="#">Expenses</NavDropdown.Item>
+                        <NavDropdown.Item href="#">
+                            <NavDropdown
+                                title="Daily Activity"
+                                className={`offcanvasNavbarDropdown`}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    setSelectedNestedDropdown(
+                                        selectedNestedDropdown ===
+                                            'Daily Activity'
+                                            ? ''
+                                            : 'Daily Activity'
+                                    );
+                                }}
+                                show={
+                                    selectedNestedDropdown === 'Daily Activity'
+                                }
+                            >
+                                <NavDropdown.Item href="#">
+                                    Food
+                                </NavDropdown.Item>
+                                <NavDropdown.Item href="#">
+                                    Walk
+                                </NavDropdown.Item>
+                                <NavDropdown.Item href="#">
+                                    Training
+                                </NavDropdown.Item>
+                                <NavDropdown.Item href="#">
+                                    Pee
+                                </NavDropdown.Item>
+                                <NavDropdown.Item href="#">
+                                    Poop
+                                </NavDropdown.Item>
+                            </NavDropdown>
+                            {/* History */}
                         </NavDropdown.Item>
                     </NavDropdown>
+
+                    <NavDropdown
+                        title="My Marketplace"
+                        className={`offcanvasNavbarDropdown`}
+                    >
+                        <NavDropdown.Item href="#">Products</NavDropdown.Item>
+                        <NavDropdown.Item href="#">Services</NavDropdown.Item>
+                    </NavDropdown>
+                    <Nav.Link href="#">My Pet Family</Nav.Link>
                 </Nav>
-                <Form className="d-flex">
-                    <Form.Control
-                        type="search"
-                        placeholder="Search"
-                        className="me-2"
-                        aria-label="Search"
-                    />
-                    <Button variant="outline-success">Search</Button>
-                </Form>
             </Offcanvas.Body>
         </Navbar.Offcanvas>
     );

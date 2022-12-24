@@ -346,3 +346,13 @@
     align-items: center;
     border: none;
 }
+
+.offcanvasNavbarDropdown div {
+    background: var(--secondary-color);
+    border: none;
+}
+
+.offcanvasNavbarDropdown div a:hover {
+    background: var(--secondary-color);
+    color: #ffffff;
+}
