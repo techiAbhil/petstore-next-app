@@ -2,11 +2,13 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { Nav, Navbar, NavDropdown, Offcanvas } from 'react-bootstrap';
 import MAIN_LOGO from '../../assets/main-logo.png';
+import ProfileDisplay from '../../components/common/ProfileDisplay';
 
 const expand = false;
 const SidebarMenuItems = () => {
     const [selectedNestedDropdown, setSelectedNestedDropdown] =
         useState<string>('');
+
     return (
         <Navbar.Offcanvas
             className="bg-header-color"
@@ -27,7 +29,9 @@ const SidebarMenuItems = () => {
             </Offcanvas.Header>
             <Offcanvas.Body>
                 <Nav className="justify-content-end flex-grow-1 pe-3">
-                    <Nav.Link href="#">My Profile</Nav.Link>
+                    <div className="d-flex justify-content-center mb-3">
+                        <ProfileDisplay />
+                    </div>
                     <NavDropdown
                         title="My Pet Assistent"
                         className={`offcanvasNavbarDropdown`}

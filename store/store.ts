@@ -11,6 +11,28 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import registrationReducer from './registrationSlice';
+import userReducer from './userSlice';
+
+const appReducer = combineReducers({
+    registration: registrationReducer,
+    user: userReducer,
+});
+
+const rootReducer = (state: any, action: any) => {
+    if (action.type === 'registration/clearLogoutState') {
+        storage.removeItem('persist:root');
+        return appReducer(undefined, action);
+    }
+
+    return appReducer(state, action);
+};
+
+const persistConfig = {
+    key: 'root',
+    storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const appReducer = combineReducers({
     registration: registrationReducer,
