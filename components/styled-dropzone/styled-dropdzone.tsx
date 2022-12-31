@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useDropzone } from 'react-dropzone';
+import { DropzoneOptions, useDropzone } from 'react-dropzone';
 
 const baseStyle: object = {
     flex: 1,
@@ -29,14 +29,14 @@ const rejectStyle: object = {
     borderColor: '#ff1744',
 };
 
-function StyledDropzone(props: any) {
+function StyledDropzone(props: { config?: DropzoneOptions }) {
     const {
         getRootProps,
         getInputProps,
         isFocused,
         isDragAccept,
         isDragReject,
-    } = useDropzone({ accept: { 'image/*': [] } });
+    } = useDropzone(props.config ?? { accept: { 'image/*': [] } });
 
     const style = useMemo(
         () => ({

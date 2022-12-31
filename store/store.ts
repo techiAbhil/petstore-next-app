@@ -1,13 +1,57 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import {
+    FLUSH,
+    PAUSE,
+    PERSIST,
+    persistReducer,
+    persistStore,
+    PURGE,
+    REGISTER,
+    REHYDRATE,
+} from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import registrationReducer from './registrationSlice';
+import userReducer from './userSlice';
 
-export const store = configureStore({
-    reducer: {
-        registration: registrationReducer,
-    },
+const appReducer = combineReducers({
+    registration: registrationReducer,
+    user: userReducer,
 });
 
-// Infer the `RootState` and `AppDispatch` types from the store itself
+const rootReducer = (state: any, action: any) => {
+    if (action.type === 'registration/clearLogoutState') {
+        storage.removeItem('persist:root');
+        return appReducer(undefined, action);
+    }
+
+    return appReducer(state, action);
+};
+
+const persistConfig = {
+    key: 'root',
+    storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+export const store = configureStore({
+    reducer: persistedReducer,
+
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: {
+                ignoredActions: [
+                    FLUSH,
+                    REHYDRATE,
+                    PAUSE,
+                    PERSIST,
+                    PURGE,
+                    REGISTER,
+                ],
+            },
+        }),
+});
+
 export type RootState = ReturnType<typeof store.getState>;
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch;
+export const persistor = persistStore(store);

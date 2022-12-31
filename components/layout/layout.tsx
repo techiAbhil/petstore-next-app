@@ -13,7 +13,7 @@ function Layout({ children }: { children: any }) {
     const router = useRouter();
     const isAuthenticated = useMemo(() => {
         if (typeof window !== 'undefined')
-            return window.localStorage.getItem('USER_DETAILS') ? true : false;
+            return window.localStorage.getItem('AUTH_TOKEN') ? true : false;
         return false;
     }, []);
     return (

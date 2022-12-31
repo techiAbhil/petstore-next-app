@@ -4,7 +4,8 @@ import Head from 'next/head';
 import Script from 'next/script';
 import { Fragment, useEffect, useState } from 'react';
 import { Provider } from 'react-redux';
-import { store } from '../store/store';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistor, store } from '../store/store';
 import '../styles/globals.css';
 import '../utils/interceptor';
 export default function App({ Component, pageProps }: AppProps) {
@@ -36,7 +37,9 @@ export default function App({ Component, pageProps }: AppProps) {
             </Head>
             <Script src="https://kit.fontawesome.com/73ee72016e.js"></Script>
             <Provider store={store}>
-                <Component {...pageProps} />
+                <PersistGate loading={null} persistor={persistor}>
+                    <Component {...pageProps} />
+                </PersistGate>
             </Provider>
         </Fragment>
     );

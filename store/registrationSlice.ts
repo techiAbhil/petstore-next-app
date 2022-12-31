@@ -2,13 +2,13 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
 export interface IRegistrationState {
-    email: string;
-    password: string;
+    us_email: string;
+    us_phone: string;
 }
 
 const initialState: IRegistrationState = {
-    email: '',
-    password: '',
+    us_email: '',
+    us_phone: '',
 };
 
 export const registrationSlice = createSlice({
@@ -20,16 +20,18 @@ export const registrationSlice = createSlice({
             {
                 payload,
             }: PayloadAction<{
-                email: string;
-                password: string;
+                us_email: string;
+                us_phone: string;
             }>
         ) => {
-            state.email = payload.email;
-            state.password = payload.password;
+            state.us_email = payload.us_email;
+            state.us_phone = payload.us_phone;
         },
+        clearLogoutState: () => {},
     },
 });
 
-export const { setRegistrationState } = registrationSlice.actions;
+export const { setRegistrationState, clearLogoutState } =
+    registrationSlice.actions;
 
 export default registrationSlice.reducer;
