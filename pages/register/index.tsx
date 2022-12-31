@@ -29,7 +29,7 @@ const Register = () => {
                     ...values,
                 });
                 setShowLoader(false);
-                router.push(`/verification`);
+                router.push(`/login`);
             } catch (e: any) {
                 setServiceError(e?.message ?? 'Something went wrong!');
                 setShowLoader(false);

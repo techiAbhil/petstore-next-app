@@ -1,7 +1,7 @@
-import Image from 'next/image'
-import { Stack } from 'react-bootstrap'
-import FOOTER_IMG1 from '../../assets/footer-img-1.png'
-import PAYMENT from '../../assets/payment.png'
+import Image from 'next/image';
+import { Stack } from 'react-bootstrap';
+import FOOTER_IMG1 from '../../assets/footer-img-1.png';
+import PAYMENT from '../../assets/payment.png';
 
 const Footer = () => {
     return (
@@ -117,13 +117,13 @@ const Footer = () => {
                     <i className="fa-brands fa-square-facebook"></i>
                 </div>
                 <Stack className="col-12 col-lg-2 d-flex justify-content-end">
-                    <button type="button" className="btn login-btn btn-block">
+                    <button type="button" className="btn orange-btn btn-block">
                         Chat Support
                     </button>
                 </Stack>
             </div>
         </Stack>
-    )
-}
+    );
+};
 
-export default Footer
+export default Footer;

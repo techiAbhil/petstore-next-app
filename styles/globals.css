@@ -15,22 +15,41 @@
 }
 
 .bg-header-color {
-    background: var(--secondary-color);
+    background: #fff;
 }
 
 .bg-header-color .btn-link {
     color: whitesmoke;
 }
 
+.cms-container {
+    height: 300px;
+}
+
+.overflow-y-scroll {
+    overflow-y: scroll;
+}
+
 .login-btn {
-    background-color: var(--tertiary-color);
+    background-color: var(--primary-color);
     color: #fff;
     border: none;
 }
 
 .login-btn:hover {
+    background-color: var(--primary-color);
+    color: var(--dark-grey-text-color);
+}
+
+.orange-btn {
     background-color: var(--tertiary-color);
-    color: var(--primary-color);
+    color: #fff;
+    border: none;
+}
+
+.orange-btn:hover {
+    background-color: var(--tertiary-color);
+    color: var(--dark-grey-text-color);
 }
 
 .login-btn-secondary {
@@ -54,11 +73,8 @@
 }
 
 .landing-section-card-btn {
-    width: 140px;
-    height: 140px;
-    background: var(--secondary-color);
-    border: 3px solid var(--primary-color);
-    border-radius: 20px;
+    width: 240px;
+    height: 240px;
     margin: 5px;
     margin-left: 20px;
 }
@@ -139,7 +155,7 @@
     margin: 5px;
     background-color: var(--secondary-color);
     border-radius: 20px;
-    height: 350px;
+    min-height: 150px;
     width: 90%;
     overflow: hidden;
 }
@@ -200,7 +216,7 @@
 }
 
 .sandwich-icon {
-    background-color: var(--tertiary-color);
+    background-color: var(--primary-color);
 }
 
 .profile-dropdown {

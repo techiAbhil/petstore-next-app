@@ -105,8 +105,9 @@ function Layout({ children }: { children: any }) {
                                     <button
                                         type="button"
                                         className="btn login-btn"
+                                        onClick={() => router.push('/register')}
                                     >
-                                        Get Started
+                                        Register
                                     </button>
                                 </>
                             ) : (

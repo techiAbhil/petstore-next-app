@@ -1,18 +1,18 @@
-import Image from 'next/image'
-import { Fragment } from 'react'
-import { Slide } from 'react-slideshow-image'
-import TESTIMONAIL_PROFILE from '../../assets/testimonail-profile.png'
+import Image from 'next/image';
+import { Fragment } from 'react';
+import { Slide } from 'react-slideshow-image';
+import TESTIMONAIL_PROFILE from '../../assets/testimonail-profile.png';
 
-import { Stack } from 'react-bootstrap'
-import 'react-slideshow-image/dist/styles.css'
+import { Stack } from 'react-bootstrap';
+import 'react-slideshow-image/dist/styles.css';
 
 type TESTIMOIAL_SLIDER_TYPE = {
-    userProfilePic: any
-    userName: string
-    petRelation: string
-    rating: number
-    comment: string
-}
+    userProfilePic: any;
+    userName: string;
+    petRelation: string;
+    rating: number;
+    comment: string;
+};
 
 const testimonials: TESTIMOIAL_SLIDER_TYPE[] = [
     {
@@ -29,20 +29,20 @@ const testimonials: TESTIMOIAL_SLIDER_TYPE[] = [
         userName: 'John Wick',
         petRelation: 'Pet Parent',
         rating: 5,
-        comment: `  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        comment: `Lorem ipsum dolor sit amet consectetur adipisicing elit.
         Iusto ipsam ab nemo, beatae minima, nulla quisquam
-        repella`,
+        repellat`,
     },
     {
         userProfilePic: TESTIMONAIL_PROFILE,
         userName: 'John Wick',
         petRelation: 'Pet Parent',
         rating: 5,
-        comment: `  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        comment: `Lorem ipsum dolor sit amet consectetur adipisicing elit.
         Iusto ipsam ab nemo, beatae minima, nulla quisquam
         repellat`,
     },
-]
+];
 
 const responsiveSettings = [
     {
@@ -66,15 +66,15 @@ const responsiveSettings = [
             slidesToScroll: 1,
         },
     },
-]
+];
 
 const HomeTestimonials = () => {
     return (
         <Fragment>
-            <section className="row">
+            <section className="row mt-5">
                 <div className="col-12 d-flex flex-column align-items-center justify-content-center section-text-style">
                     <h1 className="fw-bolder text-center">
-                        About Pets and More
+                        What Others Say About Us
                     </h1>
                 </div>
             </section>
@@ -128,13 +128,13 @@ const HomeTestimonials = () => {
                                         </Stack>
                                     </Stack>
                                 </div>
-                            )
+                            );
                         }
                     )}
                 </Slide>
             </section>
         </Fragment>
-    )
-}
+    );
+};
 
-export default HomeTestimonials
+export default HomeTestimonials;
