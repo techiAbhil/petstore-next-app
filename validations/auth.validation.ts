@@ -1,32 +1,57 @@
 import * as Yup from 'yup';
-import { PHONE_VALIDATION_REGEX } from '../utils/constants';
+import {
+    OTP_VALIDATION_REGEX,
+    PHONE_VALIDATION_REGEX,
+} from '../utils/constants';
 
 export const loginSchema = Yup.object({
-    email: Yup.string().email('Invalid email address').required(),
-    password: Yup.string().required(),
+    us_email: Yup.string()
+        .email('Invalid email address')
+        .required('Email is required!'),
+    us_password: Yup.string().required('Password is required!'),
 });
 
 export const registrationSchema = Yup.object({
-    email: Yup.string().email('Invalid email address').required(),
-    password: Yup.string().required(),
+    us_email: Yup.string()
+        .email('Invalid email address')
+        .required('Email is required!'),
+    us_password: Yup.string().required('Password is required!'),
     confirmPassword: Yup.string()
         .required('Please provide confirm passowrd!')
         .oneOf(
-            [Yup.ref('password')],
+            [Yup.ref('us_password')],
             'Password & Confirm Password do not match!'
         ),
-});
-
-export const profileRegistrationSchema = Yup.object({
-    name: Yup.string().required(),
-    phone: Yup.string()
-        .required()
+    us_phone: Yup.string()
+        .required('Phone number is required!')
         .test(
             'isValidPhoneNumber',
             'Please enter a valid phone number!',
             (val: any) => PHONE_VALIDATION_REGEX.test(val)
         ),
-    country: Yup.string().required(),
-    city: Yup.string().required(),
-    address: Yup.string().required(),
+});
+
+export const profileRegistrationSchema = Yup.object({
+    us_full_name: Yup.string().required('Full Name is required!'),
+    us_country: Yup.string().required('Country is required!'),
+    us_city: Yup.string().required('City is required!'),
+    us_address: Yup.string().required('Address is required!'),
+    us_email: Yup.string()
+        .email('Invalid email address')
+        .required('Email is required!'),
+    us_phone: Yup.string()
+        .required('Phone number is required!')
+        .test(
+            'isValidPhoneNumber',
+            'Please enter a valid phone number!',
+            (val: any) => PHONE_VALIDATION_REGEX.test(val)
+        ),
+});
+
+export const otpValidationScehma = Yup.object({
+    us_otp: Yup.string()
+        .required('OTP is required!')
+        .test('isValidOTP', 'Please enter a valid OTP number!', (val: any) =>
+            OTP_VALIDATION_REGEX.test(val)
+        ),
 });

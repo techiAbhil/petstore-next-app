@@ -1,14 +1,16 @@
 import axios from 'axios';
 import { Form, Formik } from 'formik';
-import jwtDecode from 'jwt-decode';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useCallback, useState } from 'react';
 import { Button } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
 import CustomFormikField from '../../components/common/CustomFormikField';
 import CustomLoader from '../../components/common/CustomLoader';
 import CustomToaster from '../../components/common/Toaster';
 import AuthLayout from '../../components/layout/auth-layout';
+import { setUserState } from '../../store/userSlice';
+import { updateUserLocalStorageStateByToken } from '../../utils/helper';
 import { loginSchema } from '../../validations/auth.validation';
 
 const Login = () => {
@@ -17,33 +19,31 @@ const Login = () => {
     );
     const [showLoader, setShowLoader] = useState<boolean>(false);
     const router = useRouter();
+    const dispatch = useDispatch();
 
-    const submitHandler = useCallback(async (values: any) => {
-        try {
-            console.log(values);
-            const {
-                data: { token },
-            }: any = await axios.post('/auth/login', values);
-            const userDetails: any = jwtDecode(token);
-            localStorage.setItem(
-                'USER_DETAILS',
-                JSON.stringify({ ...userDetails, token })
-            );
-            setShowLoader(false);
-            router.replace('/');
-        } catch (e: any) {
-            setServiceError(
-                e?.response?.data?.message ?? 'Something went wrong!'
-            );
-
-            setShowLoader(false);
-        }
-    }, []);
+    const submitHandler = useCallback(
+        async (values: any) => {
+            try {
+                console.log(values);
+                const {
+                    data: { token },
+                }: any = await axios.post('/auth/login', values);
+                const userDetails = updateUserLocalStorageStateByToken(token);
+                dispatch(setUserState(userDetails));
+                setShowLoader(false);
+                router.replace(userDetails?.us_first_name ? '/' : '/profile');
+            } catch (e: any) {
+                setServiceError(e?.message ?? 'Something went wrong!');
+                setShowLoader(false);
+            }
+        },
+        [dispatch, router]
+    );
     return (
         <AuthLayout>
             <>
                 <Formik
-                    initialValues={{ email: '', password: '' }}
+                    initialValues={{ us_email: '', us_password: '' }}
                     validationSchema={loginSchema}
                     onSubmit={submitHandler}
                 >
@@ -56,7 +56,7 @@ const Login = () => {
                                 <CustomFormikField
                                     className="form-control"
                                     placeholder="Email"
-                                    name="email"
+                                    name="us_email"
                                 />
                             </div>
 
@@ -64,7 +64,7 @@ const Login = () => {
                                 <CustomFormikField
                                     className="form-control"
                                     placeholder="Password"
-                                    name="password"
+                                    name="us_password"
                                     type="password"
                                 />
                             </div>

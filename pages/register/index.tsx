@@ -1,22 +1,39 @@
+import axios from 'axios';
 import { Form as FormikForm, Formik } from 'formik';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import { useDispatch } from 'react-redux';
 import CustomFormikField from '../../components/common/CustomFormikField';
+import CustomLoader from '../../components/common/CustomLoader';
+import CustomToaster from '../../components/common/Toaster';
 import AuthLayout from '../../components/layout/auth-layout';
 import { setRegistrationState } from '../../store/registrationSlice';
 import { registrationSchema } from '../../validations/auth.validation';
 
 const Register = () => {
+    const [serviceError, setServiceError] = useState<string | undefined>(
+        undefined
+    );
     const router = useRouter();
+    const [showLoader, setShowLoader] = useState<boolean>(false);
     const dispatch = useDispatch();
     const submitHandler = useCallback(
         async (values: any) => {
-            dispatch(setRegistrationState({ ...values }));
-            router.push('/register-profile');
+            try {
+                setShowLoader(true);
+                dispatch(setRegistrationState({ ...values }));
+                await axios.post('/auth/register', {
+                    ...values,
+                });
+                setShowLoader(false);
+                router.push(`/verification`);
+            } catch (e: any) {
+                setServiceError(e?.message ?? 'Something went wrong!');
+                setShowLoader(false);
+            }
         },
         [dispatch, router]
     );
@@ -25,8 +42,9 @@ const Register = () => {
             <>
                 <Formik
                     initialValues={{
-                        email: '',
-                        password: '',
+                        us_email: '',
+                        us_password: '',
+                        us_phone: '',
                         confirmPassword: '',
                     }}
                     validationSchema={registrationSchema}
@@ -50,7 +68,16 @@ const Register = () => {
                                 <CustomFormikField
                                     className="form-control"
                                     placeholder="Email"
-                                    name="email"
+                                    name="us_email"
+                                />
+                            </div>
+
+                            <div className="form-group my-3">
+                                <CustomFormikField
+                                    className="form-control"
+                                    placeholder="Phone No."
+                                    name="us_phone"
+                                    type="tel"
                                 />
                             </div>
 
@@ -58,7 +85,7 @@ const Register = () => {
                                 <CustomFormikField
                                     className="form-control "
                                     placeholder="Password"
-                                    name="password"
+                                    name="us_password"
                                     type="password"
                                 />
                             </div>
@@ -127,6 +154,17 @@ const Register = () => {
                         Privacy Policy
                     </a>
                 </div>
+
+                <CustomLoader show={showLoader} />
+                {serviceError && (
+                    <CustomToaster
+                        bodyContent={serviceError}
+                        headerContent={
+                            <strong className="me-auto">Error</strong>
+                        }
+                        onClose={() => setServiceError(undefined)}
+                    />
+                )}
             </>
         </AuthLayout>
     );
