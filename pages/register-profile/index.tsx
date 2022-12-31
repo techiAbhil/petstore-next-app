@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import { useDropzone } from 'react-dropzone';
-import { useSelector } from 'react-redux';
 import AlertModal from '../../components/common/AlertModal';
 import CustomFormikField from '../../components/common/CustomFormikField';
 import CustomFormikSelect from '../../components/common/CustomFormikSelect';
@@ -12,7 +11,6 @@ import CustomLoader from '../../components/common/CustomLoader';
 import CustomToaster from '../../components/common/Toaster';
 import AuthLayout from '../../components/layout/auth-layout';
 import StyledDropzone from '../../components/styled-dropzone/styled-dropdzone';
-import { RootState } from '../../store/store';
 import { profileRegistrationSchema } from '../../validations/auth.validation';
 
 const Register = () => {
@@ -22,9 +20,9 @@ const Register = () => {
     const handleClose = () => setShowFileUploadModal(false);
     const handleShow = () => setShowFileUploadModal(true);
     const router = useRouter();
-    const { email, password } = useSelector(
-        (state: RootState) => state.registration
-    );
+    const email = '',
+        password = '';
+
     const [serviceError, setServiceError] = useState<string | undefined>(
         undefined
     );
