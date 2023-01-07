@@ -11,9 +11,11 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import registrationReducer from './registrationSlice';
+import userReducer from './userSlice';
 
 const appReducer = combineReducers({
     registration: registrationReducer,
+    user: userReducer,
 });
 
 const rootReducer = (state: any, action: any) => {
