@@ -34,26 +34,6 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const appReducer = combineReducers({
-    registration: registrationReducer,
-});
-
-const rootReducer = (state: any, action: any) => {
-    if (action.type === 'registration/clearLogoutState') {
-        storage.removeItem('persist:root');
-        return appReducer(undefined, action);
-    }
-
-    return appReducer(state, action);
-};
-
-const persistConfig = {
-    key: 'root',
-    storage,
-};
-
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-
 export const store = configureStore({
     reducer: persistedReducer,
 

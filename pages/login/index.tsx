@@ -9,6 +9,7 @@ import CustomFormikField from '../../components/common/CustomFormikField';
 import CustomLoader from '../../components/common/CustomLoader';
 import CustomToaster from '../../components/common/Toaster';
 import AuthLayout from '../../components/layout/auth-layout';
+import { setUserState } from '../../store/userSlice';
 import { updateUserLocalStorageStateByToken } from '../../utils/helper';
 import { loginSchema } from '../../validations/auth.validation';
 
@@ -28,9 +29,9 @@ const Login = () => {
                     data: { token },
                 }: any = await axios.post('/auth/login', values);
                 const userDetails = updateUserLocalStorageStateByToken(token);
+                dispatch(setUserState(userDetails));
                 setShowLoader(false);
-                // router.replace(userDetails?.us_first_name ? '/' : '/profile');
-                router.replace('/');
+                router.replace(userDetails?.us_first_name ? '/' : '/profile');
             } catch (e: any) {
                 setServiceError(e?.message ?? 'Something went wrong!');
                 setShowLoader(false);

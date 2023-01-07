@@ -34,6 +34,10 @@ export default function App({ Component, pageProps }: AppProps) {
                 />
 
                 <link rel="preconnect" href="https://fonts.gstatic.com" />
+                <meta
+                    http-equiv="Content-Security-Policy"
+                    content="upgrade-insecure-requests"
+                />
             </Head>
             <Script src="https://kit.fontawesome.com/73ee72016e.js"></Script>
             <Provider store={store}>
