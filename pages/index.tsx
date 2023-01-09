@@ -102,33 +102,48 @@ const Index = () => {
                 </div>
 
                 <div className="overflow-y-scroll col-md-6 col-sm-12 d-flex flex-column align-items-center justify-content-center section-text-style">
-                    <h2 className="fw-bolder">About PetsNmore</h2>
-                    <Card text={'white'} className="mb-1 home-list-items">
+                    <h2 className="fw-bolder">About petsNmore</h2>
+                    <Card className="mb-1 home-list-items">
                         <Card.Body>
                             <Card.Text className="text-center">
-                                It all started as an idea over a cup of coffee,
+                                {`It all started as an idea over a cup of coffee,
                                 on how we can support the building of a robust
                                 ecosystem that helps pet parents to offer
                                 comfortable lives to their pets – who
-                                inadvertently are a part of the family now.
+                                inadvertently are a part of the family now.`}
                             </Card.Text>
                         </Card.Body>
                     </Card>
+                </div>
+            </section>
 
-                    <h2 className="fw-bolder mt-3">
-                        Description of our services
-                    </h2>
-                    <Card text={'white'} className="mb-1 home-list-items">
+            <section className="row">
+                <div className=" col-12 p-5 d-flex justify-content-center">
+                    <Card className="mb-1 home-list-items">
+                        <Card.Title>
+                            <h2 className="fw-bolder text-center">
+                                Our Culture and Values
+                            </h2>
+                        </Card.Title>
                         <Card.Body>
                             <Card.Text className="text-center">
-                                Caring for our pets in our opinion is a
-                                multi-people job -. They need all the attention
-                                we can offer to receive their unconditional
-                                love. To reduce any anxiety or uncertainties
-                                that you as a pet parent face and want to offer
-                                the best of everything to your pets, we are
-                                offering a tech-driven comprehensive pet care
-                                solution.
+                                {`At the core of our firm are a set of values that
+                                we adhere to bring out the best in our services.
+                                Through our commitment to our consumers and our
+                                responsibilities to our pet communities, we aim
+                                to create an inclusive ecosystem to help pet
+                                parents, by offering one-stop solutions for all
+                                their pet needs. Our values: Committed – We are
+                                committed to pets & pet parents, service
+                                partners, employees, and communities we serve
+                                Passionate – We are passionate about pets and
+                                are working to create an inclusive environment
+                                for them Exceptional – We are committed to
+                                creating exceptional experiences for pets, pet
+                                parents, and our employees Innovative – We will
+                                use creative ways/ideas and strive to connect
+                                pet and pet parent needs with the business
+                                realities`}
                             </Card.Text>
                         </Card.Body>
                     </Card>
