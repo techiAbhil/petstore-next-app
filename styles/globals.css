@@ -211,8 +211,8 @@
 }
 
 .home-list-items {
-    background: #f7882f;
     width: 90%;
+    border: none;
 }
 
 .sandwich-icon {
@@ -364,11 +364,9 @@
 }
 
 .offcanvasNavbarDropdown div {
-    background: var(--secondary-color);
     border: none;
 }
 
 .offcanvasNavbarDropdown div a:hover {
-    background: var(--secondary-color);
-    color: #ffffff;
+    color: #000;
 }
