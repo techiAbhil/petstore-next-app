@@ -45,7 +45,6 @@ const Register = () => {
                         us_email: '',
                         us_password: '',
                         us_phone: '',
-                        confirmPassword: '',
                     }}
                     validationSchema={registrationSchema}
                     onSubmit={submitHandler}
@@ -59,15 +58,16 @@ const Register = () => {
                             <div className="form-group">
                                 <Form.Select aria-label="Default select example">
                                     <option>Owner</option>
-                                    <option value="1">Owner 1</option>
-                                    <option value="2">Owner 2</option>
+                                    <option value="1">Shopkeeper</option>
+                                    <option value="2">Care Taker</option>
+                                    <option value="3">Admin</option>
                                 </Form.Select>
                             </div>
 
                             <div className="form-group my-3">
                                 <CustomFormikField
                                     className="form-control"
-                                    placeholder="Email"
+                                    placeholder="Email Id"
                                     name="us_email"
                                 />
                             </div>
@@ -75,7 +75,7 @@ const Register = () => {
                             <div className="form-group my-3">
                                 <CustomFormikField
                                     className="form-control"
-                                    placeholder="Phone No."
+                                    placeholder="Mobile Number"
                                     name="us_phone"
                                     type="tel"
                                 />
@@ -86,15 +86,6 @@ const Register = () => {
                                     className="form-control "
                                     placeholder="Password"
                                     name="us_password"
-                                    type="password"
-                                />
-                            </div>
-
-                            <div className="form-group my-3">
-                                <CustomFormikField
-                                    className="form-control "
-                                    placeholder="Re-enter Password"
-                                    name="confirmPassword"
                                     type="password"
                                 />
                             </div>

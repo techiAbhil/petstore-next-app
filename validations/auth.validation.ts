@@ -16,12 +16,7 @@ export const registrationSchema = Yup.object({
         .email('Invalid email address')
         .required('Email is required!'),
     us_password: Yup.string().required('Password is required!'),
-    confirmPassword: Yup.string()
-        .required('Please provide confirm passowrd!')
-        .oneOf(
-            [Yup.ref('us_password')],
-            'Password & Confirm Password do not match!'
-        ),
+
     us_phone: Yup.string()
         .required('Phone number is required!')
         .test(
