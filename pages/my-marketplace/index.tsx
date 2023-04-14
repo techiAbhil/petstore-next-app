@@ -8,6 +8,8 @@ import DogFood from '../../assets/Pedigree.png';
 import DogFood1 from '../../assets/dogs-food-2.png';
 import ProductsBanner from '../../assets/products-banner.png';
 import ProductsSliderComponent from '../../components/my-marketplace/products-slider';
+import ProductsTab from '../../components/my-marketplace/products-tab';
+import ServicesTab from '../../components/my-marketplace/services-tab';
 
 type IMenuItem = {
     iconName: string;
@@ -119,103 +121,11 @@ const MyPet = () => {
                     </div>
                 </div>
                 {/* // end of tabs */}
-
-                <div className="row justify-content-center mt-4">
-                    {productsMenuItems.map(({ iconName, itemName }, index) => {
-                        return (
-                            <div
-                                key={`history-menu-item-${index}`}
-                                className="mt-2 col-6 col-md-2 d-flex flex-column justify-content-center align-items-center"
-                            >
-                                <div className="form-group d-flex justify-content-center">
-                                    <div className="circular-profile-pic d-flex justify-content-center align-items-center">
-                                        <i
-                                            className={`${iconName} fa-3x avatar-icon`}
-                                        ></i>
-                                    </div>
-                                </div>
-                                <p className="mt-2 text-center">{itemName}</p>
-                            </div>
-                        );
-                    })}
-                </div>
-                {/* end of history section */}
-
-                {/* Best selling products */}
-                <div className="mt-5 row d-flex flex-column align-items-center justify-content-center section-text-style">
-                    <h2 className="pt-1 col-sm-12 text-center text-uppercase">
-                        Best Selling
-                    </h2>
-                </div>
-
-                <div className="row justify-content-center mt-4">
-                    {bestSellingProducts.map(
-                        ({ iconName, itemName }, index) => {
-                            return (
-                                <div
-                                    key={`activity-menu-items-${index}`}
-                                    className="mt-2 col-6 col-md-2 d-flex flex-column justify-content-center align-items-center"
-                                >
-                                    <div className="form-group d-flex justify-content-center">
-                                        <div className="d-flex justify-content-center align-items-center p-4 products">
-                                            <Image
-                                                src={DogFood}
-                                                alt="dog food"
-                                                height={100}
-                                                width={100}
-                                            />
-                                        </div>
-                                    </div>
-                                    <p className="mt-2 text-center">
-                                        {itemName}
-                                    </p>
-                                </div>
-                            );
-                        }
-                    )}
-                </div>
-                {/* end of best selling prodcts */}
-
-                {/* Featured Products */}
-                <div className="mt-5 row d-flex flex-column align-items-center justify-content-center section-text-style">
-                    <h2 className="pt-1 col-sm-12 text-center text-uppercase">
-                        Featured Products
-                    </h2>
-                </div>
-
-                <div className="row justify-content-center mt-4">
-                    {featuredProducts.map(({ iconName, itemName }, index) => {
-                        return (
-                            <div
-                                key={`activity-menu-items-${index}`}
-                                className="mt-2 col-6 col-md-2 d-flex flex-column justify-content-center align-items-center"
-                            >
-                                <div className="form-group d-flex justify-content-center">
-                                    <div className="d-flex justify-content-center align-items-center p-4 products">
-                                        <Image
-                                            src={DogFood1}
-                                            alt="dog food"
-                                            height={100}
-                                            width={100}
-                                        />
-                                    </div>
-                                </div>
-                                <p className="mt-2 text-center">{itemName}</p>
-                            </div>
-                        );
-                    })}
-                </div>
-                {/* end of featured products */}
-
-                <div className="mt-5 row d-flex flex-column align-items-center justify-content-center section-text-style">
-                    <Image
-                        alt="Products banner"
-                        src={ProductsBanner}
-                        height={170}
-                    />
-                </div>
-
-                <ProductsSliderComponent />
+                {selectedTab === ITabs.Products ? (
+                    <ProductsTab />
+                ) : (
+                    <ServicesTab />
+                )}
             </section>
             <Footer />
         </Layout>

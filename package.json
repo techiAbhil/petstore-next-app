@@ -11,6 +11,7 @@
         "export": "next build && next export"
     },
     "dependencies": {
+        "@mui/icons-material": "^5.11.16",
         "@reduxjs/toolkit": "^1.9.1",
         "@types/node": "18.11.9",
         "@types/react": "18.0.25",
