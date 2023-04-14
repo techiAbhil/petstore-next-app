@@ -7,6 +7,7 @@ import { useState } from 'react';
 import DogFood from '../../assets/Pedigree.png';
 import DogFood1 from '../../assets/dogs-food-2.png';
 import ProductsBanner from '../../assets/products-banner.png';
+import ProductsSliderComponent from '../../components/my-marketplace/products-slider';
 
 type IMenuItem = {
     iconName: string;
@@ -213,6 +214,8 @@ const MyPet = () => {
                         height={170}
                     />
                 </div>
+
+                <ProductsSliderComponent />
             </section>
             <Footer />
         </Layout>
