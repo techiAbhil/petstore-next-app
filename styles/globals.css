@@ -370,3 +370,18 @@
 .offcanvasNavbarDropdown div a:hover {
     color: #000;
 }
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.horizontal-scrollable {
+    overflow-x: scroll;
+}
+
+.products {
+    background: var(--theme-color);
+    border-radius: 20px;
+}

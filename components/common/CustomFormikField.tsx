@@ -7,6 +7,7 @@ const CustomFormikField = ({
     placeholder,
     hideErrorMsg = false,
     errorMessageComponent = 'div',
+    disabled = false,
 }: {
     name: string;
     className?: string;
@@ -14,6 +15,7 @@ const CustomFormikField = ({
     placeholder?: string;
     hideErrorMsg?: boolean;
     errorMessageComponent?: string;
+    disabled?: boolean;
 }) => {
     return (
         <>
@@ -22,6 +24,7 @@ const CustomFormikField = ({
                 className={className}
                 placeholder={placeholder}
                 name={name}
+                disabled={disabled}
             />
             {!hideErrorMsg && (
                 <ErrorMessage

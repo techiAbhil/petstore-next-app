@@ -2,6 +2,7 @@
     "name": "petstore-next-app",
     "version": "0.1.0",
     "private": true,
+    "homepage": "http://petsnmore.co",
     "scripts": {
         "dev": "next dev",
         "build": "next build",

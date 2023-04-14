@@ -113,9 +113,9 @@ const Profile = () => {
                                 </p>
 
                                 <div
-                                    title="Upload Profile Pic"
+                                    // title="Upload Profile Pic"
                                     className="form-group d-flex justify-content-center"
-                                    onClick={handleShow}
+                                    // onClick={handleShow}
                                 >
                                     <ProfileDisplay />
                                 </div>
@@ -126,6 +126,7 @@ const Profile = () => {
                                         placeholder="Phone No."
                                         name="us_phone"
                                         type="tel"
+                                        disabled
                                     />
                                 </div>
 
@@ -134,6 +135,7 @@ const Profile = () => {
                                         className="form-control"
                                         placeholder="Email"
                                         name="us_email"
+                                        disabled
                                     />
                                 </div>
 
@@ -142,10 +144,29 @@ const Profile = () => {
                                         className="form-control"
                                         placeholder="Full Name"
                                         name="us_full_name"
+                                        disabled
                                     />
                                 </div>
 
                                 <div className="form-group pt-3">
+                                    <CustomFormikField
+                                        className="form-control"
+                                        placeholder="city"
+                                        name="us_city"
+                                        disabled
+                                    />
+                                </div>
+
+                                <div className="form-group pt-3">
+                                    <CustomFormikField
+                                        className="form-control"
+                                        placeholder="country"
+                                        name="us_country"
+                                        disabled
+                                    />
+                                </div>
+
+                                {/* <div className="form-group pt-3">
                                     <CustomFormikSelect name="us_city">
                                         <option disabled value="">
                                             City
@@ -156,9 +177,9 @@ const Profile = () => {
                                             Hydrabad
                                         </option>
                                     </CustomFormikSelect>
-                                </div>
+                                </div> */}
 
-                                <div className="form-group pt-3">
+                                {/* <div className="form-group pt-3">
                                     <CustomFormikSelect name="us_country">
                                         <option disabled value="">
                                             Country
@@ -166,24 +187,25 @@ const Profile = () => {
                                         <option value="India">India</option>
                                         <option value="Japan">Japan</option>
                                     </CustomFormikSelect>
-                                </div>
+                                </div> */}
 
                                 <div className="form-group">
                                     <CustomFormikField
                                         className="form-control my-3"
                                         placeholder="Address"
                                         name="us_address"
+                                        disabled
                                     />
                                 </div>
 
-                                <div className="form-group py-3">
+                                {/* <div className="form-group py-3">
                                     <Button
                                         type="submit"
                                         className="btn btn-block login-btn w-100"
                                     >
                                         Save
                                     </Button>
-                                </div>
+                                </div> */}
                             </FormikForm>
                         </Formik>
                     )}
