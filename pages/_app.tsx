@@ -6,7 +6,7 @@ import { Fragment, useEffect, useState } from 'react';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistor, store } from '../store/store';
-import '../styles/globals.css';
+import '../styles/globals.scss';
 import '../utils/interceptor';
 export default function App({ Component, pageProps }: AppProps) {
     const [showing, setShowing] = useState(false);
