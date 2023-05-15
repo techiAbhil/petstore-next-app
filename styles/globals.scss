@@ -1,24 +1,10 @@
-* {
-    font-family: 'Comfortaa', cursive;
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-}
-
-:root {
-    --theme-color: #d8eefd;
-    --primary-color: #687a8f;
-    --secondary-color: #dcc7aa;
-    --tertiary-color: #f7882f;
-    --quaternary-color: #f7c331;
-    --theme-secondary-color: #edfafb;
-    --dark-grey-text-color: #36414e;
-    --facebook-blue: #3b5998;
-    --google-red: #e63537;
-}
+@use './partials/resets' as *;
+@use './partials/variables' as *;
+@use './partials/mixins' as *;
+@use './partials/utility' as *;
 
 .bg-header-color {
-    background: #fff;
+    background: $white-color;
 }
 
 .bg-header-color .btn-link {
@@ -34,35 +20,35 @@
 }
 
 .login-btn {
-    background-color: var(--primary-color);
-    color: #fff;
+    background-color: $primary-color;
+    color: $white-color;
     border: none;
 }
 
 .login-btn:hover {
-    background-color: var(--primary-color);
-    color: var(--dark-grey-text-color);
+    background-color: $primary-color;
+    color: $dark-grey-text-color;
 }
 
 .orange-btn {
-    background-color: var(--tertiary-color);
-    color: #fff;
+    background-color: $tertiary-color;
+    color: $white-color;
     border: none;
 }
 
 .orange-btn:hover {
-    background-color: var(--tertiary-color);
-    color: var(--dark-grey-text-color);
+    background-color: $tertiary-color;
+    color: $dark-grey-text-color;
 }
 
 .login-btn-secondary {
-    background-color: var(--secondary-color);
-    color: var(--dark-grey-text-color);
+    background-color: $secondary-color;
+    color: $dark-grey-text-color;
     border: none;
 }
 
 .login-btn-secondary:hover {
-    background-color: var(--primary-color);
+    background-color: $primary-color;
 }
 
 .btn-menu-item {
@@ -71,8 +57,8 @@
 }
 
 .btn-menu-item:hover {
-    background: var(--primary-color);
-    color: #fff;
+    background: $primary-color;
+    color: $white-color;
 }
 
 .landing-section-card-btn {
@@ -83,29 +69,29 @@
 }
 
 .landing-section-card-btn p {
-    color: #000;
+    color: $black-color;
 }
 
 .landing-section-card-btn:hover {
-    background-color: var(--primary-color);
+    background-color: $primary-color;
     cursor: pointer;
 }
 
 .footer {
     /* margin-top: 20px; */
     padding: 40px;
-    background-color: var(--primary-color);
+    background-color: $primary-color;
 }
 
 .footer-links a {
     font-size: 14px;
-    color: var(--dark-grey-text-color);
+    color: $dark-grey-text-color;
     padding-top: 15px;
     font-weight: 400;
 }
 
 .footer-links a:hover {
-    color: #ffffff;
+    color: $white-color;
 }
 
 .social-media-icons i {
@@ -123,40 +109,40 @@
 
 .copyright-div {
     padding: 10px;
-    border-top: 1px solid #000;
+    border-top: 1px solid $black-color;
 }
 
 .copyright-div a {
-    color: var(--dark-grey-text-color);
+    color: $dark-grey-text-color;
 }
 
 .copyright-div a:hover {
-    color: #fff;
+    color: $white-color;
 }
 
 .section-text-style {
-    color: #000;
+    color: $black-color;
 }
 
 .custom-link-btn {
     font-size: 14px;
-    color: var(--primary-color);
+    color: $primary-color;
     font-weight: 400;
     padding: 15px;
 }
 
 .custom-link-btn:hover {
-    color: #000 !important;
+    color: $black-color !important;
 }
 
 .header-custom-menu-link button {
     border: none !important;
-    color: var(--primary-color);
+    color: $primary-color;
 }
 
 .testimonial-card {
     margin: 5px;
-    background-color: var(--secondary-color);
+    background-color: $secondary-color;
     border-radius: 20px;
     min-height: 150px;
     width: 90%;
@@ -172,7 +158,7 @@
 }
 
 .fa-star {
-    color: var(--tertiary-color);
+    color: $tertiary-color;
 }
 
 .testimonial-bar {
@@ -202,15 +188,14 @@
 }
 
 .profile-login-icon {
+    @include center;
     width: 53px;
     height: 53px;
-    background: var(--tertiary-color);
+    background: $tertiary-color;
     border-radius: 100%;
     align-self: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--dark-grey-text-color);
+
+    color: $dark-grey-text-color;
 }
 
 .home-list-items {
@@ -219,18 +204,18 @@
 }
 
 .sandwich-icon {
-    background-color: var(--primary-color);
+    background-color: $primary-color;
 }
 
 .profile-dropdown {
-    background-color: var(--tertiary-color);
-    color: var(--dark-grey-text-color);
+    background-color: $tertiary-color;
+    color: $dark-grey-text-color;
     border: none;
     margin: none;
 }
 
 .profile-dropdown:hover {
-    background-color: var(--tertiary-color);
+    background-color: $tertiary-color;
 }
 
 @media screen and (max-width: 768px) {
@@ -269,14 +254,14 @@
 }
 
 .facebook-btn {
-    background: var(--facebook-blue);
-    color: #fff;
+    background: $facebook-blue;
+    color: $white-color;
     border: none;
 }
 
 .google-btn {
-    background: var(--google-red);
-    color: #fff;
+    background: $google-red;
+    color: $white-color;
     border: none;
 }
 
@@ -288,24 +273,24 @@
     width: 90%;
     height: 1px;
     top: 55%;
-    background: var(--primary-color);
+    background: $primary-color;
     margin-top: 5%;
 }
 
 .font-grey {
-    color: var(--primary-color);
+    color: $primary-color;
 }
 
 .font-dark-grey {
-    color: var(--dark-grey-text-color);
+    color: $dark-grey-text-color;
 }
 
 .circular-profile-pic {
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    border-width: 1px solid var(--primary-color);
-    background-color: var(--tertiary-color);
+    border-width: 1px solid $primary-color;
+    background-color: $tertiary-color;
 }
 
 .circular-profile-pic:hover {
@@ -313,7 +298,7 @@
 }
 
 .avatar-icon {
-    color: var(--dark-grey-text-color);
+    color: $dark-grey-text-color;
 }
 
 .cursor-pointer {
@@ -321,14 +306,12 @@
 }
 
 .my-pet-profile-pic {
+    @include center;
     min-width: 250px;
     min-height: 250px;
     border-radius: 50%;
-    border-width: 1px solid var(--primary-color);
-    background-color: var(--quaternary-color);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    border-width: 1px solid $primary-color;
+    background-color: $quaternary-color;
 }
 @media screen and (width>768px) {
     .testimonial-section-container {
@@ -356,7 +339,7 @@
 }
 
 .error-toaster {
-    background-color: var(--tertiary-color);
+    background-color: $tertiary-color;
 }
 
 .loading-modal .modal-content {
@@ -371,13 +354,11 @@
 }
 
 .offcanvasNavbarDropdown div a:hover {
-    color: #000;
+    color: $black-color;
 }
 
 .center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include center;
 }
 
 .horizontal-scrollable {
@@ -385,7 +366,7 @@
 }
 
 .products {
-    background: var(--theme-color);
+    background: $theme-color;
     border-radius: 20px;
 }
 
@@ -405,8 +386,8 @@
 }
 
 .service-item-container {
+    @include box-shadow-elevation;
     margin: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.24), 0 2px 6px rgba(0, 0, 0, 0.12);
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
 }
