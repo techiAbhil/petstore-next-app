@@ -48,7 +48,7 @@ const Login = () => {
                     onSubmit={submitHandler}
                 >
                     {() => (
-                        <Form className="mt-1">
+                        <Form>
                             <p className="text-center text-uppercase text-secondary fw-bold">
                                 Login
                             </p>
