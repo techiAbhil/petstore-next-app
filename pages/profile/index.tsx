@@ -1,19 +1,19 @@
 import axios from 'axios';
 
-import { Form as FormikForm, Formik } from 'formik';
+import { Formik, Form as FormikForm } from 'formik';
 import { useRouter } from 'next/router';
-import { useCallback, useState } from 'react';
-import { Button, Modal } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import { useCallback, useEffect, useState } from 'react';
+import { Modal } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 import AlertModal from '../../components/common/AlertModal';
 import CustomFormikField from '../../components/common/CustomFormikField';
-import CustomFormikSelect from '../../components/common/CustomFormikSelect';
 import CustomLoader from '../../components/common/CustomLoader';
 import ProfileDisplay from '../../components/common/ProfileDisplay';
 import CustomToaster from '../../components/common/Toaster';
 import Layout from '../../components/layout/layout';
 import StyledDropzone from '../../components/styled-dropzone/styled-dropdzone';
-import { RootState } from '../../store/store';
+import { getPetsMetaData } from '../../store/petsMetaDataSlice';
+import { RootState, useAppDispatch } from '../../store/store';
 import { setUserState } from '../../store/userSlice';
 import { updateUserLocalStorageStateByToken } from '../../utils/helper';
 import { profileRegistrationSchema } from '../../validations/auth.validation';
@@ -22,6 +22,11 @@ const Profile = () => {
     const storedUserDetails = useSelector((state: RootState) => state.user);
 
     const [showFileUploadModal, setShowFileUploadModal] = useState(false);
+
+    const dispatch = useAppDispatch();
+    useEffect(() => {
+        dispatch(getPetsMetaData(undefined));
+    }, [dispatch]);
 
     const [isUpdatedUserDetails, setIsUpadedUserDetails] =
         useState<boolean>(false);
@@ -33,7 +38,6 @@ const Profile = () => {
     );
 
     const [showLoader, setShowLoader] = useState<boolean>(false);
-    const dispatch = useDispatch();
 
     const submitHandler = useCallback(
         async (values: any) => {

@@ -1,13 +1,7 @@
-import Image from 'next/image';
-import DogProfileImg from '../../assets/dog-profile-img.png';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 import Footer from '../../components/home/footer';
 import Layout from '../../components/layout/layout';
-import { Button } from 'react-bootstrap';
-import { useState } from 'react';
-import DogFood from '../../assets/Pedigree.png';
-import DogFood1 from '../../assets/dogs-food-2.png';
-import ProductsBanner from '../../assets/products-banner.png';
-import ProductsSliderComponent from '../../components/my-marketplace/products-slider';
 import ProductsTab from '../../components/my-marketplace/products-tab';
 import ServicesTab from '../../components/my-marketplace/services-tab';
 
@@ -81,11 +75,13 @@ enum ITabs {
     Products,
     Services,
 }
-const MyPet = () => {
+const MyMarketplace = () => {
     const [selectedTab, setSelectedTab] = useState<ITabs>(ITabs.Products);
     const onTabClick = (selectedTab: ITabs) => {
         setSelectedTab(selectedTab);
     };
+    const router = useRouter();
+    const { tab } = router.query;
     return (
         <Layout>
             <section className="mt-3 mb-5 container">
@@ -132,4 +128,4 @@ const MyPet = () => {
     );
 };
 
-export default MyPet;
+export default MyMarketplace;

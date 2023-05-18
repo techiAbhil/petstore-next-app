@@ -1,17 +1,11 @@
 import Image from 'next/image';
-import DogProfileImg from '../../assets/dog-profile-img.png';
-import Footer from '../../components/home/footer';
-import Layout from '../../components/layout/layout';
-import { Button } from 'react-bootstrap';
 import { useState } from 'react';
-import DogFood from '../../assets/Pedigree.png';
-import DogFood1 from '../../assets/dogs-food-2.png';
 import ProductsBanner from '../../assets/products-banner.png';
-import ProductsSliderComponent from './products-slider';
 import ServiceListImg1 from '../../assets/service-list-1.png';
 import ServiceListImg2 from '../../assets/service-list-2.png';
 import ServiceListImg3 from '../../assets/service-list-3.png';
 import ServiceListImg4 from '../../assets/service-list-4.png';
+import ServicesMenuSliderComponent from './services-menu-slider';
 
 type IMenuItem = {
     iconName: string;
@@ -102,29 +96,11 @@ const ServicesTab = () => {
     );
     return (
         <>
-            <div className="row mt-4 horizantal-scroll">
-                {productsMenuItems.map(({ iconName, itemName }, index) => {
-                    return (
-                        <div
-                            onClick={() => setSelectedServiceTab(itemName)}
-                            key={`history-menu-item-${index}`}
-                            className="mt-2 col-6 col-md-2 d-flex flex-column justify-content-center align-items-center"
-                        >
-                            <div className="form-group d-flex justify-content-center">
-                                <div className="circular-profile-pic d-flex justify-content-center align-items-center">
-                                    <i
-                                        className={`${iconName} fa-3x avatar-icon ${
-                                            selectedServiceTab === itemName
-                                                ? ''
-                                                : 'text-white'
-                                        }`}
-                                    ></i>
-                                </div>
-                            </div>
-                            <p className="mt-2 text-center ">{itemName}</p>
-                        </div>
-                    );
-                })}
+            <div className="row mt-4">
+                <ServicesMenuSliderComponent
+                    setSelectedServiceTab={setSelectedServiceTab}
+                    selectedServiceTab={selectedServiceTab}
+                />
             </div>
 
             <div className="mt-5 row d-flex flex-column align-items-center justify-content-center section-text-style">

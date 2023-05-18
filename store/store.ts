@@ -1,21 +1,24 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import {
     FLUSH,
     PAUSE,
     PERSIST,
-    persistReducer,
-    persistStore,
     PURGE,
     REGISTER,
     REHYDRATE,
+    persistReducer,
+    persistStore,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import petsMetaDataReducer from './petsMetaDataSlice';
 import registrationReducer from './registrationSlice';
 import userReducer from './userSlice';
 
 const appReducer = combineReducers({
     registration: registrationReducer,
     user: userReducer,
+    petsMetaData: petsMetaDataReducer,
 });
 
 const rootReducer = (state: any, action: any) => {
@@ -54,4 +57,7 @@ export const store = configureStore({
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+export const useAppDispatch: () => AppDispatch = useDispatch;
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+
 export const persistor = persistStore(store);

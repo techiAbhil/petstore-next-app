@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { Nav, Navbar, NavDropdown, Offcanvas } from 'react-bootstrap';
 import MAIN_LOGO from '../../assets/main-logo.png';
@@ -8,6 +9,8 @@ const expand = false;
 const SidebarMenuItems = () => {
     const [selectedNestedDropdown, setSelectedNestedDropdown] =
         useState<string>('');
+
+    const router = useRouter();
 
     return (
         <Navbar.Offcanvas
@@ -113,8 +116,18 @@ const SidebarMenuItems = () => {
                         title="My Marketplace"
                         className={`offcanvasNavbarDropdown`}
                     >
-                        <NavDropdown.Item href="#">Products</NavDropdown.Item>
-                        <NavDropdown.Item href="#">Services</NavDropdown.Item>
+                        <NavDropdown.Item
+                            href="#"
+                            onClick={() => router.push('/my-marketplace')}
+                        >
+                            Products
+                        </NavDropdown.Item>
+                        <NavDropdown.Item
+                            href="#"
+                            onClick={() => router.push('/my-marketplace')}
+                        >
+                            Services
+                        </NavDropdown.Item>
                     </NavDropdown>
                     <Nav.Link href="#">My Pet Family</Nav.Link>
                 </Nav>

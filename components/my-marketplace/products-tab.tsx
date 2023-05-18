@@ -1,12 +1,9 @@
 import Image from 'next/image';
-import DogProfileImg from '../../assets/dog-profile-img.png';
-import Footer from '../../components/home/footer';
-import Layout from '../../components/layout/layout';
-import { Button } from 'react-bootstrap';
-import { useState } from 'react';
 import DogFood from '../../assets/Pedigree.png';
 import DogFood1 from '../../assets/dogs-food-2.png';
 import ProductsBanner from '../../assets/products-banner.png';
+import { useAppSelector } from '../../store/store';
+import CommonMenuSlider from '../common/common-menu-slider';
 import ProductsSliderComponent from './products-slider';
 
 type IMenuItem = {
@@ -80,26 +77,32 @@ enum ITabs {
     Services,
 }
 const ProductsTab = () => {
+    const { petTypes } = useAppSelector((state) => state.petsMetaData);
     return (
         <>
             <div className="row justify-content-center mt-4">
-                {productsMenuItems.map(({ iconName, itemName }, index) => {
-                    return (
-                        <div
-                            key={`history-menu-item-${index}`}
-                            className="mt-2 col-6 col-md-2 d-flex flex-column justify-content-center align-items-center"
-                        >
-                            <div className="form-group d-flex justify-content-center">
-                                <div className="circular-profile-pic d-flex justify-content-center align-items-center">
-                                    <i
-                                        className={`${iconName} fa-3x avatar-icon`}
-                                    ></i>
+                <CommonMenuSlider>
+                    {petTypes.map(({ pc_icon_path, pc_title }, index) => {
+                        return (
+                            <div
+                                key={`history-menu-item-${index}`}
+                                className="mt-2 col-6 col-md-2 d-flex flex-column justify-content-center align-items-center"
+                            >
+                                <div className="form-group d-flex justify-content-center">
+                                    <div className="circular-profile-pic d-flex justify-content-center align-items-center">
+                                        <Image
+                                            src={`${process.env.NEXT_PUBLIC_ICONS}/${pc_icon_path}`}
+                                            alt={pc_title}
+                                            height={50}
+                                            width={50}
+                                        />
+                                    </div>
                                 </div>
+                                <p className="mt-2 text-center">{pc_title}</p>
                             </div>
-                            <p className="mt-2 text-center">{itemName}</p>
-                        </div>
-                    );
-                })}
+                        );
+                    })}
+                </CommonMenuSlider>
             </div>
             {/* end of history section */}
 
