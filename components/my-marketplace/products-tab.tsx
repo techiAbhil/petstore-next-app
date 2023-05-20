@@ -149,7 +149,7 @@ const ProductsTab = () => {
                     return (
                         <div
                             key={`activity-menu-items-${index}`}
-                            className="mt-2 col-6 col-md-2 d-flex flex-column justify-content-center align-items-center"
+                            className="mt-2 mx-3 col-6 col-md-2 d-flex flex-column justify-content-center align-items-center"
                         >
                             <div className="form-group d-flex justify-content-center">
                                 <div className="d-flex justify-content-center align-items-center p-4 products">
