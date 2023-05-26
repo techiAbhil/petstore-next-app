@@ -115,8 +115,13 @@ const ProductsTab = () => {
                     width={180}
                 />
             </div>
-
-            <ProductsSliderComponent comboProducts={comboProducts} />
+            {comboProducts.length > 0 ? (
+                <ProductsSliderComponent comboProducts={comboProducts} />
+            ) : (
+                <p className="mt-2 text-center text-wrap">
+                    No Combo products available.
+                </p>
+            )}
         </>
     );
 };

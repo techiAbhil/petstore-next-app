@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Fragment } from 'react';
+import { Fragment, useMemo } from 'react';
 import { Slide } from 'react-slideshow-image';
 import Products_Slider_image from '../../assets/products-slider.png';
 
@@ -57,12 +57,28 @@ const ProductsSliderComponent = ({
 }: {
     comboProducts: IProducts[];
 }) => {
+    const sliderConfig = useMemo(() => {
+        if (comboProducts.length <= 2) {
+            const updatedSliderSettings = responsiveSettings.map((s) => {
+                return {
+                    ...s,
+                    settings: {
+                        slidesToShow: comboProducts.length,
+                        slidesToScroll: comboProducts.length,
+                    },
+                };
+            });
+            return updatedSliderSettings;
+        } else {
+            responsiveSettings;
+        }
+    }, [comboProducts.length]);
     return (
         <Fragment>
             <section className="row mt-5 py-10 sm:py-5 mb-5 sm:mb-2 testimonial-section-container">
                 <Slide
                     // autoplay={true}
-                    responsive={responsiveSettings}
+                    responsive={sliderConfig}
                     duration={2500}
                 >
                     {comboProducts.map(
@@ -79,7 +95,7 @@ const ProductsSliderComponent = ({
                                         <Image
                                             src={`${process.env.NEXT_PUBLIC_PROCUT_IMG_PATH}/${pr_poster_path}`}
                                             className="img-fluid"
-                                            alt="Product Description"
+                                            alt="Combo products"
                                             height={180}
                                             width={180}
                                         />
