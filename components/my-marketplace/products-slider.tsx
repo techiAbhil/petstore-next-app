@@ -77,7 +77,7 @@ const ProductsSliderComponent = ({
         <Fragment>
             <section className="row mt-5 py-10 sm:py-5 mb-5 sm:mb-2 testimonial-section-container">
                 <Slide
-                    // autoplay={true}
+                    autoplay={false}
                     responsive={sliderConfig}
                     duration={2500}
                 >
