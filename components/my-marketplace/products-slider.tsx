@@ -5,6 +5,7 @@ import Products_Slider_image from '../../assets/products-slider.png';
 
 import { Stack } from 'react-bootstrap';
 import 'react-slideshow-image/dist/styles.css';
+import { IProducts } from '../../store/my-marketplace-Slice';
 
 type PRODUCTS_SLIDER_TYPE = {
     productPic: any;
@@ -51,17 +52,21 @@ const responsiveSettings = [
     },
 ];
 
-const ProductsSliderComponent = () => {
+const ProductsSliderComponent = ({
+    comboProducts = [],
+}: {
+    comboProducts: IProducts[];
+}) => {
     return (
         <Fragment>
             <section className="row mt-5 py-10 sm:py-5 mb-5 sm:mb-2 testimonial-section-container">
                 <Slide
-                    autoplay={true}
+                    // autoplay={true}
                     responsive={responsiveSettings}
                     duration={2500}
                 >
-                    {productsSliderItems.map(
-                        ({ productTitle, productPic }, index: number) => {
+                    {comboProducts.map(
+                        ({ pr_poster_path, pr_name }, index: number) => {
                             return (
                                 <div
                                     key={index}
@@ -72,15 +77,16 @@ const ProductsSliderComponent = () => {
                                         className="pl-2 center"
                                     >
                                         <Image
-                                            src={productPic}
+                                            src={`${process.env.NEXT_PUBLIC_PROCUT_IMG_PATH}/${pr_poster_path}`}
                                             className="img-fluid"
                                             alt="Product Description"
                                             height={180}
+                                            width={180}
                                         />
                                     </Stack>
                                     <div className="center pt-3">
                                         <span className="center text-center">
-                                            {productTitle}
+                                            {pr_name}
                                         </span>
                                     </div>
                                 </div>

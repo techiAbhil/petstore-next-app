@@ -1,88 +1,21 @@
 import Image from 'next/image';
-import DogFood from '../../assets/Pedigree.png';
-import DogFood1 from '../../assets/dogs-food-2.png';
 import ProductsBanner from '../../assets/products-banner.png';
 import { useAppSelector } from '../../store/store';
 import CommonMenuSlider from '../common/common-menu-slider';
 import ProductsSliderComponent from './products-slider';
 
-type IMenuItem = {
-    iconName: string;
-    itemName: string;
-};
-
-const productsMenuItems: IMenuItem[] = [
-    {
-        iconName: 'fa-solid fa-dog',
-        itemName: 'Dogs',
-    },
-    {
-        iconName: 'fa-solid fa-cat',
-        itemName: 'Cats',
-    },
-    {
-        iconName: 'fa-solid fa-fish',
-        itemName: 'Fish',
-    },
-    {
-        iconName: 'fa-solid fa-kiwi-bird',
-        itemName: 'Birds',
-    },
-];
-
-const featuredProducts: IMenuItem[] = [
-    {
-        iconName: 'fa-solid fa-burger',
-        itemName: 'Drools Chicken & Egg Puppy Dry Dog Food',
-    },
-    {
-        iconName: 'fa-solid fa-shoe-prints',
-        itemName: 'Drools Chicken & Egg Puppy Dry Dog Food',
-    },
-    {
-        iconName: 'fa-solid fa-dumbbell',
-        itemName: 'Drools Chicken & Egg Puppy Dry Dog Food',
-    },
-    {
-        iconName: 'fa-solid fa-hands-bubbles',
-        itemName: 'Drools Chicken & Egg Puppy Dry Dog Food',
-    },
-    {
-        iconName: 'fa-solid fa-toilet',
-        itemName: 'Drools Chicken & Egg Puppy Dry Dog Food',
-    },
-];
-
-const bestSellingProducts: IMenuItem[] = [
-    {
-        iconName: 'fa-solid fa-wallet',
-        itemName: 'Pediagree Combo Meal Pack',
-    },
-    {
-        iconName: 'fa-solid fa-money-bill-transfer',
-        itemName: 'Pediagree Combo Meal Pack',
-    },
-    {
-        iconName: 'fa-solid fa-wallet',
-        itemName: 'Pediagree Combo Meal Pack',
-    },
-    {
-        iconName: 'fa-solid fa-money-bill-transfer',
-        itemName: 'Pediagree Combo Meal Pack',
-    },
-];
-
-enum ITabs {
-    Products,
-    Services,
-}
 const ProductsTab = () => {
-    const { petTypes } = useAppSelector((state) => state.petsMetaData);
+    const {
+        bestSellingProducts,
+        petCategories,
+        featuredProducts,
+        comboProducts,
+    } = useAppSelector((store) => store.myMarketplace);
     return (
         <>
             <div className="row justify-content-center mt-4">
                 <CommonMenuSlider>
-                    {petTypes.map(({ pc_icon_path, pc_title }, index) => {
+                    {petCategories.map(({ pc_icon_path, pc_title }, index) => {
                         return (
                             <div
                                 key={`history-menu-item-${index}`}
@@ -113,27 +46,31 @@ const ProductsTab = () => {
                 </h2>
             </div>
 
-            <div className="row justify-content-center mt-4">
-                {bestSellingProducts.map(({ iconName, itemName }, index) => {
-                    return (
-                        <div
-                            key={`activity-menu-items-${index}`}
-                            className="mt-2 col-6 col-md-2 d-flex flex-column justify-content-center align-items-center"
-                        >
-                            <div className="form-group d-flex justify-content-center">
-                                <div className="d-flex justify-content-center align-items-center p-4 products">
-                                    <Image
-                                        src={DogFood}
-                                        alt="dog food"
-                                        height={100}
-                                        width={100}
-                                    />
+            <div className="d-flex row justify-content-center align-items-center mt-4">
+                {bestSellingProducts.map(
+                    ({ pr_poster_path, pr_name }, index) => {
+                        return (
+                            <div
+                                key={`activity-menu-items-${index}`}
+                                className="mt-2 col-md-4 col-12 justify-content-center align-items-center"
+                            >
+                                <div className="form-group d-flex justify-content-center">
+                                    <div className="d-flex justify-content-center align-items-center p-4 products">
+                                        <Image
+                                            src={`${process.env.NEXT_PUBLIC_PROCUT_IMG_PATH}/${pr_poster_path}`}
+                                            alt="best selling dog food"
+                                            height={100}
+                                            width={100}
+                                        />
+                                    </div>
                                 </div>
+                                <p className="mt-2 text-center text-wrap">
+                                    {pr_name}
+                                </p>
                             </div>
-                            <p className="mt-2 text-center">{itemName}</p>
-                        </div>
-                    );
-                })}
+                        );
+                    }
+                )}
             </div>
             {/* end of best selling prodcts */}
 
@@ -145,23 +82,25 @@ const ProductsTab = () => {
             </div>
 
             <div className="row justify-content-center mt-4">
-                {featuredProducts.map(({ iconName, itemName }, index) => {
+                {featuredProducts.map(({ pr_poster_path, pr_name }, index) => {
                     return (
                         <div
                             key={`activity-menu-items-${index}`}
-                            className="mt-2 mx-3 col-6 col-md-2 d-flex flex-column justify-content-center align-items-center"
+                            className="mt-2 mx-3 col-12 col-md-4 d-flex flex-column justify-content-center align-items-center"
                         >
                             <div className="form-group d-flex justify-content-center">
                                 <div className="d-flex justify-content-center align-items-center p-4 products">
                                     <Image
-                                        src={DogFood1}
-                                        alt="dog food"
+                                        src={`${process.env.NEXT_PUBLIC_PROCUT_IMG_PATH}/${pr_poster_path}`}
+                                        alt="featured product dog food"
                                         height={100}
                                         width={100}
                                     />
                                 </div>
                             </div>
-                            <p className="mt-2 text-center">{itemName}</p>
+                            <p className="mt-2 text-center text-wrap">
+                                {pr_name}
+                            </p>
                         </div>
                     );
                 })}
@@ -173,10 +112,11 @@ const ProductsTab = () => {
                     alt="Products banner"
                     src={ProductsBanner}
                     height={170}
+                    width={180}
                 />
             </div>
 
-            <ProductsSliderComponent />
+            <ProductsSliderComponent comboProducts={comboProducts} />
         </>
     );
 };
