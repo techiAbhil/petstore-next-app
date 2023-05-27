@@ -13,6 +13,7 @@ import Layout from '../components/layout/layout';
 
 const Index = () => {
     const router = useRouter();
+
     return (
         <Layout>
             <section className="row">
