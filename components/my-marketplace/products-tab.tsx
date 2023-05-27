@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import ProductsBanner from '../../assets/products-banner.png';
 import { useAppSelector } from '../../store/store';
 import CommonMenuSlider from '../common/common-menu-slider';
@@ -11,30 +12,41 @@ const ProductsTab = () => {
         featuredProducts,
         comboProducts,
     } = useAppSelector((store) => store.myMarketplace);
+    const router = useRouter();
     return (
         <>
             <div className="row justify-content-center mt-4">
                 <CommonMenuSlider>
-                    {petCategories.map(({ pc_icon_path, pc_title }, index) => {
-                        return (
-                            <div
-                                key={`history-menu-item-${index}`}
-                                className="mt-2 col-6 col-md-2 d-flex flex-column justify-content-center align-items-center"
-                            >
-                                <div className="form-group d-flex justify-content-center">
-                                    <div className="circular-profile-pic d-flex justify-content-center align-items-center">
-                                        <Image
-                                            src={`${process.env.NEXT_PUBLIC_ICONS}/${pc_icon_path}`}
-                                            alt={pc_title}
-                                            height={50}
-                                            width={50}
-                                        />
+                    {petCategories?.map(
+                        ({ pc_icon_path, pc_title, pc_id }, index) => {
+                            return (
+                                <div
+                                    key={`history-menu-item-${index}`}
+                                    className="mt-2 col-6 col-md-2 d-flex flex-column justify-content-center align-items-center"
+                                    role="button"
+                                    onClick={() =>
+                                        router.push(
+                                            `/products-by-animal/${pc_title}/${pc_id}`
+                                        )
+                                    }
+                                >
+                                    <div className="form-group d-flex justify-content-center">
+                                        <div className="circular-profile-pic d-flex justify-content-center align-items-center">
+                                            <Image
+                                                src={`${process.env.NEXT_PUBLIC_ICONS}/${pc_icon_path}`}
+                                                alt={pc_title}
+                                                height={50}
+                                                width={50}
+                                            />
+                                        </div>
                                     </div>
+                                    <p className="mt-2 text-center">
+                                        {pc_title}
+                                    </p>
                                 </div>
-                                <p className="mt-2 text-center">{pc_title}</p>
-                            </div>
-                        );
-                    })}
+                            );
+                        }
+                    )}
                 </CommonMenuSlider>
             </div>
             {/* end of history section */}
@@ -47,7 +59,7 @@ const ProductsTab = () => {
             </div>
 
             <div className="d-flex row justify-content-center align-items-center mt-4">
-                {bestSellingProducts.map(
+                {bestSellingProducts?.map(
                     ({ pr_poster_path, pr_name }, index) => {
                         return (
                             <div
@@ -82,7 +94,7 @@ const ProductsTab = () => {
             </div>
 
             <div className="row justify-content-center mt-4">
-                {featuredProducts.map(({ pr_poster_path, pr_name }, index) => {
+                {featuredProducts?.map(({ pr_poster_path, pr_name }, index) => {
                     return (
                         <div
                             key={`activity-menu-items-${index}`}
@@ -115,7 +127,7 @@ const ProductsTab = () => {
                     width={180}
                 />
             </div>
-            {comboProducts.length > 0 ? (
+            {comboProducts?.length > 0 ? (
                 <ProductsSliderComponent comboProducts={comboProducts} />
             ) : (
                 <p className="mt-2 text-center text-wrap">

@@ -8,7 +8,7 @@ const MenuList = () => {
             <li className="nav-item">
                 <button
                     className="btn btn-menu-item"
-                    onClick={() => router.push('my-pet')}
+                    onClick={() => router.push('/my-pet')}
                 >
                     My Pet Assistent
                 </button>
@@ -21,7 +21,7 @@ const MenuList = () => {
             <li className="nav-item">
                 <button
                     className="btn btn-menu-item"
-                    onClick={() => router.push('my-marketplace')}
+                    onClick={() => router.push('/my-marketplace')}
                 >
                     My Marketplace
                 </button>

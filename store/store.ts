@@ -13,6 +13,7 @@ import {
 import storage from 'redux-persist/lib/storage';
 import myMarketplaceReducer from './my-marketplace-Slice';
 import petsMetaDataReducer from './petsMetaDataSlice';
+import productCategoriesReducer from './product-categories-slice';
 import registrationReducer from './registrationSlice';
 import userReducer from './userSlice';
 
@@ -21,6 +22,7 @@ const appReducer = combineReducers({
     user: userReducer,
     petsMetaData: petsMetaDataReducer,
     myMarketplace: myMarketplaceReducer,
+    productCategoriesByPet: productCategoriesReducer,
 });
 
 const rootReducer = (state: any, action: any) => {
