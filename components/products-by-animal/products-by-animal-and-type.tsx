@@ -1,8 +1,9 @@
 import axios from 'axios';
 import _ from 'lodash';
 import Image from 'next/image';
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
+import { Button } from 'react-bootstrap';
 import { IProducts } from '../../store/my-marketplace-slice';
 import { API_ERROR_MSG } from '../../utils/constants';
 
@@ -12,6 +13,7 @@ const ProductsByAnimalAndType = ({
     selectedTab: number | undefined;
 }) => {
     const [products, setProducts] = useState<Record<string, IProducts[]>>();
+    const router = useRouter();
 
     const loadData = useCallback(async () => {
         try {
@@ -60,13 +62,21 @@ const ProductsByAnimalAndType = ({
                         </div>
                         <div className="d-flex row justify-content-center align-items-center mt-4">
                             {products[groupName]?.map(
-                                ({ pr_poster_path, pr_name }, index) => {
+                                ({ pr_poster_path, pr_name, pr_id }, index) => {
                                     return (
                                         <div
                                             key={`activity-menu-items-${index}`}
                                             className="mt-2 mx-3 col-md-4 col-12 justify-content-center align-items-center"
                                         >
-                                            <div className="form-group d-flex justify-content-center">
+                                            <div
+                                                className="form-group d-flex justify-content-center"
+                                                role="button"
+                                                onClick={() =>
+                                                    router.push(
+                                                        `/product-details/${pr_id}`
+                                                    )
+                                                }
+                                            >
                                                 <div className="d-flex justify-content-center align-items-center p-4 products">
                                                     <Image
                                                         src={`${process.env.NEXT_PUBLIC_PROCUT_IMG_PATH}/${pr_poster_path}`}
@@ -84,12 +94,17 @@ const ProductsByAnimalAndType = ({
                                 }
                             )}
                             <div className="mt-2 row justify-content-center align-items-center">
-                                <Link
-                                    className=" text-center text-secondary"
-                                    href="/"
+                                <Button
+                                    variant="link"
+                                    className="text-center text-secondary"
+                                    onClick={() =>
+                                        router.push(
+                                            `/products-by-animal-subcategory/${groupName}`
+                                        )
+                                    }
                                 >
                                     See All
-                                </Link>
+                                </Button>
                             </div>
                         </div>
                     </React.Fragment>

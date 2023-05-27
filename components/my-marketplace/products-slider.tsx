@@ -3,6 +3,7 @@ import { Fragment, useMemo } from 'react';
 import { Slide } from 'react-slideshow-image';
 import Products_Slider_image from '../../assets/products-slider.png';
 
+import { useRouter } from 'next/router';
 import { Stack } from 'react-bootstrap';
 import 'react-slideshow-image/dist/styles.css';
 import { IProducts } from '../../store/my-marketplace-slice';
@@ -57,6 +58,7 @@ const ProductsSliderComponent = ({
 }: {
     comboProducts: IProducts[];
 }) => {
+    const router = useRouter();
     const sliderConfig = useMemo(() => {
         if (comboProducts.length <= 2) {
             const updatedSliderSettings = responsiveSettings.map((s) => {
@@ -82,11 +84,15 @@ const ProductsSliderComponent = ({
                     duration={2500}
                 >
                     {comboProducts.map(
-                        ({ pr_poster_path, pr_name }, index: number) => {
+                        ({ pr_poster_path, pr_name, pr_id }, index: number) => {
                             return (
                                 <div
                                     key={index}
                                     className="d-flex flex-column testimonial-card p-5"
+                                    role="button"
+                                    onClick={() =>
+                                        router.push(`/product-details/${pr_id}`)
+                                    }
                                 >
                                     <Stack
                                         direction="horizontal"

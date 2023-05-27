@@ -60,13 +60,19 @@ const ProductsTab = () => {
 
             <div className="d-flex row justify-content-center align-items-center mt-4">
                 {bestSellingProducts?.map(
-                    ({ pr_poster_path, pr_name }, index) => {
+                    ({ pr_poster_path, pr_name, pr_id }, index) => {
                         return (
                             <div
                                 key={`activity-menu-items-${index}`}
                                 className="mt-2 mx-3 col-md-4 col-12 justify-content-center align-items-center"
                             >
-                                <div className="form-group d-flex justify-content-center">
+                                <div
+                                    className="form-group d-flex justify-content-center"
+                                    role="button"
+                                    onClick={() =>
+                                        router.push(`/product-details/${pr_id}`)
+                                    }
+                                >
                                     <div className="d-flex justify-content-center align-items-center p-4 products">
                                         <Image
                                             src={`${process.env.NEXT_PUBLIC_PROCUT_IMG_PATH}/${pr_poster_path}`}
@@ -94,28 +100,36 @@ const ProductsTab = () => {
             </div>
 
             <div className="row justify-content-center mt-4">
-                {featuredProducts?.map(({ pr_poster_path, pr_name }, index) => {
-                    return (
-                        <div
-                            key={`activity-menu-items-${index}`}
-                            className="mt-2 mx-3 col-12 col-md-4 d-flex flex-column justify-content-center align-items-center"
-                        >
-                            <div className="form-group d-flex justify-content-center">
-                                <div className="d-flex justify-content-center align-items-center p-4 products">
-                                    <Image
-                                        src={`${process.env.NEXT_PUBLIC_PROCUT_IMG_PATH}/${pr_poster_path}`}
-                                        alt="featured product dog food"
-                                        height={100}
-                                        width={100}
-                                    />
+                {featuredProducts?.map(
+                    ({ pr_poster_path, pr_name, pr_id }, index) => {
+                        return (
+                            <div
+                                key={`activity-menu-items-${index}`}
+                                className="mt-2 mx-3 col-12 col-md-4 d-flex flex-column justify-content-center align-items-center"
+                            >
+                                <div
+                                    className="form-group d-flex justify-content-center"
+                                    role="button"
+                                    onClick={() =>
+                                        router.push(`/product-details/${pr_id}`)
+                                    }
+                                >
+                                    <div className="d-flex justify-content-center align-items-center p-4 products">
+                                        <Image
+                                            src={`${process.env.NEXT_PUBLIC_PROCUT_IMG_PATH}/${pr_poster_path}`}
+                                            alt="featured product dog food"
+                                            height={100}
+                                            width={100}
+                                        />
+                                    </div>
                                 </div>
+                                <p className="mt-2 text-center text-wrap">
+                                    {pr_name}
+                                </p>
                             </div>
-                            <p className="mt-2 text-center text-wrap">
-                                {pr_name}
-                            </p>
-                        </div>
-                    );
-                })}
+                        );
+                    }
+                )}
             </div>
             {/* end of featured products */}
 
