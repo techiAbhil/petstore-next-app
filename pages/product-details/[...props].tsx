@@ -1,7 +1,8 @@
 import axios from 'axios';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { Button } from 'react-bootstrap';
 import CustomLoader from '../../components/common/CustomLoader';
 import CommonMenuSlider from '../../components/common/common-menu-slider';
 import Layout from '../../components/layout/layout';
@@ -51,9 +52,17 @@ const ProductDetails = () => {
         getProductDetails();
     }, [getProductDetails]);
 
+    const discountedProductPrice = useMemo(() => {
+        const productActualPrice = productDetails?.pr_price;
+        if (!productActualPrice || productActualPrice < 0) return 0;
+        const discountAmount =
+            (productActualPrice * (productDetails?.pr_discount ?? 0)) / 100;
+        return productActualPrice - discountAmount;
+    }, [productDetails?.pr_discount, productDetails?.pr_price]);
+
     return (
         <Layout>
-            <section className="mt-3 mb-5 container">
+            <section className="mt-1 mb-1 container">
                 {!isLoading && !productDetails && (
                     <div className="mt-5 row d-flex flex-column align-items-center justify-content-center section-text-style">
                         <h2 className="pt-1 col-sm-12 text-center text-uppercase">
@@ -63,7 +72,12 @@ const ProductDetails = () => {
                 )}
 
                 {!isLoading && productDetails && (
-                    <div className="mt-5 row d-flex flex-column align-items-center justify-content-center section-text-style">
+                    <div className="row d-flex flex-column align-items-center justify-content-center section-text-style">
+                        <div className="mt-1 row d-flex flex-column align-items-center justify-content-center section-text-style">
+                            <h5 className="pt-1 col-sm-12 text-center text-bold text-uppercase">
+                                Product Details
+                            </h5>
+                        </div>
                         <CommonMenuSlider totalItems={productImages.length}>
                             {productImages.map(
                                 ({ pi_path, pi_id }, index: number) => {
@@ -87,6 +101,58 @@ const ProductDetails = () => {
                                 }
                             )}
                         </CommonMenuSlider>
+
+                        <div className="mt-5 row d-flex flex-column align-items-center justify-content-center section-text-style">
+                            <h5 className="pt-1 col-sm-12 text-center text-uppercase">
+                                {productDetails?.pr_name}
+                            </h5>
+                        </div>
+
+                        <div className="mt-2 row align-items-center justify-align-content-between section-text-style">
+                            <div className="col-4">
+                                <p className="text-center text-bold px-20 mt-1">
+                                    ₹{discountedProductPrice}
+                                </p>
+                            </div>
+                            <div className="col-4">
+                                <p className="text-center text-line-through px-20 mt-1">
+                                    ₹{productDetails?.pr_price}
+                                </p>
+                            </div>
+                            <div className="col-4">
+                                <p className="text-center px-20 mt-1">
+                                    {productDetails?.pr_discount}%Off
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="mt-1 row d-flex flex-column align-items-center justify-content-center section-text-style">
+                            <p className="text-secondary text-center px-20 mt-1">
+                                {productDetails?.pr_description}
+                            </p>
+                        </div>
+
+                        <div className="mt-1 row d-flex flex-column align-items-center justify-content-center section-text-style">
+                            <p className="text-secondary text-center px-20 mt-1">
+                                <div className="form-group py-3">
+                                    <Button
+                                        type="submit"
+                                        className="btn btn-block login-btn mx-2"
+                                    >
+                                        <i className={`fa-solid fa-plus`}></i>{' '}
+                                        Add to Cart
+                                    </Button>
+
+                                    <Button
+                                        type="submit"
+                                        className="btn btn-block login-btn mx-2"
+                                    >
+                                        <i className="fa-solid fa-code-compare"></i>{' '}
+                                        Compare
+                                    </Button>
+                                </div>
+                            </p>
+                        </div>
                     </div>
                 )}
                 <CustomLoader show={isLoading} />
