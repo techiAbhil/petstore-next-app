@@ -16,7 +16,7 @@ const ProductsTab = () => {
     return (
         <>
             <div className="row justify-content-center mt-4">
-                <CommonMenuSlider>
+                <CommonMenuSlider totalItems={petCategories?.length}>
                     {petCategories?.map(
                         ({ pc_icon_path, pc_title, pc_id }, index) => {
                             return (

@@ -43,7 +43,6 @@ const ProductsByAnimalSubcategory = () => {
                 <title>{parentCategory}</title>
             </Head>
             <section className="mt-3 mb-5 container">
-                {/* <CommonMenuSlider></CommonMenuSlider> */}
                 {!isLoading && isError && (
                     <div className="mt-5 row d-flex flex-column align-items-center justify-content-center section-text-style">
                         <h2 className="pt-1 col-sm-12 text-center text-uppercase">

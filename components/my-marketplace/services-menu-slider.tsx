@@ -56,7 +56,7 @@ const ServicesMenuSliderComponent = ({
     selectedServiceTab: string;
 }) => {
     return (
-        <CommonMenuSlider>
+        <CommonMenuSlider totalItems={productsMenuItems?.length}>
             {productsMenuItems.map(({ iconName, itemName }, index: number) => {
                 return (
                     <div
