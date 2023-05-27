@@ -5,7 +5,7 @@ import Footer from '../../components/home/footer';
 import Layout from '../../components/layout/layout';
 import ProductsTab from '../../components/my-marketplace/products-tab';
 import ServicesTab from '../../components/my-marketplace/services-tab';
-import { getMyMarketplaceData } from '../../store/my-marketplace-Slice';
+import { getMyMarketplaceData } from '../../store/my-marketplace-slice';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 
 type IMenuItem = {

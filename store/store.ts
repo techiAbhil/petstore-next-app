@@ -11,10 +11,10 @@ import {
     persistStore,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import myMarketplaceReducer from './my-marketplace-Slice';
-import petsMetaDataReducer from './petsMetaDataSlice';
+import myMarketplaceReducer from './my-marketplace-slice';
+import petsMetaDataReducer from './pets-params-slice';
 import productCategoriesReducer from './product-categories-slice';
-import registrationReducer from './registrationSlice';
+import registrationReducer from './registration-slice';
 import userReducer from './userSlice';
 
 const appReducer = combineReducers({

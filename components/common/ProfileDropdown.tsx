@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearLogoutState } from '../../store/registrationSlice';
+import { clearLogoutState } from '../../store/registration-slice';
 import { RootState } from '../../store/store';
 
 function ProfileDropdown() {

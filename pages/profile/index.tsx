@@ -12,7 +12,7 @@ import ProfileDisplay from '../../components/common/ProfileDisplay';
 import CustomToaster from '../../components/common/Toaster';
 import Layout from '../../components/layout/layout';
 import StyledDropzone from '../../components/styled-dropzone/styled-dropdzone';
-import { getPetsMetaData } from '../../store/petsMetaDataSlice';
+import { getPetsMetaData } from '../../store/pets-params-slice';
 import { RootState, useAppDispatch } from '../../store/store';
 import { setUserState } from '../../store/userSlice';
 import { updateUserLocalStorageStateByToken } from '../../utils/helper';

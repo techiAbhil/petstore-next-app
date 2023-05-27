@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Form as FormikForm, Formik } from 'formik';
+import { Formik, Form as FormikForm } from 'formik';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useCallback, useState } from 'react';
@@ -10,7 +10,7 @@ import CustomFormikField from '../../components/common/CustomFormikField';
 import CustomLoader from '../../components/common/CustomLoader';
 import CustomToaster from '../../components/common/Toaster';
 import AuthLayout from '../../components/layout/auth-layout';
-import { setRegistrationState } from '../../store/registrationSlice';
+import { setRegistrationState } from '../../store/registration-slice';
 import { registrationSchema } from '../../validations/auth.validation';
 
 const Register = () => {

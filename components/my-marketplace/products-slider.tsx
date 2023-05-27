@@ -5,7 +5,7 @@ import Products_Slider_image from '../../assets/products-slider.png';
 
 import { Stack } from 'react-bootstrap';
 import 'react-slideshow-image/dist/styles.css';
-import { IProducts } from '../../store/my-marketplace-Slice';
+import { IProducts } from '../../store/my-marketplace-slice';
 
 type PRODUCTS_SLIDER_TYPE = {
     productPic: any;
