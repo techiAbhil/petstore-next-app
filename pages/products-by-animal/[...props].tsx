@@ -46,7 +46,7 @@ const ProductsByAnimal = () => {
                         </h2>
                     </div>
                 )}
-                {categories?.length > 0 ? (
+                {!isLoading && categories?.length > 0 ? (
                     <div className="row d-flex flex-column align-items-center justify-content-center section-text-style">
                         <div className="center">
                             <div

@@ -41,8 +41,6 @@ const ProductsByAnimalAndType = ({
         loadData();
     }, [loadData]);
 
-    console.log('test = ', Object.keys(products ?? {}));
-
     if (!selectedTab) return <></>;
     return products === undefined ? (
         <div className="mt-5 row d-flex flex-column align-items-center justify-content-center section-text-style">
@@ -99,7 +97,7 @@ const ProductsByAnimalAndType = ({
                                     className="text-center text-secondary"
                                     onClick={() =>
                                         router.push(
-                                            `/products-by-animal-subcategory/${groupName}`
+                                            `/products-by-animal-subcategory/${products?.[groupName]?.[0]?.psc_id}`
                                         )
                                     }
                                 >
