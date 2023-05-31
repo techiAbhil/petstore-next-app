@@ -120,7 +120,7 @@ const cartItemSlice = createSlice({
                 (state, { payload }: PayloadAction<any>) => {
                     state.error = null;
                     state.isError = false;
-                    state.isLoading = true;
+                    state.isLoading = false;
                     state.cartItems = payload?.cartItems;
                 }
             )
@@ -143,11 +143,7 @@ const cartItemSlice = createSlice({
                 (state, { payload }: PayloadAction<any>) => {
                     state.error = null;
                     state.isError = false;
-                    state.isLoading = true;
-                    state.cartItems = [
-                        ...state.cartItems,
-                        ...payload?.cartItems,
-                    ];
+                    state.isLoading = false;
                 }
             )
             .addCase(addCartItems.rejected, (state, { payload }: any) => {
@@ -167,7 +163,7 @@ const cartItemSlice = createSlice({
             .addCase(updateCartItems.fulfilled, (state) => {
                 state.error = null;
                 state.isError = false;
-                state.isLoading = true;
+                state.isLoading = false;
             })
             .addCase(updateCartItems.rejected, (state, { payload }: any) => {
                 let e = API_ERROR_MSG;
@@ -186,7 +182,7 @@ const cartItemSlice = createSlice({
             .addCase(deleteCartItems.fulfilled, (state) => {
                 state.error = null;
                 state.isError = false;
-                state.isLoading = true;
+                state.isLoading = false;
             })
             .addCase(deleteCartItems.rejected, (state, { payload }: any) => {
                 let e = API_ERROR_MSG;

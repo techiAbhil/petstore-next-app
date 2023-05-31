@@ -6,7 +6,9 @@ import { Button } from 'react-bootstrap';
 import CustomLoader from '../../components/common/CustomLoader';
 import CommonMenuSlider from '../../components/common/common-menu-slider';
 import Layout from '../../components/layout/layout';
+import { addCartItems } from '../../store/cart-items-slice';
 import { IProducts } from '../../store/my-marketplace-slice';
+import { useAppDispatch, useAppSelector } from '../../store/store';
 import { API_ERROR_MSG } from '../../utils/constants';
 
 interface IProductImages {
@@ -22,8 +24,9 @@ const ProductDetails = () => {
     const [pr_id]: any = props ?? [''];
     const [productDetails, setProductDetails] = useState<IProducts>();
     const [productImages, setProductImages] = useState<IProductImages[]>([]);
-
+    const disptach = useAppDispatch();
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const { isLoading: cartLoading } = useAppSelector((state) => state.cart);
 
     const getProductDetails = useCallback(async () => {
         try {
@@ -59,6 +62,22 @@ const ProductDetails = () => {
             (productActualPrice * (productDetails?.pr_discount ?? 0)) / 100;
         return productActualPrice - discountAmount;
     }, [productDetails?.pr_discount, productDetails?.pr_price]);
+
+    const addCartItemHandler = useCallback(() => {
+        try {
+            if (!productDetails?.pr_id) return;
+            disptach(
+                addCartItems({
+                    pr_id: +productDetails.pr_id,
+                    ct_price: discountedProductPrice,
+                    ct_qty: 1,
+                })
+            );
+            router.push('/cart');
+        } catch (e) {
+            alert('Something went wrong! could not add item to cart!');
+        }
+    }, [discountedProductPrice, disptach, productDetails?.pr_id, router]);
 
     return (
         <Layout>
@@ -138,6 +157,7 @@ const ProductDetails = () => {
                                     <Button
                                         type="submit"
                                         className="btn btn-block login-btn mx-2"
+                                        onClick={addCartItemHandler}
                                     >
                                         <i className={`fa-solid fa-plus`}></i>{' '}
                                         Add to Cart
@@ -155,7 +175,7 @@ const ProductDetails = () => {
                         </div>
                     </div>
                 )}
-                <CustomLoader show={isLoading} />
+                <CustomLoader show={isLoading || cartLoading} />
             </section>
         </Layout>
     );

@@ -111,7 +111,16 @@ function Layout({ children }: { children: any }) {
                                     </button>
                                 </>
                             ) : (
-                                <ProfileDropdown />
+                                <>
+                                    <ProfileDropdown />
+                                    <button
+                                        type="button"
+                                        className="btn login-btn"
+                                        onClick={() => router.push('/cart')}
+                                    >
+                                        <i className="fa-solid fa-cart-shopping"></i>
+                                    </button>
+                                </>
                             )}
                             <Navbar.Toggle
                                 className="sandwich-icon"
