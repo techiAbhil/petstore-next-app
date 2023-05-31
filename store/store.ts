@@ -11,6 +11,7 @@ import {
     persistStore,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import cartReducer from './cart-items-slice';
 import myMarketplaceReducer from './my-marketplace-slice';
 import petsMetaDataReducer from './pets-params-slice';
 import productCategoriesReducer from './product-categories-slice';
@@ -25,6 +26,7 @@ const appReducer = combineReducers({
     myMarketplace: myMarketplaceReducer,
     productCategoriesByPet: productCategoriesReducer,
     userDashboard: userDashboardSlice,
+    cart: cartReducer,
 });
 
 const rootReducer = (state: any, action: any) => {
