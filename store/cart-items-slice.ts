@@ -73,7 +73,7 @@ export const updateCartItems = createAsyncThunk(
                 `/marketplace/cart/${ct_id}/${apiEndpoint}`
             );
             if (data?.status === true) {
-                return data;
+                return { ct_id, isAddItem };
             }
 
             throw new Error(API_ERROR_MSG);
@@ -160,11 +160,31 @@ const cartItemSlice = createSlice({
                 state.isError = false;
                 state.isLoading = true;
             })
-            .addCase(updateCartItems.fulfilled, (state) => {
-                state.error = null;
-                state.isError = false;
-                state.isLoading = false;
-            })
+            .addCase(
+                updateCartItems.fulfilled,
+                (
+                    state,
+                    {
+                        payload: { ct_id, isAddItem },
+                    }: PayloadAction<{
+                        ct_id: number;
+                        isAddItem: boolean;
+                    }>
+                ) => {
+                    state.error = null;
+                    state.isError = false;
+                    state.isLoading = false;
+                    state.cartItems = state.cartItems.map((cart) => {
+                        if (cart?.ct_id === ct_id) {
+                            const itemCount = isAddItem
+                                ? cart?.ct_qty + 1
+                                : cart?.ct_qty - 1;
+                            return { ...cart, ct_qty: itemCount };
+                        }
+                        return cart;
+                    });
+                }
+            )
             .addCase(updateCartItems.rejected, (state, { payload }: any) => {
                 let e = API_ERROR_MSG;
                 if (payload?.message && typeof payload?.message === 'string') {

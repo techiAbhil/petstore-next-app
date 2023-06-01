@@ -1,9 +1,9 @@
 import Image from 'next/image';
-import { useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import Table from 'react-bootstrap/Table';
 import CustomLoader from '../../components/common/CustomLoader';
 import Layout from '../../components/layout/layout';
-import { getCartItems } from '../../store/cart-items-slice';
+import { getCartItems, updateCartItems } from '../../store/cart-items-slice';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 
 const CartComponent = () => {
@@ -22,6 +22,17 @@ const CartComponent = () => {
             return total + item?.ct_price * item?.ct_qty;
         }, 0);
     }, [cartItems]);
+
+    const updateCartItemsHandler = useCallback(
+        (request: any) => {
+            try {
+                disptach(updateCartItems(request));
+            } catch (e) {
+                alert('Something went wrong while updating cart items!');
+            }
+        },
+        [disptach]
+    );
 
     return (
         <Layout>
@@ -65,12 +76,28 @@ const CartComponent = () => {
                                                     <i
                                                         className="fa-solid fa-circle-minus mx-2"
                                                         role="button"
+                                                        onClick={() =>
+                                                            updateCartItemsHandler(
+                                                                {
+                                                                    ct_id: item?.ct_id,
+                                                                    isAddItem:
+                                                                        false,
+                                                                }
+                                                            )
+                                                        }
                                                     />
                                                 )}
                                                 {item?.ct_qty}
                                                 <i
                                                     className="fa-solid fa-circle-plus mx-2"
                                                     role="button"
+                                                    onClick={() =>
+                                                        updateCartItemsHandler({
+                                                            ct_id: item?.ct_id,
+
+                                                            isAddItem: true,
+                                                        })
+                                                    }
                                                 />
                                             </td>
                                             <td align="center" valign="middle">
@@ -92,6 +119,17 @@ const CartComponent = () => {
                                 </tr>
                             </tbody>
                         </Table>
+
+                        <div className="row d-flex justify-content-center">
+                            <button
+                                type="button"
+                                className="btn login-btn w-25"
+                                // onClick={() => router.push('/cart')}
+                            >
+                                <i className="fa-solid fa-cart-shopping"></i>{' '}
+                                Checkout
+                            </button>
+                        </div>
                     </div>
                 )}
             </section>
