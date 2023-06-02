@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import CustomLoader from '../../components/common/CustomLoader';
 import Footer from '../../components/home/footer';
@@ -9,32 +10,39 @@ import { getUserDashboardData } from '../../store/user-dashboard-slice';
 type IMenuItem = {
     iconName: string;
     itemName: string;
+    navigateTo: string;
 };
 
 const historyMenuItems: IMenuItem[] = [
     {
         iconName: 'fa-solid fa-syringe',
         itemName: 'Vaccination',
+        navigateTo: '/vaccination',
     },
     {
         iconName: 'fa-solid fa-virus-covid',
         itemName: 'Parasite Prevention',
+        navigateTo: '/parasite-prevenetion',
     },
     {
         iconName: 'fa-solid fa-shield-cat',
         itemName: 'Grooming',
+        navigateTo: '/grooming',
     },
     {
         iconName: 'fa-solid fa-weight-scale',
         itemName: 'Measurements',
+        navigateTo: '/measurement',
     },
     {
         iconName: 'fa-solid fa-laptop-medical',
         itemName: 'Episodes & Symptomatic History',
+        navigateTo: '/episodes',
     },
     {
         iconName: 'fa-solid fa-capsules',
         itemName: 'Medication & Supplements',
+        navigateTo: '/medication-and-supplements',
     },
 ];
 
@@ -42,33 +50,39 @@ const activityLogMenuItems: IMenuItem[] = [
     {
         iconName: 'fa-solid fa-burger',
         itemName: 'Food',
+        navigateTo: '/food',
     },
     {
         iconName: 'fa-solid fa-shoe-prints',
         itemName: 'Walk',
+        navigateTo: '/',
     },
     {
         iconName: 'fa-solid fa-dumbbell',
         itemName: 'Training',
+        navigateTo: '/training',
     },
     {
         iconName: 'fa-solid fa-hands-bubbles',
         itemName: 'Pee',
+        navigateTo: '/',
     },
     {
         iconName: 'fa-solid fa-toilet',
         itemName: 'Poop',
+        navigateTo: '/',
     },
 ];
 
 const expensesMenuItems: IMenuItem[] = [
-    {
-        iconName: 'fa-solid fa-wallet',
-        itemName: 'Add Expenses',
-    },
+    // {
+    //     iconName: 'fa-solid fa-wallet',
+    //     itemName: 'Add Expenses',
+    // },
     {
         iconName: 'fa-solid fa-money-bill-transfer',
-        itemName: 'Expense History',
+        itemName: 'Expenses',
+        navigateTo: '/expenses',
     },
 ];
 
@@ -76,6 +90,8 @@ const MyPet = () => {
     const dispatch = useAppDispatch();
     const { error, isError, isLoading, family, petDetails, pets, reminders } =
         useAppSelector((state) => state.userDashboard);
+
+    const router = useRouter();
 
     useEffect(() => {
         dispatch(getUserDashboardData(undefined));
@@ -143,23 +159,31 @@ const MyPet = () => {
                 </div>
 
                 <div className="row justify-content-center mt-4 ">
-                    {historyMenuItems.map(({ iconName, itemName }, index) => {
-                        return (
-                            <div
-                                key={`history-menu-item-${index}`}
-                                className="mt-2 col-6 col-md-4 d-flex flex-column justify-content-center align-items-center"
-                            >
-                                <div className="form-group d-flex justify-content-center">
-                                    <div className="circular-profile-pic d-flex justify-content-center align-items-center">
-                                        <i
-                                            className={`${iconName} fa-3x avatar-icon`}
-                                        ></i>
+                    {historyMenuItems.map(
+                        ({ iconName, itemName, navigateTo }, index) => {
+                            return (
+                                <div
+                                    key={`history-menu-item-${index}`}
+                                    className="mt-2 col-6 col-md-4 d-flex flex-column justify-content-center align-items-center"
+                                >
+                                    <div
+                                        className="form-group d-flex justify-content-center"
+                                        role="button"
+                                        onClick={() => router.push(navigateTo)}
+                                    >
+                                        <div className="circular-profile-pic d-flex justify-content-center align-items-center">
+                                            <i
+                                                className={`${iconName} fa-3x avatar-icon`}
+                                            ></i>
+                                        </div>
                                     </div>
+                                    <p className="mt-2 text-center">
+                                        {itemName}
+                                    </p>
                                 </div>
-                                <p className="mt-2 text-center">{itemName}</p>
-                            </div>
-                        );
-                    })}
+                            );
+                        }
+                    )}
                 </div>
                 {/* end of history section */}
 
@@ -171,23 +195,31 @@ const MyPet = () => {
                 </div>
 
                 <div className="row justify-content-center mt-4">
-                    {expensesMenuItems.map(({ iconName, itemName }, index) => {
-                        return (
-                            <div
-                                key={`activity-menu-items-${index}`}
-                                className="mt-2 col-6 col-md-4 d-flex flex-column justify-content-center align-items-center"
-                            >
-                                <div className="form-group d-flex justify-content-center">
-                                    <div className="circular-profile-pic d-flex justify-content-center align-items-center">
-                                        <i
-                                            className={`${iconName} fa-3x avatar-icon`}
-                                        ></i>
+                    {expensesMenuItems.map(
+                        ({ iconName, itemName, navigateTo }, index) => {
+                            return (
+                                <div
+                                    key={`activity-menu-items-${index}`}
+                                    className="mt-2 col-6 col-md-4 d-flex flex-column justify-content-center align-items-center"
+                                >
+                                    <div
+                                        className="form-group d-flex justify-content-center"
+                                        role="button"
+                                        onClick={() => router.push(navigateTo)}
+                                    >
+                                        <div className="circular-profile-pic d-flex justify-content-center align-items-center">
+                                            <i
+                                                className={`${iconName} fa-3x avatar-icon`}
+                                            ></i>
+                                        </div>
                                     </div>
+                                    <p className="mt-2 text-center">
+                                        {itemName}
+                                    </p>
                                 </div>
-                                <p className="mt-2 text-center">{itemName}</p>
-                            </div>
-                        );
-                    })}
+                            );
+                        }
+                    )}
                 </div>
                 {/* end of Expense section */}
 
@@ -196,23 +228,21 @@ const MyPet = () => {
                     <h2 className="pt-1 col-sm-12 text-center text-uppercase">
                         Daily Activity Log
                     </h2>
-                    <p className="text-center px-5 font-grey">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Quibusdam explicabo error cupiditate enim animi sed
-                        repellendus, iste cum quidem totam. Iste incidunt illo
-                        eos non!
-                    </p>
                 </div>
 
                 <div className="row justify-content-center mt-4">
                     {activityLogMenuItems.map(
-                        ({ iconName, itemName }, index) => {
+                        ({ iconName, itemName, navigateTo }, index) => {
                             return (
                                 <div
                                     key={`activity-menu-items-${index}`}
                                     className="mt-2 col-6 col-md-4 d-flex flex-column justify-content-center align-items-center"
                                 >
-                                    <div className="form-group d-flex justify-content-center">
+                                    <div
+                                        className="form-group d-flex justify-content-center"
+                                        role="button"
+                                        onClick={() => router.push(navigateTo)}
+                                    >
                                         <div className="circular-profile-pic d-flex justify-content-center align-items-center">
                                             <i
                                                 className={`${iconName} fa-3x avatar-icon`}
