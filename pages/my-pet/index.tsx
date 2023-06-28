@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import DefaultPet from '../../assets/default-pet.png';
 import CustomLoader from '../../components/common/CustomLoader';
 import Footer from '../../components/home/footer';
 import Layout from '../../components/layout/layout';
@@ -121,18 +122,16 @@ const MyPet = () => {
                                 >
                                     <div className="form-group d-flex justify-content-center">
                                         <div className="d-flex justify-content-center align-items-center py-5">
-                                            {imgUrl ? (
-                                                <Image
-                                                    src={`${process.env.NEXT_PUBLIC_PROCUT_IMG_PATH}/${imgUrl}`}
-                                                    alt="featured product dog food"
-                                                    height={100}
-                                                    width={100}
-                                                />
-                                            ) : (
-                                                <h5 className="text-grey text-center align-items-center">
-                                                    Pet image unavailable
-                                                </h5>
-                                            )}
+                                            <Image
+                                                src={
+                                                    imgUrl
+                                                        ? `${process.env.NEXT_PUBLIC_PROCUT_IMG_PATH}/${imgUrl}`
+                                                        : DefaultPet
+                                                }
+                                                alt="featured product dog food"
+                                                height={100}
+                                                width={100}
+                                            />
                                         </div>
                                     </div>
                                     <div className="row center">

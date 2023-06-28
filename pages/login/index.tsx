@@ -85,9 +85,12 @@ const Login = () => {
                                     </label>
                                 </div>
                                 <div>
-                                    <a href="#" className="font-small">
+                                    <Link
+                                        href="/forgot-password"
+                                        className="font-small"
+                                    >
                                         Forgot Password?
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
 

@@ -11,6 +11,12 @@ export const loginSchema = Yup.object({
     us_password: Yup.string().required('Password is required!'),
 });
 
+export const forgotPassowrdSchema = Yup.object({
+    us_email: Yup.string()
+        .email('Invalid email address')
+        .required('Email is required!'),
+});
+
 export const registrationSchema = Yup.object({
     us_email: Yup.string()
         .email('Invalid email address')
