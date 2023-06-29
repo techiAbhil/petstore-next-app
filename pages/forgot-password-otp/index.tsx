@@ -20,7 +20,7 @@ const Verification = () => {
     useEffect(() => {
         try {
             const RESET_PASSWORD_DETAILS = JSON.parse(
-                localStorage.getItem('RESET_PASSWORD_DETAILS') ?? ''
+                localStorage.getItem('RESET_PASSWORD_DETAILS') ?? null
             );
             if (
                 !RESET_PASSWORD_DETAILS?.userId ||

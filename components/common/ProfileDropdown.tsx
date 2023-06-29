@@ -9,7 +9,7 @@ function ProfileDropdown() {
     const router = useRouter();
     const dispatch = useDispatch();
     const logoutHandler = useCallback(() => {
-        localStorage.clear();
+        localStorage.removeItem('AUTH_TOKEN');
         dispatch(clearLogoutState());
         setTimeout(() => {
             router.replace('/login');
