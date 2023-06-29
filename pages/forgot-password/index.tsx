@@ -23,14 +23,14 @@ const ForgotPassword = () => {
                 return;
             }
             try {
-                const { data }: any = await axios.get(
+                const data: any = await axios.get(
                     `/auth/password-recovery-otp?username=${us_email}&mode=email`
                 );
                 // NOTE: mode = email | mobile according to mode the value can ve phone or email
                 if (data?.otp && data?.otp_id) {
                     localStorage.setItem(
                         'RESET_PASSWORD_DETAILS',
-                        JSON.stringify(data)
+                        JSON.stringify({ ...data, otp: '' })
                     );
                     setShowLoader(false);
                     router.push('/forgot-password-otp');

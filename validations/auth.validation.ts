@@ -17,6 +17,13 @@ export const forgotPassowrdSchema = Yup.object({
         .required('Email is required!'),
 });
 
+export const forgotPasswordFinalSchema = Yup.object().shape({
+    us_password: Yup.string().required('Password is required'),
+    cnf_password: Yup.string()
+        .oneOf([Yup.ref('us_password'), null], 'Passwords must match')
+        .required('Confirm Password is required'),
+});
+
 export const registrationSchema = Yup.object({
     us_email: Yup.string()
         .email('Invalid email address')

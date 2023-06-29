@@ -44,7 +44,7 @@ const Verification = () => {
                     otpId: userDetails?.otp_id,
                 });
                 setShowLoader(false);
-                router.replace('/login');
+                router.push('/forgot-password-final');
             } catch (e: any) {
                 setServiceError(e?.message ?? 'Something went wrong!');
                 setShowLoader(false);
