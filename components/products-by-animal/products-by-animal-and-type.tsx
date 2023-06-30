@@ -63,7 +63,7 @@ const ProductsByAnimalAndType = ({
                                     {groupName}
                                 </h2>
                             </div>
-                            <div className="d-flex row justify-content-center align-items-center mt-4">
+                            <div className="d-flex row justify-content-center align-items-center mt-1">
                                 <CommonMenuSlider
                                     totalItems={products[groupName]?.length}
                                 >

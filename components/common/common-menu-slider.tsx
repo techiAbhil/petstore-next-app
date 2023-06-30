@@ -62,7 +62,9 @@ const CommonMenuSlider = ({
                             {children}
                         </Slide>
                     ) : (
-                        <div className="center">{children}</div>
+                        <div className="testimonial-section-container">
+                            {children}
+                        </div>
                     )}
                 </section>
             )}
