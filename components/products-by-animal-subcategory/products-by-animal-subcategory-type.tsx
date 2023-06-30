@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
 import { IProducts } from '../../store/my-marketplace-slice';
 import { API_ERROR_MSG } from '../../utils/constants';
+import CommonMenuSlider from '../common/common-menu-slider';
 
 const ProductsByAnimalSubcategoryType = ({
     selectedTab,
@@ -50,38 +51,40 @@ const ProductsByAnimalSubcategoryType = ({
                     </h2>
                 </div>
                 <div className="d-flex row justify-content-center align-items-center mt-4">
-                    {products?.map(
-                        ({ pr_poster_path, pr_name, pr_id }, index) => {
-                            return (
-                                <div
-                                    key={`activity-menu-items-${index}`}
-                                    className="mt-2 mx-3 col-md-4 col-12 justify-content-center align-items-center"
-                                >
+                    <CommonMenuSlider totalItems={products?.length}>
+                        {products?.map(
+                            ({ pr_poster_path, pr_name, pr_id }, index) => {
+                                return (
                                     <div
-                                        className="form-group d-flex justify-content-center"
-                                        role="button"
-                                        onClick={() =>
-                                            router.push(
-                                                `/product-details/${pr_id}`
-                                            )
-                                        }
+                                        key={`activity-menu-items-${index}`}
+                                        className="mt-2 mx-3 col-md-4 col-12 justify-content-center align-items-center"
                                     >
-                                        <div className="d-flex justify-content-center align-items-center p-4 products">
-                                            <Image
-                                                src={`${process.env.NEXT_PUBLIC_PROCUT_IMG_PATH}/${pr_poster_path}`}
-                                                alt="best selling dog food"
-                                                height={100}
-                                                width={100}
-                                            />
+                                        <div
+                                            className="form-group d-flex justify-content-center"
+                                            role="button"
+                                            onClick={() =>
+                                                router.push(
+                                                    `/product-details/${pr_id}`
+                                                )
+                                            }
+                                        >
+                                            <div className="d-flex justify-content-center align-items-center p-4 products">
+                                                <Image
+                                                    src={`${process.env.NEXT_PUBLIC_PROCUT_IMG_PATH}/${pr_poster_path}`}
+                                                    alt="best selling dog food"
+                                                    height={100}
+                                                    width={100}
+                                                />
+                                            </div>
                                         </div>
+                                        <p className="mt-2 text-center text-wrap">
+                                            {pr_name}
+                                        </p>
                                     </div>
-                                    <p className="mt-2 text-center text-wrap">
-                                        {pr_name}
-                                    </p>
-                                </div>
-                            );
-                        }
-                    )}
+                                );
+                            }
+                        )}
+                    </CommonMenuSlider>
                 </div>
             </React.Fragment>
         </>

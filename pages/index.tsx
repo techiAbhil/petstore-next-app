@@ -71,7 +71,10 @@ const Index = () => {
                         <p className="mt-2">My Pet Assistent</p>
                     </div>
 
-                    <div className="d-flex flex-column justify-content-center align-items-center landing-section-card-btn">
+                    <div
+                        className="d-flex flex-column justify-content-center align-items-center landing-section-card-btn"
+                        role="button"
+                    >
                         <Image
                             src={PET_FAMILY}
                             alt="Dog"
@@ -80,7 +83,11 @@ const Index = () => {
                         <p className="mt-2">My Pet-O-Sphere</p>
                     </div>
 
-                    <div className="d-flex flex-column justify-content-center align-items-center landing-section-card-btn">
+                    <div
+                        className="d-flex flex-column justify-content-center align-items-center landing-section-card-btn"
+                        role="button"
+                        onClick={() => router.push('/my-marketplace')}
+                    >
                         <Image
                             src={PET_MARKETPLACE}
                             alt="Dog"

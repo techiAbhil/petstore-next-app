@@ -46,7 +46,7 @@ const ProductsByAnimal = () => {
                         </h2>
                     </div>
                 )}
-                {!isLoading && categories?.length > 0 ? (
+                {!isLoading && categories?.length > 0 && (
                     <div className="row d-flex flex-column align-items-center justify-content-center section-text-style">
                         <div className="center">
                             <div
@@ -73,14 +73,18 @@ const ProductsByAnimal = () => {
                             </div>
                         </div>
                     </div>
-                ) : (
+                )}
+
+                {!isLoading && categories?.length <= 0 && (
                     <div className="mt-5 row d-flex flex-column align-items-center justify-content-center section-text-style">
                         <h2 className="pt-1 col-sm-12 text-center">
                             No Categories found for selected animal!
                         </h2>
                     </div>
                 )}
-                <ProductsByAnimalAndType selectedTab={selectedTab} />
+                {selectedTab && (
+                    <ProductsByAnimalAndType selectedTab={selectedTab} />
+                )}
                 <CustomLoader show={isLoading} />
             </section>
             <Footer />

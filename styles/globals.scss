@@ -313,6 +313,7 @@
     border-width: 1px solid $primary-color;
     background-color: $quaternary-color;
 }
+
 @media screen and (width>768px) {
     .testimonial-section-container {
         margin: 0px 20px;
@@ -423,4 +424,8 @@
 
 .text-line-through {
     text-decoration: line-through;
+}
+
+.flex-1 {
+    flex: 1;
 }

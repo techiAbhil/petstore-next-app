@@ -42,7 +42,7 @@ const CommonMenuSlider = ({
                     ...conf,
                     settings: {
                         slidesToShow: totalItems,
-                        slidesToScroll: totalItems,
+                        slidesToScroll: 1,
                     },
                 };
             });
@@ -53,13 +53,17 @@ const CommonMenuSlider = ({
         <Fragment>
             {totalItems > 0 && (
                 <section className="row mt-5 testimonial-section-container">
-                    <Slide
-                        autoplay={false}
-                        responsive={sliderConfig}
-                        duration={2500}
-                    >
-                        {children}
-                    </Slide>
+                    {totalItems > 3 ? (
+                        <Slide
+                            autoplay={false}
+                            responsive={sliderConfig}
+                            duration={2500}
+                        >
+                            {children}
+                        </Slide>
+                    ) : (
+                        <div className="center">{children}</div>
+                    )}
                 </section>
             )}
         </Fragment>
