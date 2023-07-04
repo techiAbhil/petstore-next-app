@@ -19,9 +19,11 @@ const Verification = () => {
 
     useEffect(() => {
         try {
-            const RESET_PASSWORD_DETAILS = JSON.parse(
-                localStorage.getItem('RESET_PASSWORD_DETAILS') ?? null
+            const localStorageData = localStorage.getItem(
+                'RESET_PASSWORD_DETAILS'
             );
+            if (!localStorageData) return;
+            const RESET_PASSWORD_DETAILS = JSON.parse(localStorageData);
             if (
                 !RESET_PASSWORD_DETAILS?.userId ||
                 !RESET_PASSWORD_DETAILS?.otp_id
