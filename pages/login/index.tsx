@@ -182,7 +182,7 @@ const Login = () => {
                         <Button
                             className="btn btn-block google-btn w-100"
                             onClick={() =>
-                                signIn('google', { callbackUrl: '/' })
+                                signIn('google', { callbackUrl: '/o-auth' })
                             }
                         >
                             <i className="fa-brands fa-google mx-2"></i>Sign in

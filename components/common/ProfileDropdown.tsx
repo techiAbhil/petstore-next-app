@@ -1,4 +1,4 @@
-import { signOut } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -9,14 +9,17 @@ import { RootState } from '../../store/store';
 function ProfileDropdown() {
     const router = useRouter();
     const dispatch = useDispatch();
+    const { data: userDetails } = useSession();
     const logoutHandler = useCallback(() => {
         localStorage.removeItem('AUTH_TOKEN');
-        signOut();
+        if (userDetails) {
+            signOut();
+        }
         dispatch(clearLogoutState());
         setTimeout(() => {
             router.replace('/login');
         }, 200);
-    }, [dispatch, router]);
+    }, [dispatch, router, userDetails]);
 
     const { us_full_name } = useSelector((state: RootState) => state.user);
 
