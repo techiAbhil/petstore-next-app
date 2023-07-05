@@ -1,3 +1,4 @@
+import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -10,6 +11,7 @@ function ProfileDropdown() {
     const dispatch = useDispatch();
     const logoutHandler = useCallback(() => {
         localStorage.removeItem('AUTH_TOKEN');
+        signOut();
         dispatch(clearLogoutState());
         setTimeout(() => {
             router.replace('/login');

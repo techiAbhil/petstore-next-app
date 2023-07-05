@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Form, Formik } from 'formik';
+import { signIn, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
@@ -21,6 +22,10 @@ const Login = () => {
     const [showLoader, setShowLoader] = useState<boolean>(false);
     const router = useRouter();
     const dispatch = useDispatch();
+
+    const session = useSession();
+
+    console.log('session data = ', session);
 
     const submitHandler = useCallback(
         async (values: any) => {
@@ -61,9 +66,10 @@ const Login = () => {
         isInitialSetupDone: false,
     });
     useEffect(() => {
-        const remberMeDetails = JSON.parse(
-            localStorage.getItem('REMEMBER_ME') ?? null
-        );
+        const rememberMeFromLocalstorage = localStorage.getItem('REMEMBER_ME');
+        const remberMeDetails = rememberMeFromLocalstorage
+            ? JSON.parse(rememberMeFromLocalstorage)
+            : null;
         if (remberMeDetails?.us_email) {
             setIsRememberMe(true);
 
@@ -173,7 +179,12 @@ const Login = () => {
                     </div>
 
                     <div className="form-group pt-3">
-                        <Button className="btn btn-block google-btn w-100">
+                        <Button
+                            className="btn btn-block google-btn w-100"
+                            onClick={() =>
+                                signIn('google', { callbackUrl: '/' })
+                            }
+                        >
                             <i className="fa-brands fa-google mx-2"></i>Sign in
                             with Google
                         </Button>

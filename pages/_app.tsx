@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { SessionProvider } from 'next-auth/react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import Script from 'next/script';
@@ -38,7 +39,9 @@ export default function App({ Component, pageProps }: AppProps) {
             <Script src="https://kit.fontawesome.com/73ee72016e.js"></Script>
             <Provider store={store}>
                 <PersistGate loading={null} persistor={persistor}>
-                    <Component {...pageProps} />
+                    <SessionProvider session={pageProps?.session}>
+                        <Component {...pageProps} />
+                    </SessionProvider>
                 </PersistGate>
             </Provider>
         </Fragment>
