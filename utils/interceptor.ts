@@ -23,7 +23,9 @@ axios.interceptors.response.use(
     (error) => {
         if (error?.response?.status === 401) {
             localStorage.clear();
-            return Promise.reject('Session timeout!');
+            Promise.reject('Session timeout!');
+            window.location.href = '/';
+            return;
         }
         return Promise.reject(error?.response?.data ?? error);
     }
