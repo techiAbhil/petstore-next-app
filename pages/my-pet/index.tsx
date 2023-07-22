@@ -18,32 +18,32 @@ const historyMenuItems: IMenuItem[] = [
     {
         iconName: 'fa-solid fa-syringe',
         itemName: 'Vaccination',
-        navigateTo: '/vaccination',
+        navigateTo: '/Vaccination',
     },
     {
         iconName: 'fa-solid fa-virus-covid',
         itemName: 'Parasite Prevention',
-        navigateTo: '/parasite-prevenetion',
+        navigateTo: '/Parasite',
     },
     {
         iconName: 'fa-solid fa-shield-cat',
         itemName: 'Grooming',
-        navigateTo: '/grooming',
+        navigateTo: '/Grooming',
     },
     {
         iconName: 'fa-solid fa-weight-scale',
         itemName: 'Measurements',
-        navigateTo: '/measurement',
+        navigateTo: '/Measurements',
     },
     {
         iconName: 'fa-solid fa-laptop-medical',
         itemName: 'Episodes & Symptomatic History',
-        navigateTo: '/episodes',
+        navigateTo: '/Episodes',
     },
     {
         iconName: 'fa-solid fa-capsules',
         itemName: 'Medication & Supplements',
-        navigateTo: '/medication-and-supplements',
+        navigateTo: '/Medication',
     },
 ];
 
@@ -168,7 +168,11 @@ const MyPet = () => {
                                     <div
                                         className="form-group d-flex justify-content-center"
                                         role="button"
-                                        onClick={() => router.push(navigateTo)}
+                                        onClick={() =>
+                                            router.push(
+                                                `/my-pet-assistant${navigateTo}`
+                                            )
+                                        }
                                     >
                                         <div className="circular-profile-pic d-flex justify-content-center align-items-center">
                                             <i

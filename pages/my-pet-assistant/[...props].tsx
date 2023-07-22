@@ -3,6 +3,12 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import Layout from '../../components/layout/layout';
+import Episodes from '../../components/my-pets-tabs-components/episodes';
+import Grooming from '../../components/my-pets-tabs-components/grooming';
+import Measurement from '../../components/my-pets-tabs-components/measurement';
+import MedicationAndSupplements from '../../components/my-pets-tabs-components/medication-and-supplements';
+import ParasitePrevention from '../../components/my-pets-tabs-components/parasite-prevenetion';
+import Vaccination from '../../components/my-pets-tabs-components/vaccination';
 
 const MyPetAssitant = () => {
     const router = useRouter();
@@ -29,27 +35,27 @@ const MyPetAssitant = () => {
                     fill
                 >
                     <Tab eventKey="Vaccination" title="Vaccination">
-                        Vaccination
+                        <Vaccination />
                     </Tab>
                     <Tab eventKey="Parasite" title="Parasite Prevention">
-                        Parasite Prevention
+                        <ParasitePrevention />
                     </Tab>
 
                     <Tab eventKey="Grooming" title="Grooming">
-                        Grooming
+                        <Grooming />
                     </Tab>
                     <Tab eventKey="Measurements" title="Measurements">
-                        Measurements
+                        <Measurement />
                     </Tab>
 
                     <Tab
                         eventKey="Episodes"
-                        title="pisodes & Symptomatic History"
+                        title="Episodes & Symptomatic History"
                     >
-                        Episodes & Symptomatic History
+                        <Episodes />
                     </Tab>
                     <Tab eventKey="Medication" title="Medication & Supplements">
-                        Medication & Supplements
+                        <MedicationAndSupplements />
                     </Tab>
                 </Tabs>
             </section>
