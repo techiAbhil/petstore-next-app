@@ -62,7 +62,7 @@ const ParasitePrevention = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {parasiteList.map((v, i) => {
+                                {parasiteList.map((v: any, i: number) => {
                                     return (
                                         <tr key={i}>
                                             <td className="text-capitalize">

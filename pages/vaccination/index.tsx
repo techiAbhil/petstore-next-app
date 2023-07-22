@@ -62,7 +62,7 @@ const Vaccination = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {vaccines.map((v, i) => {
+                                {vaccines.map((v: any, i: number) => {
                                     return (
                                         <tr key={i}>
                                             <td className="text-capitalize">

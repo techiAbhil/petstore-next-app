@@ -64,7 +64,7 @@ const Episodes = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {episodes.map((v, i) => {
+                                {episodes.map((v: any, i: number) => {
                                     return (
                                         <tr key={i}>
                                             <td className="text-capitalize">

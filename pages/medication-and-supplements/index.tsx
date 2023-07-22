@@ -77,7 +77,7 @@ const MedicationAndSupplements = () => {
                             </thead>
                             <tbody>
                                 {medicationAndSupplement?.medications?.map(
-                                    (v, i) => {
+                                    (v: any, i: number) => {
                                         return (
                                             <tr key={i}>
                                                 <td className="text-capitalize">
@@ -142,7 +142,7 @@ const MedicationAndSupplements = () => {
                             </thead>
                             <tbody>
                                 {medicationAndSupplement?.supplements?.map(
-                                    (v, i) => {
+                                    (v: any, i: number) => {
                                         return (
                                             <tr key={i}>
                                                 <td className="text-capitalize">
