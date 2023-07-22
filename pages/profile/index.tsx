@@ -14,7 +14,7 @@ import Layout from '../../components/layout/layout';
 import StyledDropzone from '../../components/styled-dropzone/styled-dropdzone';
 import { getPetsMetaData } from '../../store/pets-params-slice';
 import { RootState, useAppDispatch } from '../../store/store';
-import { setUserState } from '../../store/userSlice';
+import { setUserState } from '../../store/user-slice';
 import { updateUserLocalStorageStateByToken } from '../../utils/helper';
 import { profileRegistrationSchema } from '../../validations/auth.validation';
 

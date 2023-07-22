@@ -16,8 +16,9 @@ import myMarketplaceReducer from './my-marketplace-slice';
 import petsMetaDataReducer from './pets-params-slice';
 import productCategoriesReducer from './product-categories-slice';
 import registrationReducer from './registration-slice';
-import userDashboardSlice from './user-dashboard-slice';
-import userReducer from './userSlice';
+import userDashboardReducer from './user-dashboard-slice';
+import userSelectedOptionsReducer from './user-selected-options-slice';
+import userReducer from './user-slice';
 
 const appReducer = combineReducers({
     registration: registrationReducer,
@@ -25,8 +26,9 @@ const appReducer = combineReducers({
     petsMetaData: petsMetaDataReducer,
     myMarketplace: myMarketplaceReducer,
     productCategoriesByPet: productCategoriesReducer,
-    userDashboard: userDashboardSlice,
+    userDashboard: userDashboardReducer,
     cart: cartReducer,
+    userSelectedOptions: userSelectedOptionsReducer,
 });
 
 const rootReducer = (state: any, action: any) => {
