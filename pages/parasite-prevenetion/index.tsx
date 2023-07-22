@@ -7,15 +7,15 @@ import Layout from '../../components/layout/layout';
 import { useAppSelector } from '../../store/store';
 
 const COLS: string[] = [
-    'Vaccine Name',
-    'Date of Vaccination',
-    'Is Recurring',
-    'Next Vaccination Date',
-    'Notes',
+    'Medicine Name',
+    'Date of Medicine',
+    'Next Due Date',
+    'Number Of Medicine',
+    'Medicine Type',
 ];
 
-const Vaccination = () => {
-    const [vaccines, setVaccines] = useState<any[]>([]);
+const ParasitePrevention = () => {
+    const [parasiteList, setParasiteList] = useState<any[]>([]);
     const { selectedPetIDForMarketplace } = useAppSelector(
         (state) => state.userSelectedOptions
     );
@@ -25,10 +25,10 @@ const Vaccination = () => {
             try {
                 setIsLoading(true);
                 const data: any = await axios.get(
-                    `pet/${selectedPetIDForMarketplace}/vaccine`
+                    `pet/${selectedPetIDForMarketplace}/parasite-prevention`
                 );
-                if (Array.isArray(data?.vaccines)) {
-                    setVaccines(data.vaccines);
+                if (Array.isArray(data?.medicines)) {
+                    setParasiteList(data.medicines);
                 }
                 setIsLoading(false);
             } catch (e) {
@@ -45,14 +45,14 @@ const Vaccination = () => {
                 <div className="col-center ">
                     <div className="row d-flex flex-column align-items-center justify-content-center section-text-style">
                         <h4 className="pt-1 col-sm-12 text-center text-uppercase">
-                            Vaccination
+                            Parasite Prevention
                         </h4>
                     </div>
                     <PetSelectDropdown />
                 </div>
                 <CustomLoader show={isLoading} />
                 <div className="center mt-2">
-                    {vaccines.length > 0 ? (
+                    {parasiteList.length > 0 ? (
                         <Table responsive bordered>
                             <thead>
                                 <tr>
@@ -62,20 +62,16 @@ const Vaccination = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {vaccines.map((v, i) => {
+                                {parasiteList.map((v, i) => {
                                     return (
                                         <tr key={i}>
                                             <td className="text-capitalize">
-                                                {v?.vc_name}
+                                                {v?.md_medicine_name}
                                             </td>
-                                            <td>{v?.vc_date}</td>
-                                            <td>
-                                                {v?.vc_is_recurring
-                                                    ? 'Yes'
-                                                    : 'No'}
-                                            </td>
-                                            <td>{v?.vc_next_date}</td>
-                                            <td>{v?.vc_note}</td>
+                                            <td>{v?.md_date_of_medicine}</td>
+                                            <td>{v?.md_next_date}</td>
+                                            <td>{v?.md_number_of_medicine}</td>
+                                            <td>{v?.md_medicine_type}</td>
                                         </tr>
                                     );
                                 })}
@@ -95,4 +91,4 @@ const Vaccination = () => {
     );
 };
 
-export default Vaccination;
+export default ParasitePrevention;
