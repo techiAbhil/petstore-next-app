@@ -37,7 +37,7 @@ const Vaccination = () => {
                 console.log('could not fetch the data');
             }
         })();
-    }, []);
+    }, [selectedPetIDForMarketplace]);
     return (
         <Layout>
             <section className="mt-1 mb-1 container">
@@ -53,7 +53,7 @@ const Vaccination = () => {
                 <CustomLoader show={isLoading} />
                 <div className="center mt-2">
                     {vaccines.length > 0 ? (
-                        <Table responsive bordered>
+                        <Table responsive striped>
                             <thead>
                                 <tr>
                                     {COLS.map((col) => (

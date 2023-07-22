@@ -37,7 +37,7 @@ const ParasitePrevention = () => {
                 console.log('could not fetch the data');
             }
         })();
-    }, []);
+    }, [selectedPetIDForMarketplace]);
     return (
         <Layout>
             <section className="mt-1 mb-1 container">
@@ -53,7 +53,7 @@ const ParasitePrevention = () => {
                 <CustomLoader show={isLoading} />
                 <div className="center mt-2">
                     {parasiteList.length > 0 ? (
-                        <Table responsive bordered>
+                        <Table responsive striped>
                             <thead>
                                 <tr>
                                     {COLS.map((col) => (
