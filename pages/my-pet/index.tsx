@@ -8,8 +8,14 @@ import Layout from '../../components/layout/layout';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { getUserDashboardData } from '../../store/user-dashboard-slice';
 
+import FoodActivityImg from '../../assets/food-activity.png';
+import PeeActivityImg from '../../assets/pee-activity.png';
+import PoopActivityImg from '../../assets/poop-activity.png';
+import TrainingActivityImg from '../../assets/training-activity.png';
+import WalkActivityImg from '../../assets/walk-activity.png';
+
 type IMenuItem = {
-    iconName: string;
+    iconName: any;
     itemName: string;
     navigateTo: string;
 };
@@ -49,29 +55,29 @@ const historyMenuItems: IMenuItem[] = [
 
 const activityLogMenuItems: IMenuItem[] = [
     {
-        iconName: 'fa-solid fa-burger',
+        iconName: FoodActivityImg,
         itemName: 'Food',
-        navigateTo: '/food',
+        navigateTo: '/Food',
     },
     {
-        iconName: 'fa-solid fa-shoe-prints',
+        iconName: WalkActivityImg,
         itemName: 'Walk',
-        navigateTo: '/',
+        navigateTo: '/Walk',
     },
     {
-        iconName: 'fa-solid fa-dumbbell',
+        iconName: TrainingActivityImg,
         itemName: 'Training',
-        navigateTo: '/training',
+        navigateTo: '/Training',
     },
     {
-        iconName: 'fa-solid fa-hands-bubbles',
+        iconName: PeeActivityImg,
         itemName: 'Pee',
-        navigateTo: '/',
+        navigateTo: '/Pee',
     },
     {
-        iconName: 'fa-solid fa-toilet',
+        iconName: PoopActivityImg,
         itemName: 'Poop',
-        navigateTo: '/',
+        navigateTo: '/Poop',
     },
 ];
 
@@ -244,12 +250,18 @@ const MyPet = () => {
                                     <div
                                         className="form-group d-flex justify-content-center"
                                         role="button"
-                                        onClick={() => router.push(navigateTo)}
+                                        onClick={() =>
+                                            router.push(
+                                                `daily-activity${navigateTo}`
+                                            )
+                                        }
                                     >
                                         <div className="circular-profile-pic d-flex justify-content-center align-items-center">
-                                            <i
-                                                className={`${iconName} fa-3x avatar-icon`}
-                                            ></i>
+                                            <Image
+                                                src={iconName}
+                                                className="img-fluid pet-assistant-activity-tab-image"
+                                                alt={itemName}
+                                            />
                                         </div>
                                     </div>
                                     <p className="mt-2 text-center">
