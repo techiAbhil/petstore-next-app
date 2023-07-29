@@ -13,6 +13,8 @@ import PeeActivityImg from '../../assets/pee-activity.png';
 import PoopActivityImg from '../../assets/poop-activity.png';
 import TrainingActivityImg from '../../assets/training-activity.png';
 import WalkActivityImg from '../../assets/walk-activity.png';
+import { useGetUserSelectedPet } from '../../hooks/useGetUserSelectedPet.hook';
+import { setUserSelectedOptionsState } from '../../store/user-selected-options-slice';
 
 type IMenuItem = {
     iconName: any;
@@ -103,6 +105,23 @@ const MyPet = () => {
     useEffect(() => {
         dispatch(getUserDashboardData(undefined));
     }, [dispatch]);
+
+    const userPets = useAppSelector((state) => state.userDashboard.pets);
+    const userSelectedOptions = useAppSelector(
+        (state) => state.userSelectedOptions
+    );
+    const selectedPet = useGetUserSelectedPet();
+
+    useEffect(() => {
+        if (!selectedPet && userPets.length > 0) {
+            dispatch(
+                setUserSelectedOptionsState({
+                    ...userSelectedOptions,
+                    selectedPetIDForMarketplace: userPets[0].petId,
+                })
+            );
+        }
+    }, [dispatch, selectedPet, userPets, userSelectedOptions]);
     return (
         <Layout>
             <section className="my-5 container">

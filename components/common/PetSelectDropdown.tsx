@@ -12,6 +12,7 @@ const PetSelectDropdown = () => {
     const userPets = useAppSelector((state) => state.userDashboard.pets);
     const dispatch = useAppDispatch();
     const selectedPet = useGetUserSelectedPet();
+
     const onPetSection = useCallback(
         (pet: IUserPet) => {
             dispatch(
@@ -23,6 +24,7 @@ const PetSelectDropdown = () => {
         },
         [dispatch, userSelectedOptions]
     );
+
     return (
         <div className="center">
             <Dropdown drop="down">

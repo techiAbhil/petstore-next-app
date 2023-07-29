@@ -16,6 +16,7 @@ import PoopActivity from '../../components/daiily-activity-tab-components/poop';
 import TrainingActivity from '../../components/daiily-activity-tab-components/training';
 import WalkActivity from '../../components/daiily-activity-tab-components/walk';
 import Layout from '../../components/layout/layout';
+import { useGetUserSelectedPet } from '../../hooks/useGetUserSelectedPet.hook';
 
 const TabTitle = ({ title, img }: { title: string; img: any }) => {
     return (
@@ -36,8 +37,8 @@ const DailiyActivity = () => {
     const router = useRouter();
     const routePorps = router.query.props;
     const [urlKey]: any = routePorps ?? [''];
+    const selectedPet = useGetUserSelectedPet();
     const [key, setKey] = useState(urlKey);
-
     useEffect(() => {
         urlKey && setKey(urlKey);
     }, [urlKey]);
@@ -57,69 +58,79 @@ const DailiyActivity = () => {
                     />
                 </div>
                 <div className="container">
-                    <Tabs
-                        defaultActiveKey="profile"
-                        id="pet-assistant-tab"
-                        className="mb-3"
-                        activeKey={key}
-                        onSelect={(k) => setKey(k)}
-                        fill
-                    >
-                        <Tab
-                            eventKey="Food"
-                            title={
-                                <TabTitle
-                                    title={'Food'}
-                                    img={FoodActivityImg}
-                                />
-                            }
+                    {selectedPet && (
+                        <Tabs
+                            defaultActiveKey="profile"
+                            id="pet-assistant-tab"
+                            className="mb-3"
+                            activeKey={key}
+                            onSelect={(k) => setKey(k)}
+                            fill
                         >
-                            <FoodActivity />
-                        </Tab>
-                        <Tab
-                            eventKey="Walk"
-                            title={
-                                <TabTitle
-                                    title={'Walk'}
-                                    img={WalkActivityImg}
-                                />
-                            }
-                        >
-                            <WalkActivity />
-                        </Tab>
+                            <Tab
+                                eventKey="Food"
+                                title={
+                                    <TabTitle
+                                        title={'Food'}
+                                        img={FoodActivityImg}
+                                    />
+                                }
+                            >
+                                <FoodActivity />
+                            </Tab>
+                            <Tab
+                                eventKey="Walk"
+                                title={
+                                    <TabTitle
+                                        title={'Walk'}
+                                        img={WalkActivityImg}
+                                    />
+                                }
+                            >
+                                <WalkActivity />
+                            </Tab>
 
-                        <Tab
-                            eventKey="Training"
-                            title={
-                                <TabTitle
-                                    title={'Training'}
-                                    img={TrainingActivityImg}
-                                />
-                            }
-                        >
-                            <TrainingActivity />
-                        </Tab>
-                        <Tab
-                            eventKey="Pee"
-                            title={
-                                <TabTitle title={'Pee'} img={PeeActivityImg} />
-                            }
-                        >
-                            <PeeActivity />
-                        </Tab>
+                            <Tab
+                                eventKey="Training"
+                                title={
+                                    <TabTitle
+                                        title={'Training'}
+                                        img={TrainingActivityImg}
+                                    />
+                                }
+                            >
+                                <TrainingActivity />
+                            </Tab>
+                            <Tab
+                                eventKey="Pee"
+                                title={
+                                    <TabTitle
+                                        title={'Pee'}
+                                        img={PeeActivityImg}
+                                    />
+                                }
+                            >
+                                <PeeActivity />
+                            </Tab>
 
-                        <Tab
-                            eventKey="Poop"
-                            title={
-                                <TabTitle
-                                    title={'Poop'}
-                                    img={PoopActivityImg}
-                                />
-                            }
-                        >
-                            <PoopActivity />
-                        </Tab>
-                    </Tabs>
+                            <Tab
+                                eventKey="Poop"
+                                title={
+                                    <TabTitle
+                                        title={'Poop'}
+                                        img={PoopActivityImg}
+                                    />
+                                }
+                            >
+                                <PoopActivity />
+                            </Tab>
+                        </Tabs>
+                    )}
+                    {!selectedPet && (
+                        <p className="text-center text-uppercase text-secondary fw-bold my-1">
+                            You do not have any pets!!!
+                        </p>
+                    )}
                 </div>
             </section>
         </Layout>
