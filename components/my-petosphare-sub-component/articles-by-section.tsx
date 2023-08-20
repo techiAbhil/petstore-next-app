@@ -23,9 +23,7 @@ const ArticlesBySection = ({ ac_id, ac_title, articles, router }: any) => {
                                     className="mt-2 col-6 col-md-2 d-flex flex-column justify-content-center align-items-center"
                                     role="button"
                                     onClick={() =>
-                                        router.push(
-                                            `/products-by-animal/${ar_title}/${ar_id}`
-                                        )
+                                        router.push(`/article/${ar_id}`)
                                     }
                                 >
                                     <div className="form-group">
