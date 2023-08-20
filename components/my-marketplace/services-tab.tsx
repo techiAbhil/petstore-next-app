@@ -7,52 +7,6 @@ import ServiceListImg3 from '../../assets/service-list-3.png';
 import ServiceListImg4 from '../../assets/service-list-4.png';
 import ServicesMenuSliderComponent from './services-menu-slider';
 
-type IMenuItem = {
-    iconName: string;
-    itemName: string;
-};
-
-const productsMenuItems: IMenuItem[] = [
-    {
-        iconName: 'fa-solid fa-dog',
-        itemName: 'Groomers & Trainers',
-    },
-    {
-        iconName: 'fa-solid fa-otter',
-        itemName: 'Boarding & Lodging',
-    },
-    {
-        iconName: 'fa-solid fa-shield-cat',
-        itemName: 'Vets',
-    },
-    {
-        iconName: 'fa-solid fa-paw',
-        itemName: 'Walkers',
-    },
-    {
-        iconName: 'fa-solid fa-camera',
-        itemName: 'Photographer',
-    },
-    {
-        iconName: 'fa-solid fa-camera',
-        itemName: 'Sitters',
-    },
-    {
-        iconName: 'fa-solid fa-camera',
-        itemName: 'Communication & Telepathy',
-    },
-
-    {
-        iconName: 'fa-solid fa-camera',
-        itemName: 'Bakers & Cafe',
-    },
-
-    {
-        iconName: 'fa-solid fa-camera',
-        itemName: 'Ambulance Taxis',
-    },
-];
-
 type IServiceListItem = {
     img: any;
     itemName: string;

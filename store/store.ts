@@ -13,6 +13,7 @@ import {
 import storage from 'redux-persist/lib/storage';
 import cartReducer from './cart-items-slice';
 import myMarketplaceReducer from './my-marketplace-slice';
+import myPetOSphareReducer from './my-pet-o-sphare-slice';
 import petsMetaDataReducer from './pets-params-slice';
 import productCategoriesReducer from './product-categories-slice';
 import registrationReducer from './registration-slice';
@@ -29,6 +30,7 @@ const appReducer = combineReducers({
     userDashboard: userDashboardReducer,
     cart: cartReducer,
     userSelectedOptions: userSelectedOptionsReducer,
+    myPetOSphare: myPetOSphareReducer,
 });
 
 const rootReducer = (state: any, action: any) => {

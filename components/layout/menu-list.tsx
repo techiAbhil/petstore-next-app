@@ -15,7 +15,12 @@ const MenuList = () => {
             </li>
 
             <li className="nav-item">
-                <button className="btn btn-menu-item">My Pet-O-Sphere</button>
+                <button
+                    className="btn btn-menu-item"
+                    onClick={() => router.push('/my-pet-o-sphere')}
+                >
+                    My Pet-O-Sphere
+                </button>
             </li>
 
             <li className="nav-item">

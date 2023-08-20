@@ -74,6 +74,7 @@ const Index = () => {
                     <div
                         className="d-flex flex-column justify-content-center align-items-center landing-section-card-btn"
                         role="button"
+                        onClick={() => router.push('my-pet-o-sphere')}
                     >
                         <Image
                             src={PET_FAMILY}
