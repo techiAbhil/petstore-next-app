@@ -474,3 +474,10 @@
     width: 150px;
     height: 150px;
 }
+
+.order-tr {
+    background: $secondary-color;
+    td {
+        font-weight: 600;
+    }
+}
