@@ -481,3 +481,16 @@
         font-weight: 600;
     }
 }
+
+.bottom-ruler {
+    border-color: $primary-color;
+    border-bottom-width: 0.5px;
+    border-bottom-style: solid;
+}
+
+.col-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

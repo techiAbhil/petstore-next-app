@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { useCallback, useEffect, useMemo } from 'react';
 import Table from 'react-bootstrap/Table';
 import CustomLoader from '../../components/common/CustomLoader';
@@ -11,6 +12,7 @@ const CartComponent = () => {
     const { cartItems, isLoading, error, isError } = useAppSelector(
         (state) => state.cart
     );
+    const router = useRouter();
 
     useEffect(() => {
         disptach(getCartItems(undefined));
@@ -124,7 +126,7 @@ const CartComponent = () => {
                             <button
                                 type="button"
                                 className="btn login-btn w-25"
-                                // onClick={() => router.push('/cart')}
+                                onClick={() => router.push('/addresses')}
                             >
                                 <i className="fa-solid fa-cart-shopping"></i>{' '}
                                 Checkout
