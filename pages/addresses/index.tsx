@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { useCallback, useEffect, useState } from 'react';
+import Head from 'next/head';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import CustomLoader from '../../components/common/CustomLoader';
 import Layout from '../../components/layout/layout';
 import { useAppSelector } from '../../store/store';
@@ -8,7 +9,14 @@ const Addresses = () => {
     const [addresses, setAddresses] = useState<any[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [selectedAddress, setSelectedAddress] = useState<any>();
+    const user = useAppSelector((state) => state.user);
     const cartItems = useAppSelector((state) => state.cart.cartItems);
+    const subTotal: number = useMemo(() => {
+        if (cartItems.length === 0) return 0;
+        return cartItems.reduce((total, item) => {
+            return total + item?.ct_price * item?.ct_qty;
+        }, 0);
+    }, [cartItems]);
     useEffect(() => {
         (async () => {
             try {
@@ -33,6 +41,36 @@ const Addresses = () => {
     const [isOrderInfoFetching, setIsOrderInfoFetching] =
         useState<boolean>(false);
 
+    const initiatePayment = useCallback(
+        (address: string = '') => {
+            const paymentOptions = {
+                key: 'YOUR_KEY_ID', // Enter the Key ID generated from the Dashboard
+                amount: `${subTotal}`, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                currency: 'INR',
+                name: 'PetsNMore', //your business name
+                description: 'Test Transaction',
+                order_id: 'order_9A33XWu170gUtm', //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                handler: function (response: any) {
+                    alert(response.razorpay_payment_id);
+                    alert(response.razorpay_order_id);
+                    alert(response.razorpay_signature);
+                },
+                prefill: {
+                    name: user.us_full_name, //your customer's name
+                    email: user.us_email,
+                    contact: user.us_phone, //Provide the customer's phone number for better conversion rates
+                },
+                notes: {
+                    address: address,
+                },
+                theme: {
+                    color: '#3399cc',
+                },
+            };
+        },
+        [subTotal, user.us_email, user.us_full_name, user.us_phone]
+    );
+
     const getPaymentDetails = useCallback(async () => {
         try {
             if (!selectedAddress) {
@@ -48,13 +86,15 @@ const Addresses = () => {
                 alert('No cart items found!');
                 return;
             }
+            const address = `${selectedAddress?.ad_address}, ${selectedAddress?.ad_city},${selectedAddress?.ad_state}, ${selectedAddress?.ad_country}, ${selectedAddress?.ad_zip}`;
             const result: any = await axios.post(`/marketplace/cart/checkout`, {
                 currency: 'INR',
                 address_title: selectedAddress?.ad_title,
-                address: `${selectedAddress?.ad_address}, ${selectedAddress?.ad_city},${selectedAddress?.ad_state}, ${selectedAddress?.ad_country}, ${selectedAddress?.ad_zip}`,
+                address: address,
                 cart_items: cartItemIds,
             });
             if (result.message === 'Success') {
+                initiatePayment(address);
                 alert('Redircet to payment gateway pending implementation');
             }
             setIsOrderInfoFetching(false);
@@ -63,10 +103,17 @@ const Addresses = () => {
             setIsOrderInfoFetching(false);
             console.log('could not fetch the order details');
         }
-    }, [cartItems, selectedAddress]);
+    }, [cartItems, initiatePayment, selectedAddress]);
 
     return (
         <Layout>
+            <Head>
+                <title>Address</title>
+                <script
+                    src="https://checkout.razorpay.com/v1/checkout.js"
+                    async
+                ></script>
+            </Head>
             <section className="mt-1 mb-1 container">
                 <div className="mt-5 row d-flex flex-column align-items-center justify-content-center section-text-style">
                     <h4 className="pt-1 col-sm-12 text-center text-uppercase">
