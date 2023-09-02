@@ -130,6 +130,12 @@ const SidebarMenuItems = () => {
                         </NavDropdown.Item>
                     </NavDropdown>
                     <Nav.Link href="#">My Pet Family</Nav.Link>
+                    <Nav.Link
+                        href="#"
+                        onClick={() => router.push('/order-history')}
+                    >
+                        Order History
+                    </Nav.Link>
                 </Nav>
             </Offcanvas.Body>
         </Navbar.Offcanvas>

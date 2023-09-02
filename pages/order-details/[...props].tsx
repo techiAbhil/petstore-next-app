@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { Badge } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
 import CustomLoader from '../../components/common/CustomLoader';
+import Footer from '../../components/home/footer';
 import Layout from '../../components/layout/layout';
 import { useAppDispatch } from '../../store/store';
 
@@ -130,6 +131,7 @@ const OrderDetails = () => {
                 )}
             </section>
             <CustomLoader show={isLoading} />
+            <Footer />
         </Layout>
     );
 };
