@@ -1,5 +1,5 @@
 import Image, { ImageProps } from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface MyImageProps extends ImageProps {
     defaultImage?: any;
@@ -7,6 +7,10 @@ interface MyImageProps extends ImageProps {
 
 const MyImage = (props: MyImageProps) => {
     const [pic, setPic] = useState<any>(props.src);
+
+    useEffect(() => {
+        setPic(props.src);
+    }, [props.src]);
 
     const handleImageError = () => {
         setPic(props.defaultImage);

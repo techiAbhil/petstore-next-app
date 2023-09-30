@@ -30,12 +30,24 @@ const responsiveSettings = [
 const CommonMenuSlider = ({
     totalItems,
     children,
+    customSliderConfig = [],
+    infinite = false,
 }: {
     totalItems: number;
-
     children: React.ReactNode;
+    customSliderConfig?: {
+        breakpoint: number;
+        settings: {
+            slidesToShow: number;
+            slidesToScroll: number;
+        };
+    }[];
+    infinite?: boolean;
 }) => {
     const sliderConfig = useMemo(() => {
+        if (customSliderConfig.length > 0) {
+            return customSliderConfig;
+        }
         if (totalItems < 3) {
             return responsiveSettings.map((conf) => {
                 return {
@@ -48,7 +60,7 @@ const CommonMenuSlider = ({
             });
         }
         return responsiveSettings;
-    }, [totalItems]);
+    }, [customSliderConfig, totalItems]);
     return (
         <Fragment>
             {totalItems > 0 && (
@@ -58,6 +70,7 @@ const CommonMenuSlider = ({
                             autoplay={false}
                             responsive={sliderConfig}
                             duration={2500}
+                            infinite={infinite}
                         >
                             {children}
                         </Slide>

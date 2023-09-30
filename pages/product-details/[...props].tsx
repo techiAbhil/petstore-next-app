@@ -1,10 +1,12 @@
 import axios from 'axios';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Button } from 'react-bootstrap';
+import NoImage from '../../assets/no-image.jpg';
 import CustomLoader from '../../components/common/CustomLoader';
+import MyImage from '../../components/common/MyImage';
 import CommonMenuSlider from '../../components/common/common-menu-slider';
+import Footer from '../../components/home/footer';
 import Layout from '../../components/layout/layout';
 import { addCartItems } from '../../store/cart-items-slice';
 import { IProducts } from '../../store/my-marketplace-slice';
@@ -18,12 +20,37 @@ interface IProductImages {
     display_order: number;
 }
 
+const sliderConfig = [
+    {
+        breakpoint: 800,
+        settings: {
+            slidesToShow: 6,
+            slidesToScroll: 2,
+        },
+    },
+    {
+        breakpoint: 600,
+        settings: {
+            slidesToShow: 5,
+            slidesToScroll: 3,
+        },
+    },
+    {
+        breakpoint: 500,
+        settings: {
+            slidesToShow: 6,
+            slidesToScroll: 6,
+        },
+    },
+];
+
 const ProductDetails = () => {
     const router = useRouter();
     const props = router.query.props;
     const [pr_id]: any = props ?? [''];
     const [productDetails, setProductDetails] = useState<IProducts>();
     const [productImages, setProductImages] = useState<IProductImages[]>([]);
+    const [selectedImage, setSelectedImage] = useState<string>('');
     const disptach = useAppDispatch();
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const { isLoading: cartLoading } = useAppSelector((state) => state.cart);
@@ -79,9 +106,13 @@ const ProductDetails = () => {
         }
     }, [discountedProductPrice, disptach, productDetails?.pr_id, router]);
 
+    useEffect(() => {
+        setSelectedImage(productImages?.[0]?.pi_path ?? '');
+    }, [productImages]);
+
     return (
         <Layout>
-            <section className="mt-1 mb-1 container">
+            <section className="my-5 container">
                 {!isLoading && !productDetails && (
                     <div className="mt-5 row d-flex flex-column align-items-center justify-content-center section-text-style">
                         <h2 className="pt-1 col-sm-12 text-center text-uppercase">
@@ -93,67 +124,84 @@ const ProductDetails = () => {
                 {!isLoading && productDetails && (
                     <div className="row d-flex flex-column align-items-center justify-content-center section-text-style">
                         <div className="mt-1 row d-flex flex-column align-items-center justify-content-center section-text-style">
-                            <h5 className="pt-1 col-sm-12 text-center text-bold text-uppercase">
+                            <p className="pb-2 col-sm-12 text-center text-uppercase">
                                 Product Details
-                            </h5>
-                        </div>
-                        <CommonMenuSlider totalItems={productImages.length}>
-                            {productImages.map(
-                                ({ pi_path, pi_id }, index: number) => {
-                                    return (
-                                        <div
-                                            key={`activity-menu-items-${index}`}
-                                            className="mt-2 mx-3 col-md-4 col-12 justify-content-center align-items-center"
-                                        >
-                                            <div className="form-group d-flex justify-content-center">
-                                                <div className="d-flex justify-content-center align-items-center p-4 products">
-                                                    <Image
-                                                        src={`${process.env.NEXT_PUBLIC_PROCUT_IMG_PATH}/${pi_path}`}
-                                                        alt="best selling dog food"
-                                                        height={100}
-                                                        width={100}
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    );
-                                }
-                            )}
-                        </CommonMenuSlider>
-
-                        <div className="mt-5 row d-flex flex-column align-items-center justify-content-center section-text-style">
-                            <h5 className="pt-1 col-sm-12 text-center text-uppercase">
-                                {productDetails?.pr_name}
-                            </h5>
-                        </div>
-
-                        <div className="mt-2 row align-items-center justify-align-content-between section-text-style">
-                            <div className="col-4">
-                                <p className="text-center text-bold px-20 mt-1">
-                                    ₹{discountedProductPrice}
-                                </p>
-                            </div>
-                            <div className="col-4">
-                                <p className="text-center text-line-through px-20 mt-1">
-                                    ₹{productDetails?.pr_price}
-                                </p>
-                            </div>
-                            <div className="col-4">
-                                <p className="text-center px-20 mt-1">
-                                    {productDetails?.pr_discount}%Off
-                                </p>
-                            </div>
-                        </div>
-
-                        <div className="mt-1 row d-flex flex-column align-items-center justify-content-center section-text-style">
-                            <p className="text-secondary text-center px-20 mt-1">
-                                {productDetails?.pr_description}
                             </p>
                         </div>
 
-                        <div className="mt-1 row d-flex flex-column align-items-center justify-content-center section-text-style">
-                            <p className="text-secondary text-center px-20 mt-1">
-                                <div className="form-group py-3">
+                        <div className="row justify-content-center">
+                            <div className="col-12 col-md-6">
+                                <div className="d-flex justify-content-center align-items-center">
+                                    <MyImage
+                                        src={`${process.env.NEXT_PUBLIC_PROCUT_IMG_PATH}/${selectedImage}`}
+                                        alt="best selling dog food"
+                                        width={400}
+                                        height={400}
+                                        defaultImage={NoImage}
+                                    />
+                                </div>
+                                <CommonMenuSlider
+                                    totalItems={productImages.length}
+                                    customSliderConfig={sliderConfig}
+                                    infinite={true}
+                                >
+                                    {productImages.map(
+                                        ({ pi_path }, index: number) => {
+                                            return (
+                                                <div
+                                                    key={`activity-menu-items-${index}`}
+                                                    role="button"
+                                                    onClick={() =>
+                                                        setSelectedImage(
+                                                            pi_path ?? ''
+                                                        )
+                                                    }
+                                                >
+                                                    <div className="form-group d-flex justify-content-center">
+                                                        <MyImage
+                                                            src={`${process.env.NEXT_PUBLIC_PROCUT_IMG_PATH}/${pi_path}`}
+                                                            alt="best selling dog food"
+                                                            height={50}
+                                                            width={50}
+                                                            defaultImage={
+                                                                NoImage
+                                                            }
+                                                        />
+                                                    </div>
+                                                </div>
+                                            );
+                                        }
+                                    )}
+                                </CommonMenuSlider>
+                            </div>
+
+                            <div className="col-12 col-md-6 ">
+                                <h3 className="my-5 col-sm-12 text-center text-uppercase text-secondary text-bold">
+                                    {productDetails?.pr_name}
+                                </h3>
+
+                                <p className="text-secondary text-center px-20 mt-1">
+                                    {productDetails?.pr_description}
+                                </p>
+                                <div className="my-5 row align-items-center justify-align-content-between section-text-style">
+                                    <div className="col-4">
+                                        <p className="text-center text-bold px-20 mt-1">
+                                            ₹{discountedProductPrice}
+                                        </p>
+                                    </div>
+                                    <div className="col-4">
+                                        <p className="text-center text-line-through px-20 mt-1">
+                                            ₹{productDetails?.pr_price}
+                                        </p>
+                                    </div>
+                                    <div className="col-4">
+                                        <p className="text-center px-20 mt-1">
+                                            {productDetails?.pr_discount}%Off
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="d-flex justify-content-center">
                                     <Button
                                         type="submit"
                                         className="btn btn-block login-btn mx-2"
@@ -162,21 +210,14 @@ const ProductDetails = () => {
                                         <i className={`fa-solid fa-plus`}></i>{' '}
                                         Add to Cart
                                     </Button>
-
-                                    <Button
-                                        type="submit"
-                                        className="btn btn-block login-btn mx-2"
-                                    >
-                                        <i className="fa-solid fa-code-compare"></i>{' '}
-                                        Compare
-                                    </Button>
                                 </div>
-                            </p>
+                            </div>
                         </div>
                     </div>
                 )}
                 <CustomLoader show={isLoading || cartLoading} />
             </section>
+            <Footer />
         </Layout>
     );
 };
