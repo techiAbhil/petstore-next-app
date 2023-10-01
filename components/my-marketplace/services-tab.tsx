@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import { useState } from 'react';
-import ProductsBanner from '../../assets/products-banner.png';
 import ServiceListImg1 from '../../assets/service-list-1.png';
 import ServiceListImg2 from '../../assets/service-list-2.png';
 import ServiceListImg3 from '../../assets/service-list-3.png';
@@ -50,7 +49,7 @@ const ServicesTab = () => {
     );
     return (
         <>
-            <div className="row mt-4">
+            <div className="row">
                 <ServicesMenuSliderComponent
                     setSelectedServiceTab={setSelectedServiceTab}
                     selectedServiceTab={selectedServiceTab}
@@ -94,13 +93,13 @@ const ServicesTab = () => {
                 )}
             </div>
 
-            <div className="mt-5 row d-flex flex-column align-items-center justify-content-center section-text-style">
+            {/* <div className="mt-5 row d-flex flex-column align-items-center justify-content-center section-text-style">
                 <Image
                     alt="Products banner"
                     src={ProductsBanner}
                     height={170}
                 />
-            </div>
+            </div> */}
         </>
     );
 };

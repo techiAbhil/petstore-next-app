@@ -4,7 +4,6 @@ import CustomLoader from '../../components/common/CustomLoader';
 import Footer from '../../components/home/footer';
 import Layout from '../../components/layout/layout';
 import ProductsTab from '../../components/my-marketplace/products-tab';
-import ServicesTab from '../../components/my-marketplace/services-tab';
 import { getMyMarketplaceData } from '../../store/my-marketplace-slice';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 
@@ -33,7 +32,7 @@ const MyMarketplace = () => {
             <section className="mt-3 mb-5 container">
                 {/* basic info */}
                 {/* history section */}
-                <div className="row d-flex flex-column align-items-center justify-content-center section-text-style">
+                {/* <div className="row d-flex flex-column align-items-center justify-content-center section-text-style">
                     <div className="center">
                         <div
                             className="btn-group btn-group-toggle"
@@ -61,9 +60,9 @@ const MyMarketplace = () => {
                             </button>
                         </div>
                     </div>
-                </div>
+                </div> */}
                 {/* // end of tabs */}
-                {!isLoading && !isError && (
+                {/* {!isLoading && !isError && (
                     <>
                         {selectedTab === ITabs.Products ? (
                             <ProductsTab />
@@ -71,7 +70,9 @@ const MyMarketplace = () => {
                             <ServicesTab />
                         )}
                     </>
-                )}
+                )} */}
+
+                <ProductsTab />
                 {!isLoading && isError && (
                     <div className="mt-5 row d-flex flex-column align-items-center justify-content-center section-text-style">
                         <h2 className="pt-1 col-sm-12 text-center text-uppercase">

@@ -494,3 +494,37 @@
     align-items: center;
     justify-content: center;
 }
+
+.img-fit-cover {
+    object-fit: cover;
+}
+
+.product-card-item-cotnainer {
+    height: 310px;
+    width: 260px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    .product-btn {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        z-index: 2;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        display: none;
+    }
+
+    :hover {
+        opacity: 0.9;
+        // transform: scale(
+        //     1.02
+        // ); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+    }
+}
+
+.product-card-item-cotnainer:hover .product-btn {
+    display: block;
+}

@@ -1,11 +1,11 @@
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import ERROR_IMG from '../../assets/no-image.jpg';
-import ProductsBanner from '../../assets/products-banner.png';
 import { useAppSelector } from '../../store/store';
 import MyImage from '../common/MyImage';
 import CommonMenuSlider from '../common/common-menu-slider';
+import ProductCardItem from '../product-card-item';
 import ProductsSliderComponent from './products-slider';
+import ServicesTab from './services-tab';
 
 const sliderConfig = [
     {
@@ -101,38 +101,27 @@ const ProductsTab = () => {
             </div>
 
             <div className="d-flex row justify-content-center align-items-center">
-                <CommonMenuSlider totalItems={bestSellingProducts?.length}>
-                    {bestSellingProducts?.map(
-                        ({ pr_poster_path, pr_name, pr_id }, index) => {
-                            return (
-                                <div
-                                    key={`activity-menu-items-${index}`}
-                                    className="col-6 col-md-2 d-flex flex-column justify-content-center align-items-center"
-                                    role="button"
-                                    onClick={() =>
-                                        router.push(`/product-details/${pr_id}`)
-                                    }
-                                >
-                                    <div>
-                                        <div className=" p-4 products">
-                                            <MyImage
-                                                src={`${process.env.NEXT_PUBLIC_PROCUT_IMG_PATH}/${pr_poster_path}`}
-                                                alt="best selling dog food"
-                                                height={100}
-                                                width={100}
-                                                defaultImage={ERROR_IMG}
-                                            />
-                                        </div>
-                                        <p className="mt-2 text-center">
-                                            {pr_name}
-                                        </p>
-                                    </div>
-                                </div>
-                            );
-                        }
-                    )}
-                </CommonMenuSlider>
+                {bestSellingProducts?.map(
+                    (
+                        { pr_poster_path, pr_name, pr_id }: any,
+                        index: number
+                    ) => {
+                        return (
+                            <div
+                                className="col-6 col-md-2 d-flex flex-column justify-content-center mx-4"
+                                key={`activity-menu-items-${index}`}
+                            >
+                                <ProductCardItem
+                                    pr_poster_path={pr_poster_path}
+                                    pr_id={pr_id}
+                                    pr_name={pr_name}
+                                />
+                            </div>
+                        );
+                    }
+                )}
             </div>
+
             {/* end of best selling prodcts */}
 
             {/* Featured Products */}
@@ -142,49 +131,45 @@ const ProductsTab = () => {
                 </h3>
             </div>
 
-            <div className="row justify-content-center mt-4">
-                <CommonMenuSlider totalItems={featuredProducts?.length}>
-                    {featuredProducts?.map(
-                        ({ pr_poster_path, pr_name, pr_id }, index) => {
-                            return (
-                                <div
-                                    key={`activity-menu-items-${index}`}
-                                    className="mx-2 col-12 col-md-4 d-flex flex-column justify-content-center align-items-center"
-                                    role="button"
-                                    onClick={() =>
-                                        router.push(`/product-details/${pr_id}`)
-                                    }
-                                >
-                                    <div>
-                                        <div className=" p-4 products">
-                                            <MyImage
-                                                src={`${process.env.NEXT_PUBLIC_PROCUT_IMG_PATH}/${pr_poster_path}`}
-                                                alt="featured product dog food"
-                                                height={100}
-                                                width={100}
-                                                defaultImage={ERROR_IMG}
-                                            />
-                                        </div>
-                                        <p className="mt-2 text-center text-wrap">
-                                            {pr_name}
-                                        </p>
-                                    </div>
-                                </div>
-                            );
-                        }
-                    )}
-                </CommonMenuSlider>
+            <div className="d-flex row justify-content-center align-items-center">
+                {featuredProducts?.map(
+                    (
+                        { pr_poster_path, pr_name, pr_id }: any,
+                        index: number
+                    ) => {
+                        return (
+                            <div
+                                className="col-6 col-md-2 d-flex flex-column justify-content-center mx-4"
+                                key={`activity-menu-items-${index}`}
+                            >
+                                <ProductCardItem
+                                    pr_poster_path={pr_poster_path}
+                                    pr_id={pr_id}
+                                    pr_name={pr_name}
+                                />
+                            </div>
+                        );
+                    }
+                )}
             </div>
-            {/* end of featured products */}
 
             <div className="mt-5 row d-flex flex-column align-items-center justify-content-center section-text-style">
+                <h3 className="col-sm-12 text-center text-uppercase">
+                    Services
+                </h3>
+            </div>
+            <ServicesTab />
+
+            {/* end of featured products */}
+
+            {/* <div className="mt-5 row d-flex flex-column align-items-center justify-content-center section-text-style">
                 <Image
                     alt="Products banner"
                     src={ProductsBanner}
                     height={170}
                     width={180}
                 />
-            </div>
+            </div> */}
         </>
     );
 };
