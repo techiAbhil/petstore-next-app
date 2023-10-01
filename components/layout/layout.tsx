@@ -77,6 +77,7 @@ function Layout({ children }: { children: any }) {
                                 src={MAIN_LOGO}
                                 className="img-fluid rounded"
                                 alt="Responsive image"
+                                priority={true}
                             />
                         </Navbar.Brand>
                     </div>

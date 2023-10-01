@@ -94,7 +94,7 @@ const ProductsSliderComponent = ({
                         ({ pr_poster_path, pr_name, pr_id }, index: number) => {
                             return (
                                 <div className="row" key={index}>
-                                    <div className="col-8">
+                                    <div className="col-12 col-md-8">
                                         <Stack
                                             direction="horizontal"
                                             className="pl-2 center"
@@ -109,7 +109,7 @@ const ProductsSliderComponent = ({
                                             />
                                         </Stack>
                                     </div>
-                                    <div className="col-4 d-flex flex-column justify-content-center">
+                                    <div className="col-12 col-md-4 d-flex flex-column justify-content-center">
                                         <h4 className="my-5 col-sm-12 text-center text-uppercase text-secondary text-bold">
                                             {pr_name}
                                         </h4>

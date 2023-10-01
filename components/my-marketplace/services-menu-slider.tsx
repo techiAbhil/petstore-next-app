@@ -48,6 +48,30 @@ const productsMenuItems: IMenuItem[] = [
     },
 ];
 
+const sliderConfig = [
+    {
+        breakpoint: 800,
+        settings: {
+            slidesToShow: 6,
+            slidesToScroll: 2,
+        },
+    },
+    {
+        breakpoint: 600,
+        settings: {
+            slidesToShow: 5,
+            slidesToScroll: 3,
+        },
+    },
+    {
+        breakpoint: 500,
+        settings: {
+            slidesToShow: 6,
+            slidesToScroll: 6,
+        },
+    },
+];
+
 const ServicesMenuSliderComponent = ({
     selectedServiceTab,
     setSelectedServiceTab,
@@ -56,13 +80,15 @@ const ServicesMenuSliderComponent = ({
     selectedServiceTab: string;
 }) => {
     return (
-        <CommonMenuSlider totalItems={productsMenuItems?.length}>
+        <CommonMenuSlider
+            totalItems={productsMenuItems?.length}
+            customSliderConfig={sliderConfig}
+        >
             {productsMenuItems.map(({ iconName, itemName }, index: number) => {
                 return (
                     <div
                         onClick={() => setSelectedServiceTab(itemName)}
                         key={`history-menu-item-${index}`}
-                        className="mt-2 col-6 col-md-2 d-flex flex-column justify-content-center align-items-center"
                     >
                         <div className="form-group d-flex justify-content-center">
                             <div className="circular-profile-pic d-flex justify-content-center align-items-center">

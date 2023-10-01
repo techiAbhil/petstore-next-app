@@ -112,7 +112,7 @@ const SidebarMenuItems = () => {
                         </NavDropdown.Item>
                     </NavDropdown>
 
-                    <NavDropdown
+                    {/* <NavDropdown
                         title="My Marketplace"
                         className={`offcanvasNavbarDropdown`}
                     >
@@ -128,7 +128,13 @@ const SidebarMenuItems = () => {
                         >
                             Services
                         </NavDropdown.Item>
-                    </NavDropdown>
+                    </NavDropdown> */}
+                    <Nav.Link
+                        href="#"
+                        onClick={() => router.push('/my-marketplace')}
+                    >
+                        My Marketplace
+                    </Nav.Link>
                     <Nav.Link href="#">My Pet Family</Nav.Link>
                     <Nav.Link
                         href="#"

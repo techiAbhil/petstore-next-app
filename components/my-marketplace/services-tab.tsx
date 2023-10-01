@@ -68,7 +68,7 @@ const ServicesTab = () => {
                         return (
                             <div
                                 key={`activity-menu-items-${index}`}
-                                className=" col-6 col-md-3 d-flex flex-column justify-content-center align-items-center service-item-container"
+                                className="col-12 col-md-3 d-flex flex-column justify-content-center align-items-center service-item-container"
                             >
                                 <div className="justify-content-center align-items-center pt-2">
                                     <Image

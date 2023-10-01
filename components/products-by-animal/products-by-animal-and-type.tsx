@@ -1,12 +1,11 @@
 import axios from 'axios';
 import _ from 'lodash';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { IProducts } from '../../store/my-marketplace-slice';
 import { API_ERROR_MSG } from '../../utils/constants';
-import CommonMenuSlider from '../common/common-menu-slider';
+import ProductCardItem from '../product-card-item';
 
 const ProductsByAnimalAndType = ({
     selectedTab,
@@ -64,45 +63,28 @@ const ProductsByAnimalAndType = ({
                                 </h2>
                             </div>
                             <div className="d-flex row justify-content-center align-items-center mt-1">
-                                <CommonMenuSlider
-                                    totalItems={products[groupName]?.length}
-                                >
-                                    {products[groupName]?.map(
-                                        (
-                                            { pr_poster_path, pr_name, pr_id },
-                                            index
-                                        ) => {
-                                            return (
-                                                <div
-                                                    key={`activity-menu-items-${index}`}
-                                                    className="mt-2 mx-3 col-md-4 col-12 justify-content-center align-items-center"
-                                                >
-                                                    <div
-                                                        className="form-group d-flex justify-content-center"
-                                                        role="button"
-                                                        onClick={() =>
-                                                            router.push(
-                                                                `/product-details/${pr_id}`
-                                                            )
-                                                        }
-                                                    >
-                                                        <div className="d-flex justify-content-center align-items-center p-4 products">
-                                                            <Image
-                                                                src={`${process.env.NEXT_PUBLIC_PROCUT_IMG_PATH}/${pr_poster_path}`}
-                                                                alt="best selling dog food"
-                                                                height={100}
-                                                                width={100}
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                    <p className="mt-2 text-center text-wrap">
-                                                        {pr_name}
-                                                    </p>
-                                                </div>
-                                            );
-                                        }
-                                    )}
-                                </CommonMenuSlider>
+                                {products[groupName]?.map(
+                                    (
+                                        { pr_poster_path, pr_name, pr_id }: any,
+                                        index: number
+                                    ) => {
+                                        return (
+                                            <div
+                                                className="col-6 col-md-2 d-flex flex-column justify-content-center mx-4"
+                                                key={`activity-menu-items-${index}`}
+                                            >
+                                                <ProductCardItem
+                                                    pr_poster_path={
+                                                        pr_poster_path
+                                                    }
+                                                    pr_id={pr_id}
+                                                    pr_name={pr_name}
+                                                />
+                                            </div>
+                                        );
+                                    }
+                                )}
+
                                 <div className="mt-2 row justify-content-center align-items-center">
                                     <Button
                                         variant="link"

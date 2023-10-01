@@ -108,7 +108,7 @@ const ProductsTab = () => {
                     ) => {
                         return (
                             <div
-                                className="col-6 col-md-2 d-flex flex-column justify-content-center mx-4"
+                                className="col-6 col-md-2 d-flex flex-column justify-content-center align-items-center  mx-4"
                                 key={`activity-menu-items-${index}`}
                             >
                                 <ProductCardItem
@@ -139,7 +139,7 @@ const ProductsTab = () => {
                     ) => {
                         return (
                             <div
-                                className="col-6 col-md-2 d-flex flex-column justify-content-center mx-4"
+                                className="col-6 col-md-2 d-flex flex-column justify-content-center align-items-center mx-4"
                                 key={`activity-menu-items-${index}`}
                             >
                                 <ProductCardItem

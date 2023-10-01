@@ -13,6 +13,7 @@ import PeeActivityImg from '../../assets/pee-activity.png';
 import PoopActivityImg from '../../assets/poop-activity.png';
 import TrainingActivityImg from '../../assets/training-activity.png';
 import WalkActivityImg from '../../assets/walk-activity.png';
+import MyImage from '../../components/common/MyImage';
 import { useGetUserSelectedPet } from '../../hooks/useGetUserSelectedPet.hook';
 import { setUserSelectedOptionsState } from '../../store/user-selected-options-slice';
 
@@ -143,28 +144,33 @@ const MyPet = () => {
                             return (
                                 <div
                                     key={`activity-menu-items-${petId}`}
-                                    className="bg-secondary-container mt-2 mx-3 col-12 col-md-4 d-flex flex-column justify-content-center align-items-center br-15"
+                                    className="animal-profile-card mt-2 mx-3 col-12 col-md-4 d-flex"
                                 >
                                     <div className="form-group d-flex justify-content-center">
-                                        <div className="d-flex justify-content-center align-items-center py-5">
-                                            <Image
+                                        <div className="d-flex justify-content-center align-items-center py-2">
+                                            <MyImage
                                                 src={
                                                     imgUrl
-                                                        ? `${process.env.NEXT_PUBLIC_PROCUT_IMG_PATH}/${imgUrl}`
+                                                        ? `${process.env.NEXT_PUBLIC_PET_PROFILE_PIC}/${imgUrl}`
                                                         : DefaultPet
                                                 }
                                                 alt="featured product dog food"
-                                                height={100}
-                                                width={100}
+                                                height={150}
+                                                width={150}
+                                                className="pet-profile-pic"
+                                                defaultImage={DefaultPet}
                                             />
                                         </div>
                                     </div>
                                     <div className="row center">
-                                        <h4 className="mt-2 text-center text-wrap text-uppercase ">
+                                        <h4 className="text-center text-wrap text-uppercase ">
                                             {name}
                                         </h4>
-                                        <p className="mt-2 text-center text-wrap text-secondary">
+                                        <p className="text-center text-wrap text-secondary">
                                             {age} Years Old
+                                        </p>
+                                        <p className="text-center text-wrap text-secondary">
+                                            {gender}
                                         </p>
                                     </div>
                                 </div>
